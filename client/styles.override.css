@@ -1,1984 +1,117 @@
-/* Final UI overrides */
+/* Clean Telegram phone overrides */
 #room-view,
+#room-view .room-head,
 #room-view .nes-room,
-#room-view .tv-shell,
-#room-view .tv-shell__bezel,
+#room-view .deck-panel,
 #room-view .screen-shell,
 #room-view .screen-shell__screen,
-#room-view .deck-panel,
-#room-view .deck-panel__top,
-#room-view .deck-panel__bottom,
-#room-view .touch-grid,
-#room-view .panel,
-#room-view .room-head__details,
-#room-view .room-head__actions,
 #library-view .library-head,
 #library-view .game-card {
   min-width: 0;
 }
 
-.party-lobby,
-.party-share-sheet {
-  display: none;
+body.is-telegram-mini-app.is-mobile-device {
+  background: linear-gradient(180deg, #151d0f 0%, #11180d 44%, #ecefe4 44%, #f4f6ee 100%) !important;
 }
 
-body.party-share-sheet-open {
-  overflow: hidden;
+body.is-telegram-mini-app.is-mobile-device .scene {
+  min-height: var(--tg-viewport-stable-height, 100vh) !important;
+  padding: 0 !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby {
-  min-height: calc(var(--tg-viewport-stable-height, 100vh) - env(safe-area-inset-bottom)) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .room-head,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .nes-room,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .mobile-handheld {
+body.is-telegram-mini-app.is-mobile-device .scene__glow,
+body.is-telegram-mini-app.is-mobile-device .topbar {
   display: none !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby {
-  display: block !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__panel {
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 18px;
-  min-height: calc(var(--tg-viewport-stable-height, 100vh) - env(safe-area-inset-bottom));
-  padding: calc(env(safe-area-inset-top) + 56px) 14px calc(14px + env(safe-area-inset-bottom));
-  border-radius: 0;
-  background:
-    radial-gradient(circle at top, rgba(162, 188, 104, 0.18), transparent 34%),
-    linear-gradient(180deg, #25301a 0%, #151c11 52%, #dde1d4 52%, #ecefe4 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 28px 44px rgba(0, 0, 0, 0.28);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__stage {
-  display: grid;
-  align-content: start;
-  gap: 14px;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__top {
-  padding: 0 4px;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__cards {
-  display: grid;
-  gap: 12px;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__eyebrow {
-  margin: 0 0 6px;
-  color: rgba(245, 247, 237, 0.72);
-  font-size: 0.46rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__title {
-  margin: 0;
-  color: #f8f9f3;
-  font-size: 1.26rem;
-  line-height: 1.15;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__subtitle,
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__copy,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__status {
-  margin: 0;
-  color: rgba(242, 245, 236, 0.78);
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__code,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__field,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__players {
-  padding: 14px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 22px;
-  background: rgba(9, 13, 8, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__code {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: rgba(245, 247, 239, 0.82);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__code strong {
-  color: #ffffff;
-  font-size: 1.2rem;
-  letter-spacing: 0.12em;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__label,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__players-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-  color: rgba(240, 243, 234, 0.78);
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__input {
-  width: 100%;
-  min-height: 54px;
-  padding: 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  background: rgba(10, 14, 12, 0.72);
-  color: #ffffff;
-  font-size: 1rem;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__players-list {
-  display: grid;
-  gap: 10px;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__player {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 18px;
-  background: rgba(245, 247, 238, 0.06);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__player strong,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__state {
-  display: block;
-  color: #ffffff;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__player span {
-  display: block;
-  margin-top: 4px;
-  color: rgba(241, 244, 235, 0.7);
-  font-size: 0.86rem;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__state {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.82rem;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__state--ready {
-  background: rgba(70, 197, 116, 0.18);
-  color: #c5ffd8;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__toolbar,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__actions,
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__actions {
-  display: grid;
-  gap: 10px;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock {
-  display: grid;
-  gap: 12px;
-  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
-  border-radius: 28px 28px 0 0;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
-    linear-gradient(180deg, #edf0e5, #dfe3d7);
-  box-shadow:
-    0 -20px 42px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__status {
-  color: rgba(30, 38, 22, 0.72);
-  font-size: 0.88rem;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__toolbar,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__actions {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__toolbar > button,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__actions > button,
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__actions > button {
-  width: 100%;
-  min-height: 54px;
-  border-radius: 18px;
-  clip-path: none;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock .primary-button,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock .secondary-button,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock .ghost-button {
-  font-size: 1rem;
-  line-height: 1.15;
-  white-space: normal;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock .secondary-button:disabled,
-body.is-telegram-mini-app.is-mobile-device .party-lobby__dock .primary-button:disabled {
-  opacity: 0.58;
-  transform: none;
-  box-shadow:
-    0 0 0 4px rgba(32, 35, 45, 0.18) inset,
-    3px 3px 0 rgba(0, 0, 0, 0.08);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet {
-  position: fixed;
-  inset: 0;
-  z-index: 180;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet:not(.hidden) {
-  display: block;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__backdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  background: rgba(3, 5, 4, 0.56);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__panel {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  left: 10px;
-  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
-  border-radius: 28px;
-  background: linear-gradient(180deg, #eef1e7, #dde2d4);
-  box-shadow: 0 -22px 48px rgba(0, 0, 0, 0.24);
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__eyebrow {
-  margin: 0 0 8px;
-  color: rgba(37, 45, 28, 0.64);
-  font-size: 0.44rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__title {
-  margin: 0 0 8px;
-  color: #1c2414;
-  font-size: 1.24rem;
-}
-
-body.is-telegram-mini-app.is-mobile-device .party-share-sheet__copy {
-  margin: 0 0 16px;
-  color: rgba(28, 36, 20, 0.72);
-}
-
-@media (max-width: 390px) {
-  body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__panel {
-    padding-top: calc(env(safe-area-inset-top) + 64px);
-  }
-
-  body.is-telegram-mini-app.is-mobile-device .party-lobby__toolbar,
-  body.is-telegram-mini-app.is-mobile-device .party-lobby__actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-#library-view .library-head,
-#room-view .room-head {
-  flex-wrap: wrap;
-}
-
-#room-view .room-head__actions > button,
-#library-view .library-head .ghost-button {
-  max-width: 100%;
-}
-
-#library-view .game-card__actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-#library-view .game-card__actions > button {
-  min-width: 0;
-  width: 100%;
-}
-
-#room-title,
-#room-view .section-copy,
-#room-view .control-line,
-#room-view .player-card__name,
-#room-view .player-card__slot,
-#library-view .game-card__title {
-  overflow-wrap: anywhere;
-}
-
-body.is-telegram-mini-app {
-  background: var(--tg-theme-bg-color, #10141c);
-}
-
-body.is-telegram-mini-app .scene {
-  min-height: var(--tg-viewport-stable-height, 100vh);
-  padding-top: max(0px, var(--tg-content-safe-area-inset-top, 0px));
-  padding-right: max(10px, calc(var(--tg-content-safe-area-inset-right, 0px) + 10px));
-  padding-bottom: max(10px, calc(var(--tg-content-safe-area-inset-bottom, 0px) + 10px));
-  padding-left: max(10px, calc(var(--tg-content-safe-area-inset-left, 0px) + 10px));
-}
-
-body.is-telegram-mini-app .topbar {
-  display: none;
-}
-
-body.is-telegram-mini-app .topbar__meta {
-  display: none;
-}
-
-body.is-telegram-mini-app .app-shell {
-  margin-top: 0;
-}
-
-body.is-telegram-mini-app.is-mobile-device #library-view .library-head {
-  display: none;
 }
 
 body.is-telegram-mini-app.is-mobile-device .app-shell {
-  max-width: 520px;
+  max-width: none !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device #library-view {
-  gap: 12px;
+  padding: calc(env(safe-area-inset-top) + 16px) 14px calc(20px + env(safe-area-inset-bottom)) !important;
 }
 
-@media (max-width: 760px) {
-  body.is-telegram-mini-app .scene {
-    padding-top: max(0px, var(--tg-content-safe-area-inset-top, 0px));
-  }
-}
-
-@media (max-width: 960px) {
-  .scene {
-    padding: 16px;
-  }
-
-  .topbar,
-  #library-view .library-head,
-  #room-view .room-head {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .topbar__meta {
-    min-width: 0;
-    width: 100%;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  #room-view .room-head__actions {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  #room-view .room-head__actions > button,
-  #library-view .library-head .ghost-button {
-    flex: 1 1 220px;
-  }
-
-  #room-view .nes-room,
-  #room-view .deck-panel__top,
-  #room-view .deck-panel__bottom,
-  #room-view .touch-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #room-view .cover-frame {
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 700px) {
-  .scene {
-    padding: 12px;
-  }
-
-  .topbar__meta {
-    grid-template-columns: 1fr;
-  }
-
-  #library-view .game-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #room-view .room-head {
-    padding: 14px;
-    gap: 14px;
-  }
-
-  #room-view .room-head__actions > button,
-  #library-view .library-head .ghost-button {
-    flex-basis: 100%;
-    width: 100%;
-  }
-
-  #room-view .screen-shell {
-    min-height: min(80vw, 380px);
-    padding: 12px;
-  }
-
-  #room-view .screen-shell__screen {
-    min-height: min(70vw, 320px);
-  }
-
-  #room-view .deck-panel,
-  #room-view .panel {
-    padding: 14px;
-  }
-
-  #room-view .cover-frame,
-  #room-view .touch-grid .panel:nth-child(4) {
-    display: none;
-  }
-
-  #room-view .action-stack {
-    grid-template-columns: 1fr;
-  }
-
-  #room-view .action-stack > button:last-child {
-    grid-column: auto;
-  }
-}
-
-@media (max-width: 760px) {
-  body.is-mobile-device .scene {
-    padding: 10px;
-  }
-
-  body.is-mobile-device .scene__glow {
-    display: none;
-  }
-
-  body.is-mobile-device .topbar {
-    max-width: 460px;
-    margin: 0 auto 12px;
-    padding: 12px 14px;
-    gap: 8px;
-    border: 1px solid rgba(109, 140, 205, 0.24);
-    border-radius: 18px;
-    background:
-      linear-gradient(180deg, rgba(46, 54, 72, 0.96), rgba(21, 25, 34, 0.98));
-    box-shadow:
-      0 12px 28px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
-
-  body.is-mobile-device .topbar h1 {
-    margin-top: 0.1rem;
-    font-size: 1.05rem;
-    line-height: 1.2;
-    text-shadow: none;
-  }
-
-  body.is-mobile-device .topbar .eyebrow {
-    font-size: 0.42rem;
-    letter-spacing: 0.16em;
-    opacity: 0.78;
-  }
-
-  body.is-mobile-device .topbar__meta {
-    display: none;
-  }
-
-  body.is-mobile-device .app-shell {
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) {
-    gap: 12px;
-    padding-bottom: 24px;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head {
-    padding: 12px !important;
-    border: 1px solid rgba(108, 138, 205, 0.34) !important;
-    border-radius: 18px !important;
-    background:
-      linear-gradient(180deg, rgba(46, 54, 74, 0.96), rgba(21, 25, 35, 0.98)) !important;
-    box-shadow:
-      0 14px 28px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head::after {
-    display: none !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head__details {
-    gap: 4px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) #room-title {
-    font-size: 1.15rem;
-    line-height: 1.35;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) #room-subtitle {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head__actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    width: 100%;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) #back-to-library,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head__actions > button {
-    min-width: 0;
-    min-height: 46px;
-    width: 100%;
-    border-radius: 14px;
-    clip-path: none;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .nes-room {
-    grid-template-columns: 1fr !important;
-    gap: 12px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell {
-    padding-top: 0;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell__badge,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell__footer,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell__legs {
-    display: none !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell__bezel {
-    padding: 10px !important;
-    border: 1px solid rgba(118, 150, 215, 0.28) !important;
-    border-radius: 20px !important;
-    background:
-      linear-gradient(180deg, rgba(33, 42, 60, 0.98), rgba(17, 22, 32, 0.98)) !important;
-    box-shadow:
-      0 18px 30px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .tv-shell__header {
-    margin-bottom: 8px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) #screen-fullscreen-button {
-    width: 42px;
-    min-width: 42px;
-    height: 42px;
-    padding: 0;
-    border-radius: 12px;
-    clip-path: none;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .screen-shell {
-    min-height: 0 !important;
-    padding: 10px !important;
-    border: 1px solid rgba(85, 108, 160, 0.32) !important;
-    border-radius: 16px !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03),
-      0 12px 22px rgba(0, 0, 0, 0.18) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .screen-shell__screen {
-    min-height: min(58vw, 250px) !important;
-    border-radius: 14px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel {
-    display: flex !important;
-    flex-direction: column;
-    gap: 10px;
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel__top,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .touch-grid {
-    gap: 10px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel__top,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel__bottom {
-    display: contents !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .touch-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .touch-grid > .panel:nth-child(3) {
-    grid-column: 1 / -1;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel__bottom > .panel:nth-child(2) {
-    order: 1;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status {
-    order: 2;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-panel__bottom > .panel:nth-child(1) {
-    order: 3;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .cover-frame,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .touch-grid .panel:nth-child(4) {
-    display: none !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status__header,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .panel {
-    position: relative;
-    overflow: hidden;
-    padding: 14px !important;
-    border: 1px solid rgba(112, 143, 214, 0.28) !important;
-    border-radius: 18px !important;
-    background:
-      linear-gradient(180deg, rgba(35, 40, 53, 0.98), rgba(24, 29, 40, 0.98)) !important;
-    box-shadow:
-      0 10px 20px rgba(0, 0, 0, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status__header::before,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .panel::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(229, 57, 53, 0.65), rgba(81, 208, 255, 0.45));
-    opacity: 0.9;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status__header h3 {
-    font-size: 1rem;
-    line-height: 1.22;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .status-pill {
-    min-height: 34px;
-    padding: 0.28rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.4rem;
-    white-space: nowrap;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .section-kicker,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .field-label {
-    font-size: 0.42rem;
-    letter-spacing: 0.16em;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .text-input {
-    min-height: 48px;
-    padding: 0.85rem 0.9rem;
-    border-width: 1px;
-    border-radius: 14px;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03),
-      0 6px 14px rgba(0, 0, 0, 0.14);
-    font-size: 1.05rem;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .diag-line {
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .diag-line:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .players-list {
-    max-height: 180px;
-    overflow: auto;
-    padding-right: 0;
-    gap: 8px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .player-card {
-    padding: 10px 12px;
-    border-width: 1px;
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(41, 47, 62, 0.98), rgba(27, 33, 44, 0.98));
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .action-stack {
-    grid-template-columns: 1fr !important;
-    gap: 10px;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .action-stack > button,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .action-stack > button:last-child {
-    grid-column: auto;
-    min-height: 52px;
-    width: 100%;
-    border-radius: 16px;
-    clip-path: none;
-    font-size: 0.58rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
-  }
-}
-
-@media (max-width: 520px) {
-  body.is-mobile-device .topbar {
-    padding: 10px 12px;
-    border-radius: 16px;
-  }
-
-  body.is-mobile-device .topbar h1 {
-    font-size: 0.96rem;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .room-head__actions {
-    grid-template-columns: 1fr;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .screen-shell__screen {
-    min-height: min(62vw, 236px) !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .touch-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .panel,
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .deck-status__header {
-    padding: 12px !important;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .text-input {
-    font-size: 0.98rem;
-  }
-
-  body.is-mobile-device #room-view:not(.room-view--mobile-fs) .action-stack > button {
-    min-height: 50px;
-    font-size: 0.54rem;
-  }
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) {
-  --mobile-dock-height: clamp(152px, 30vw, 188px);
-  padding-bottom: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom) + 18px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-handheld {
-  position: fixed !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  z-index: 42 !important;
-  display: block !important;
-  pointer-events: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-handheld__body {
-  width: min(100%, 480px) !important;
-  min-height: var(--mobile-dock-height);
-  margin: 0 auto !important;
-  padding: 14px clamp(10px, 4vw, 16px) calc(12px + env(safe-area-inset-bottom)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  border-bottom: 0 !important;
-  border-radius: 28px 28px 0 0 !important;
-  background: linear-gradient(180deg, rgba(239, 242, 236, 0.98), rgba(206, 212, 198, 0.99)) !important;
-  box-shadow:
-    0 -18px 42px rgba(5, 9, 14, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.48) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-handheld__topbar,
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-speaker,
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-center__label {
-  display: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-controls {
-  position: relative !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  display: grid !important;
-  grid-template-columns: minmax(88px, 1fr) auto minmax(96px, 1fr) !important;
-  align-items: end !important;
-  gap: clamp(8px, 2.5vw, 14px) !important;
-  padding: 0 !important;
-  pointer-events: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-dpad,
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-pill,
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-action {
-  pointer-events: auto !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-dpad {
-  width: clamp(106px, 28vw, 126px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-center {
-  gap: 8px !important;
-  padding-bottom: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-center__row {
-  display: flex !important;
-  gap: 8px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-pill {
-  min-width: clamp(56px, 16vw, 72px) !important;
-  min-height: 30px !important;
-  padding: 0 10px !important;
-  border-radius: 999px !important;
-  clip-path: none !important;
-  font-size: 0.34rem !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-ab {
-  width: clamp(96px, 28vw, 122px) !important;
-  height: clamp(74px, 20vw, 96px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-action {
-  width: clamp(52px, 14vw, 64px) !important;
-  height: clamp(52px, 14vw, 64px) !important;
-  border-radius: 999px !important;
-  clip-path: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs {
-  --mobile-controller-height: clamp(252px, 42dvh, 340px);
-  --mobile-shell-side: clamp(12px, 4vw, 22px);
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 120 !important;
-  display: block !important;
-  min-height: 100dvh !important;
-  padding: 0 !important;
-  background:
-    radial-gradient(circle at top, rgba(176, 198, 124, 0.2), transparent 34%),
-    linear-gradient(180deg, #141b0f 0%, #090c08 44%, #d7dccf 44%, #c3c8ba 100%) !important;
-  overflow: hidden !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .room-head,
-body.is-mobile-device #room-view.room-view--mobile-fs .deck-panel,
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__badge,
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__footer,
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__legs,
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__header,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__meta {
-  display: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .nes-room {
-  display: block !important;
-  height: 100% !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: 0 !important;
-  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
-  padding: max(10px, env(safe-area-inset-top)) var(--mobile-shell-side) 10px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__bezel {
-  height: 100% !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
-  height: 100% !important;
-  min-height: 0 !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: clamp(14px, 4vw, 20px) !important;
-  border: 0 !important;
-  border-radius: 34px 34px 28px 28px !important;
-  background:
-    linear-gradient(180deg, rgba(227, 233, 214, 0.12), rgba(255, 255, 255, 0)),
-    linear-gradient(180deg, #303824 0%, #1a2014 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 28px 56px rgba(0, 0, 0, 0.34) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
-  height: auto !important;
-  min-height: 0 !important;
-  width: min(100%, calc(100dvh - var(--mobile-controller-height) - 44px)) !important;
-  max-height: 100% !important;
-  margin: 0 auto !important;
-  aspect-ratio: 256 / 240 !important;
-  border: 5px solid #313a24 !important;
-  border-radius: 24px !important;
-  background:
-    linear-gradient(180deg, rgba(95, 118, 33, 0.18), rgba(19, 26, 13, 0.94)),
-    repeating-linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.03) 0,
-      rgba(255, 255, 255, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    ),
-    #13190e !important;
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.28),
-    inset 0 0 0 4px rgba(174, 194, 119, 0.12),
-    inset 0 0 80px rgba(0, 0, 0, 0.34) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen canvas {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 100% !important;
-  max-height: 100% !important;
-  image-rendering: pixelated !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-overlay {
-  inset: clamp(14px, 4vw, 20px) !important;
-  border: 3px solid rgba(219, 233, 179, 0.16) !important;
-  border-radius: 20px !important;
-  background: rgba(7, 10, 8, 0.72) !important;
-  font-size: clamp(0.6rem, 2.8vw, 0.78rem) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  z-index: 4 !important;
-  display: block !important;
-  pointer-events: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
-  position: absolute !important;
-  top: auto !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  display: block !important;
-  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
-  padding: 18px 14px calc(18px + env(safe-area-inset-bottom)) !important;
-  border: 0 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.28) !important;
-  border-radius: 34px 34px 0 0 !important;
-  background: linear-gradient(180deg, rgba(247, 249, 242, 0.98), rgba(228, 232, 221, 0.99) 38%, #ccd1c1 100%) !important;
-  box-shadow:
-    0 -26px 48px rgba(0, 0, 0, 0.26),
-    inset 0 2px 0 rgba(255, 255, 255, 0.55) !important;
-  clip-path: none !important;
-  overflow: hidden !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before {
-  content: none !important;
-  display: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::after {
-  content: "" !important;
-  position: absolute !important;
-  right: 18px !important;
-  left: 18px !important;
-  top: 14px !important;
-  height: 4px !important;
-  border-radius: 999px !important;
-  background: linear-gradient(90deg, #7f2b61 0 34%, #43568f 34% 100%) !important;
-  opacity: 0.78 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
-  position: absolute !important;
-  top: max(12px, env(safe-area-inset-top)) !important;
-  right: max(12px, env(safe-area-inset-right)) !important;
-  left: auto !important;
-  z-index: 6 !important;
-  display: flex !important;
-  justify-content: flex-end !important;
-  padding: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-exit-button {
-  pointer-events: auto !important;
-  width: 48px !important;
-  min-width: 48px !important;
-  height: 48px !important;
-  padding: 0 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 16px !important;
-  clip-path: none !important;
-  background: rgba(13, 17, 21, 0.66) !important;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24) !important;
-  backdrop-filter: blur(12px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-exit-button span:last-child {
-  display: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-  position: absolute !important;
-  top: 26px !important;
-  right: 16px !important;
-  bottom: calc(22px + env(safe-area-inset-bottom)) !important;
-  left: 16px !important;
-  z-index: 5 !important;
-  display: block !important;
-  width: auto !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transform: none !important;
-  pointer-events: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad,
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill,
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-exit-button {
-  pointer-events: auto !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-  position: absolute !important;
-  left: 0 !important;
-  bottom: 34px !important;
-  width: clamp(148px, 38vw, 186px) !important;
-  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.22)) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-  position: absolute !important;
-  left: 50% !important;
-  bottom: 88px !important;
-  transform: translateX(-50%) !important;
-  gap: 14px !important;
-  padding-bottom: 0 !important;
-  width: max-content !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-  display: flex !important;
-  gap: 12px !important;
-  transform: rotate(-12deg) !important;
-  transform-origin: center !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label {
-  display: block !important;
-  color: #56604a !important;
-  font-family: var(--font-ui) !important;
-  font-size: 0.82rem !important;
-  letter-spacing: 0.22em !important;
-  text-align: center !important;
-  text-transform: uppercase !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-  min-width: clamp(72px, 22vw, 108px) !important;
-  min-height: 36px !important;
-  padding: 0 12px !important;
-  border-radius: 999px !important;
-  clip-path: none !important;
-  background: linear-gradient(180deg, rgba(117, 124, 132, 0.98), rgba(66, 71, 78, 0.98)) !important;
-  color: #edf2d7 !important;
-  font-size: 0.46rem !important;
-  letter-spacing: 0.09em !important;
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 4px rgba(16, 18, 21, 0.92) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-  position: absolute !important;
-  right: 4px !important;
-  bottom: 38px !important;
-  width: clamp(132px, 34vw, 164px) !important;
-  height: clamp(102px, 26vw, 132px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-  width: clamp(68px, 17vw, 84px) !important;
-  height: clamp(68px, 17vw, 84px) !important;
-  border-radius: 999px !important;
-  clip-path: none !important;
-  background: linear-gradient(180deg, rgba(186, 82, 125, 0.98), rgba(109, 39, 73, 0.98)) !important;
-  box-shadow:
-    0 18px 28px rgba(66, 17, 42, 0.26),
-    inset 0 0 0 5px rgba(74, 22, 48, 0.95) !important;
-  font-size: clamp(1rem, 4vw, 1.28rem) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
-  left: 0 !important;
-  bottom: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
-  top: 0 !important;
-  right: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill.touch-control--active,
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action.touch-control--active {
-  transform: translateY(4px) scale(0.96) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker {
-  position: absolute !important;
-  left: 50% !important;
-  bottom: max(8px, env(safe-area-inset-bottom)) !important;
-  z-index: 5 !important;
-  display: flex !important;
-  gap: 8px !important;
-  transform: translateX(-50%) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker span {
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 999px !important;
-  background: rgba(73, 81, 64, 0.78) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-}
-
-@media (max-width: 430px) {
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) {
-    --mobile-dock-height: clamp(144px, 32vw, 168px);
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .mobile-controls {
-    grid-template-columns: minmax(78px, 1fr) auto minmax(82px, 1fr) !important;
-    gap: 6px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-dpad {
-    width: clamp(94px, 27vw, 112px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-pill {
-    min-width: 52px !important;
-    min-height: 28px !important;
-    padding: 0 8px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-ab {
-    width: clamp(88px, 26vw, 110px) !important;
-    height: clamp(68px, 19vw, 84px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-controls:not(.room-view--mobile-fs) .touch-action {
-    width: clamp(48px, 13vw, 58px) !important;
-    height: clamp(48px, 13vw, 58px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs {
-    --mobile-controller-height: clamp(232px, 40dvh, 300px);
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-    top: 24px !important;
-    right: 12px !important;
-    bottom: calc(18px + env(safe-area-inset-bottom)) !important;
-    left: 12px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    width: clamp(124px, 35vw, 154px) !important;
-    bottom: 30px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-    gap: 8px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    bottom: 76px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label,
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker {
-    display: none !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-    min-width: 62px !important;
-    min-height: 32px !important;
-    padding: 0 10px !important;
-    font-size: 0.4rem !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    right: 2px !important;
-    bottom: 34px !important;
-    width: clamp(118px, 31vw, 142px) !important;
-    height: clamp(92px, 24vw, 112px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-    width: clamp(58px, 15vw, 72px) !important;
-    height: clamp(58px, 15vw, 72px) !important;
-  }
-}
-
-@media (max-height: 560px) {
-  body.is-mobile-device #room-view.room-view--mobile-fs {
-    --mobile-controller-height: clamp(172px, 36dvh, 216px);
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
-    height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
-    padding: 12px !important;
-    border-radius: 26px 26px 22px 22px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-    top: 18px !important;
-    right: 12px !important;
-    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
-    left: 12px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    width: clamp(114px, 24vw, 146px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    gap: 8px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-    transform: rotate(-12deg) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    bottom: 48px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-    min-height: 30px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    bottom: 18px !important;
-    width: clamp(108px, 22vw, 140px) !important;
-    height: clamp(82px, 17vw, 106px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-    width: clamp(58px, 12vw, 74px) !important;
-    height: clamp(58px, 12vw, 74px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker {
-    gap: 6px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker span {
-    width: 7px !important;
-    height: 7px !important;
-  }
-}
-
-/* Final handheld control alignment */
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-  left: 18px !important;
-  bottom: 58px !important;
-  width: clamp(132px, 34vw, 162px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-  left: auto !important;
-  right: 30px !important;
-  bottom: calc(14px + env(safe-area-inset-bottom)) !important;
-  transform: none !important;
-  gap: 10px !important;
-  width: clamp(136px, 36vw, 176px) !important;
-  justify-items: center !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-  justify-content: center !important;
-  gap: 14px !important;
-  transform: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label {
-  display: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-  min-width: clamp(64px, 18vw, 80px) !important;
-  min-height: 32px !important;
-  padding: 0 10px !important;
-  font-size: 0.4rem !important;
-  letter-spacing: 0.08em !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-  right: 18px !important;
-  bottom: calc(66px + env(safe-area-inset-bottom)) !important;
-  width: clamp(136px, 36vw, 170px) !important;
-  height: clamp(136px, 36vw, 170px) !important;
-  overflow: visible !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 14px !important;
-  border-radius: 50% !important;
-  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.44), rgba(201, 205, 213, 0.88) 60%, rgba(157, 162, 171, 0.92) 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 10px 22px rgba(0, 0, 0, 0.14) !important;
-  pointer-events: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-  position: absolute !important;
-  z-index: 1 !important;
-  width: clamp(60px, 16vw, 74px) !important;
-  height: clamp(60px, 16vw, 74px) !important;
-  font-size: clamp(1rem, 4vw, 1.22rem) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
-  left: 12px !important;
-  bottom: 18px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
-  top: 14px !important;
-  right: 12px !important;
-}
-
-@media (max-width: 390px) {
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    left: 12px !important;
-    bottom: 52px !important;
-    width: clamp(118px, 32vw, 144px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    right: 18px !important;
-    width: clamp(126px, 34vw, 156px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-    gap: 10px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-    min-width: 58px !important;
-    min-height: 30px !important;
-    font-size: 0.36rem !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    right: 10px !important;
-    bottom: calc(60px + env(safe-area-inset-bottom)) !important;
-    width: clamp(122px, 34vw, 148px) !important;
-    height: clamp(122px, 34vw, 148px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-    width: clamp(54px, 15vw, 66px) !important;
-    height: clamp(54px, 15vw, 66px) !important;
-  }
-}
-
-/* Final phone-first party menu */
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__panel {
-  min-height: var(--tg-viewport-stable-height, 100vh) !important;
-  padding: calc(env(safe-area-inset-top) + 44px) 12px calc(14px + env(safe-area-inset-bottom)) !important;
-  background:
-    radial-gradient(circle at top, rgba(162, 188, 104, 0.14), transparent 30%),
-    linear-gradient(180deg, #1b220f 0%, #161d0d 56%, #dde2d3 56%, #eff2e7 100%) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__shell {
-  display: grid !important;
-  align-content: start !important;
-  gap: 12px !important;
-  width: min(100%, 460px) !important;
-  margin: 0 auto !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__banner,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__field,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu {
-  position: relative !important;
-  overflow: hidden !important;
-  padding: 14px !important;
-  border: 3px solid #222b13 !important;
-  border-radius: 16px !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .library-head {
+  margin-bottom: 14px !important;
+  padding: 18px 18px 16px !important;
+  border-radius: 26px !important;
+  border: 1px solid rgba(151, 171, 90, 0.22) !important;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
-    linear-gradient(180deg, rgba(17, 24, 11, 0.94), rgba(12, 16, 9, 0.98)) !important;
+    linear-gradient(180deg, rgba(28, 36, 18, 0.96), rgba(14, 19, 10, 0.98)) !important;
   box-shadow:
-    0 10px 22px rgba(0, 0, 0, 0.18),
-    inset 0 0 0 1px rgba(187, 207, 128, 0.08) !important;
+    0 18px 34px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__hero {
-  display: grid !important;
-  gap: 6px !important;
-  padding: 2px 2px 6px !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .library-head__copy h2 {
+  font-size: 1.18rem !important;
+  line-height: 1.2 !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__banner,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu-head,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players-head {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  margin: 0 !important;
-  color: rgba(227, 238, 183, 0.78) !important;
-  font-family: var(--font-pixel) !important;
-  font-size: 0.46rem !important;
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .library-subline {
+  max-width: 20rem !important;
+  color: rgba(236, 241, 226, 0.78) !important;
+  font-size: 0.98rem !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__hero .party-lobby__eyebrow {
-  margin: 0 !important;
-  color: rgba(227, 238, 183, 0.72) !important;
-  font-size: 0.44rem !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__title {
-  margin: 0 !important;
-  color: #f6faeb !important;
-  font-size: 1.22rem !important;
-  line-height: 1.18 !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__subtitle {
-  color: rgba(237, 241, 225, 0.82) !important;
-  font-size: 0.92rem !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  color: rgba(230, 237, 197, 0.78) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code strong {
-  color: #ffffff !important;
-  font-size: 1.56rem !important;
-  letter-spacing: 0.14em !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__label {
-  margin-bottom: 10px !important;
-  color: rgba(226, 236, 187, 0.78) !important;
-  font-family: var(--font-pixel) !important;
-  font-size: 0.46rem !important;
-  letter-spacing: 0.16em !important;
-  text-transform: uppercase !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__input {
+body.is-telegram-mini-app.is-mobile-device #library-view #refresh-library {
   min-height: 50px !important;
-  border: 2px solid rgba(169, 185, 108, 0.16) !important;
-  border-radius: 12px !important;
-  background: rgba(6, 10, 6, 0.78) !important;
-  color: #f7f9ef !important;
-  font-size: 1rem !important;
+  border-radius: 18px !important;
+  clip-path: none !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players-list {
-  display: grid !important;
-  gap: 8px !important;
-  max-height: min(28vh, 210px) !important;
-  overflow: auto !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .game-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player {
-  padding: 10px 12px !important;
-  border: 1px solid rgba(180, 198, 122, 0.1) !important;
-  border-radius: 12px !important;
-  background: rgba(247, 249, 239, 0.05) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player strong {
-  color: #f9fbea !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player span {
-  color: rgba(231, 238, 206, 0.68) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__state {
-  min-width: 72px !important;
-  padding: 6px 10px !important;
-  border-radius: 999px !important;
-  text-align: center !important;
-  font-family: var(--font-pixel) !important;
-  font-size: 0.46rem !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu {
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card {
+  gap: 14px !important;
+  padding: 16px !important;
+  border-radius: 28px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
-    linear-gradient(180deg, #eef1e5, #dde2d4) !important;
-  border-color: rgba(81, 92, 47, 0.42) !important;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, rgba(23, 29, 19, 0.96), rgba(13, 18, 11, 0.98)) !important;
   box-shadow:
-    0 10px 22px rgba(0, 0, 0, 0.14),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.32) !important;
+    0 18px 32px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu-head,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__status {
-  color: rgba(33, 40, 22, 0.74) !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card::before,
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card::after {
+  display: none !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions {
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card__cover {
+  aspect-ratio: 0.74 !important;
+  border-radius: 24px !important;
+  border-width: 3px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card__title {
+  font-size: 0.7rem !important;
+  line-height: 1.65 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card__actions {
+  display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar {
-  margin-top: 12px !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .game-card__actions > button {
+  min-height: 56px !important;
+  border-radius: 16px !important;
+  font-size: 0.7rem !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__status {
-  margin-top: 10px !important;
-  margin-bottom: 12px !important;
-  font-size: 0.9rem !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar > button,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions > button {
-  min-height: 54px !important;
-  border-radius: 14px !important;
-  font-size: 0.98rem !important;
-}
-
-@media (max-width: 390px) {
-  body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar,
-  body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* Final phone-first fullscreen handheld */
-body.is-mobile-device #room-view.room-view--mobile-fs {
-  --mobile-controller-height: clamp(198px, 31dvh, 244px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
-  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
-  padding: 10px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
-  min-height: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
-  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
-  padding: 14px 12px calc(12px + env(safe-area-inset-bottom)) !important;
-  border-radius: 30px 30px 0 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-  top: 10px !important;
-  right: 12px !important;
-  bottom: calc(10px + env(safe-area-inset-bottom)) !important;
-  left: 12px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-  left: 18px !important;
-  bottom: 72px !important;
-  width: clamp(126px, 32vw, 154px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-  right: 16px !important;
-  bottom: calc(76px + env(safe-area-inset-bottom)) !important;
-  width: clamp(128px, 34vw, 160px) !important;
-  height: clamp(128px, 34vw, 160px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-  right: 24px !important;
-  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-  gap: 12px !important;
-}
-
-@media (max-width: 390px) {
-  body.is-mobile-device #room-view.room-view--mobile-fs {
-    --mobile-controller-height: clamp(186px, 30dvh, 226px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    left: 12px !important;
-    bottom: 64px !important;
-    width: clamp(112px, 30vw, 138px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    right: 10px !important;
-    bottom: calc(68px + env(safe-area-inset-bottom)) !important;
-    width: clamp(118px, 33vw, 144px) !important;
-    height: clamp(118px, 33vw, 144px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    right: 14px !important;
-    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
-    width: clamp(118px, 32vw, 150px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-    min-width: 56px !important;
-    min-height: 28px !important;
-  }
-}
-
-/* Exact handheld fullscreen pass */
-body.is-mobile-device #room-view.room-view--mobile-fs {
-  --mobile-controller-height: clamp(220px, 34dvh, 286px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
-  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
-  padding: 8px !important;
-  border-radius: 26px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
-  border-radius: 20px !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
-  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
-  padding: 0 !important;
-  border-top: 0 !important;
-  border-radius: 0 0 30px 30px !important;
-  background: linear-gradient(180deg, #f6f7f3 0%, #eceee8 46%, #e5e6e1 100%) !important;
-  box-shadow:
-    0 -18px 38px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::after,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__meta,
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label {
-  display: none !important;
-  content: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
-  top: max(18px, env(safe-area-inset-top)) !important;
-  right: 18px !important;
-  left: 18px !important;
-  z-index: 9 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-top-actions {
-  display: flex !important;
-  gap: 10px !important;
-  pointer-events: auto !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
-  min-height: 44px !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  clip-path: none !important;
-  background: rgba(36, 36, 36, 0.92) !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16) !important;
-  color: #f2f2f2 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  min-width: 122px !important;
-  padding: 0 18px !important;
-  font-family: var(--font-ui) !important;
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-  pointer-events: auto !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button__icon {
-  display: inline-block !important;
-  width: 14px !important;
-  height: 14px !important;
-  border-bottom: 3px solid currentColor !important;
-  border-left: 3px solid currentColor !important;
-  transform: rotate(45deg) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
-  width: 58px !important;
-  min-width: 58px !important;
-  padding: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button__glyph {
-  display: inline-block !important;
-  font-family: var(--font-ui) !important;
-  font-size: 1.7rem !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  letter-spacing: -0.06em !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-menu-button .mobile-icon-button__glyph {
-  transform: translateY(-2px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-exit-button .mobile-icon-button__glyph:last-child,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-menu-button .mobile-icon-button__glyph:last-child {
-  display: inline-block !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-  left: 34px !important;
-  bottom: 70px !important;
-  width: clamp(148px, 34vw, 186px) !important;
-  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.16)) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cross::before,
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cross::after {
-  border-radius: 22px !important;
-  background: linear-gradient(180deg, rgba(109, 115, 124, 0.98), rgba(54, 58, 66, 0.98)) !important;
-  box-shadow:
-    0 8px 18px rgba(0, 0, 0, 0.16),
-    inset 0 0 0 5px rgba(22, 25, 29, 0.94) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cap {
-  width: 28% !important;
-  height: 28% !important;
-  border-radius: 999px !important;
-  background: linear-gradient(180deg, rgba(111, 117, 126, 0.98), rgba(58, 62, 70, 0.98)) !important;
-  box-shadow:
-    inset 0 0 0 5px rgba(24, 26, 31, 0.95),
-    0 6px 12px rgba(0, 0, 0, 0.12) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__hint {
-  color: rgba(255, 255, 255, 0.92) !important;
-  font-size: 1.32rem !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-  right: 42px !important;
-  bottom: calc(102px + env(safe-area-inset-bottom)) !important;
-  width: clamp(172px, 34vw, 220px) !important;
-  height: clamp(126px, 24vw, 160px) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab::before {
-  display: none !important;
-  content: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-  width: clamp(76px, 16vw, 94px) !important;
-  height: clamp(76px, 16vw, 94px) !important;
-  border-radius: 999px !important;
-  background: linear-gradient(180deg, rgba(188, 89, 132, 0.98), rgba(117, 34, 75, 0.98)) !important;
-  box-shadow:
-    0 14px 22px rgba(83, 27, 53, 0.16),
-    inset 0 0 0 5px rgba(92, 24, 58, 0.94),
-    inset 0 10px 12px rgba(255, 255, 255, 0.12) !important;
-  font-size: clamp(1.2rem, 4vw, 1.6rem) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
-  left: 18px !important;
-  bottom: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
-  top: 0 !important;
-  right: 0 !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-  left: 50% !important;
-  right: auto !important;
-  bottom: calc(26px + env(safe-area-inset-bottom)) !important;
-  transform: translateX(-50%) !important;
-  width: max-content !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-  display: flex !important;
-  gap: 22px !important;
-  justify-content: center !important;
-  transform: none !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-  min-width: 112px !important;
-  min-height: 42px !important;
-  padding: 0 18px !important;
-  border-radius: 999px !important;
-  background: linear-gradient(180deg, rgba(101, 107, 115, 0.98), rgba(56, 60, 67, 0.98)) !important;
-  color: #f4f7ea !important;
-  font-size: 0.52rem !important;
-  letter-spacing: 0.08em !important;
-  box-shadow:
-    0 12px 18px rgba(0, 0, 0, 0.14),
-    inset 0 0 0 4px rgba(26, 28, 33, 0.94),
-    inset 0 8px 10px rgba(255, 255, 255, 0.1) !important;
-}
-
-@media (max-width: 390px) {
-  body.is-mobile-device #room-view.room-view--mobile-fs {
-    --mobile-controller-height: clamp(206px, 33dvh, 256px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
-    top: max(14px, env(safe-area-inset-top)) !important;
-    right: 12px !important;
-    left: 12px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button {
-    min-width: 108px !important;
-    padding: 0 14px !important;
-    font-size: 0.94rem !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
-    width: 52px !important;
-    min-width: 52px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    left: 22px !important;
-    bottom: 66px !important;
-    width: clamp(128px, 33vw, 158px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    right: 20px !important;
-    bottom: calc(94px + env(safe-area-inset-bottom)) !important;
-    width: clamp(148px, 34vw, 184px) !important;
-    height: clamp(112px, 24vw, 142px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
-    width: clamp(68px, 16vw, 82px) !important;
-    height: clamp(68px, 16vw, 82px) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
-    bottom: calc(20px + env(safe-area-inset-bottom)) !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-    gap: 14px !important;
-  }
-
-  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-    min-width: 92px !important;
-    min-height: 38px !important;
-    font-size: 0.46rem !important;
-  }
-}
-
-/* Clean solo launch screen for Telegram play mode */
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo,
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party {
   min-height: var(--tg-viewport-stable-height, 100vh) !important;
+  padding: 0 !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .room-head,
@@ -2016,65 +149,790 @@ body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-sh
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__bezel {
   padding: 10px !important;
   border-radius: 28px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, #31392a, #1f251b) !important;
+  box-shadow:
+    0 26px 46px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .screen-shell,
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .screen-shell {
   min-height: calc(var(--tg-viewport-stable-height, 100vh) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px) !important;
   padding: 8px !important;
+  border: 0 !important;
+  border-radius: 30px !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .screen-shell__screen,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .screen-shell__screen,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo #emulator-mount,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party #emulator-mount {
-  min-height: 100% !important;
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .screen-shell__screen {
+  min-height: min(76vw, 380px) !important;
+  border-radius: 22px !important;
+  background: #050607 !important;
+  box-shadow:
+    inset 0 0 0 5px #090d08,
+    inset 0 0 0 9px rgba(126, 146, 92, 0.2),
+    0 20px 36px rgba(0, 0, 0, 0.22) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch {
-  min-height: var(--tg-viewport-stable-height, 100vh) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .room-head,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .deck-panel,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .mobile-handheld,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .party-lobby {
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .nes-room {
   display: none !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .nes-room {
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby {
   display: block !important;
-  max-width: 100% !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell {
-  width: min(100%, 560px) !important;
-  margin: 0 auto !important;
-  padding-top: calc(env(safe-area-inset-top) + 12px) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell__badge,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell__header,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell__footer,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell__legs {
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party:not(.room-view--party-lobby) .party-lobby,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .party-lobby {
   display: none !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .tv-shell__bezel {
-  padding: 10px !important;
-  border-radius: 28px !important;
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby {
+  background: linear-gradient(180deg, #233018 0%, #171f11 54%, #ecefe3 54%, #f5f7ef 100%) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .screen-shell {
-  min-height: calc(var(--tg-viewport-stable-height, 100vh) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px) !important;
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__panel {
+  min-height: var(--tg-viewport-stable-height, 100vh) !important;
+  padding: calc(env(safe-area-inset-top) + 14px) 14px calc(14px + env(safe-area-inset-bottom)) !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  gap: 16px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__chrome {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-chip,
+body.is-telegram-mini-app.is-mobile-device .party-icon-button {
+  border: 0 !important;
+  background: rgba(49, 54, 43, 0.9) !important;
+  color: #f6f7f3 !important;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 50px !important;
+  min-width: 132px !important;
+  padding: 0 18px !important;
+  border-radius: 999px !important;
+  font-family: var(--font-ui) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-chip__arrow {
+  width: 14px !important;
+  height: 14px !important;
+  border-left: 3px solid currentColor !important;
+  border-bottom: 3px solid currentColor !important;
+  transform: rotate(45deg) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__chrome-actions {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-icon-button {
+  width: 50px !important;
+  min-width: 50px !important;
+  height: 50px !important;
+  border-radius: 999px !important;
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-icon-button__glyph {
+  font-family: var(--font-ui) !important;
+  font-size: 1.2rem !important;
+  line-height: 1 !important;
+  transform: translateY(-1px) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__body {
+  display: grid !important;
+  align-content: start !important;
+  gap: 14px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__hero {
+  padding: 2px 4px 0 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__eyebrow {
+  margin: 0 0 4px !important;
+  color: rgba(225, 236, 188, 0.72) !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.44rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__title {
+  margin: 0 !important;
+  color: #f8f9f2 !important;
+  font-size: 1.34rem !important;
+  line-height: 1.14 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__subtitle {
+  margin: 6px 0 0 !important;
+  color: rgba(238, 241, 229, 0.78) !important;
+  font-size: 1rem !important;
+  line-height: 1.3 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__card {
+  padding: 16px 18px !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    rgba(9, 13, 8, 0.34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 26px rgba(0, 0, 0, 0.16) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__card-head,
+body.is-telegram-mini-app.is-mobile-device .party-lobby__players-head,
+body.is-telegram-mini-app.is-mobile-device .party-lobby__label {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+  color: rgba(232, 238, 206, 0.72) !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.46rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__card-meta {
+  color: rgba(238, 242, 221, 0.66) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__code strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 1.34rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.12em !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__input {
+  width: 100% !important;
+  min-height: 56px !important;
+  padding: 0 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  background: rgba(7, 10, 6, 0.72) !important;
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__players-list {
+  display: grid !important;
+  gap: 10px !important;
+  max-height: min(26vh, 220px) !important;
+  overflow: auto !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__player {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 12px 14px !important;
+  border-radius: 18px !important;
+  background: rgba(244, 247, 237, 0.08) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__player strong,
+body.is-telegram-mini-app.is-mobile-device .party-lobby__state {
+  color: #ffffff !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__player span {
+  display: block !important;
+  margin-top: 4px !important;
+  color: rgba(232, 239, 212, 0.68) !important;
+  font-size: 0.92rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__state {
+  min-width: 74px !important;
+  padding: 8px 12px !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.46rem !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__state--ready {
+  background: rgba(89, 188, 117, 0.2) !important;
+  color: #d9ffe4 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__dock {
+  margin-top: auto !important;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom)) !important;
+  border-radius: 30px 30px 0 0 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, #f6f8ef, #ebeee2) !important;
+  box-shadow:
+    0 -20px 36px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__status {
+  margin: 0 0 14px !important;
+  color: rgba(44, 53, 29, 0.74) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.34 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__actions > button {
+  min-height: 62px !important;
+  border-radius: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.2 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-lobby__actions > button:disabled,
+body.is-telegram-mini-app.is-mobile-device .party-icon-button:disabled,
+body.is-telegram-mini-app.is-mobile-device .party-chip:disabled {
+  opacity: 0.54 !important;
+  transform: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs {
+  --mobile-controller-height: clamp(290px, 42dvh, 390px) !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 120 !important;
+  padding: 0 !important;
+  background: linear-gradient(180deg, #2c3423 0%, #161a12 50%, #f5f6f2 50%, #eceee8 100%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .room-head,
+body.is-mobile-device #room-view.room-view--mobile-fs .deck-panel,
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__badge,
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__header,
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__footer,
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__legs,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-room-badge {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .nes-room {
+  display: block !important;
+  height: 100% !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
+  width: min(100%, 620px) !important;
+  margin: 0 auto !important;
+  padding: max(14px, env(safe-area-inset-top)) 18px 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__bezel {
+  height: 100% !important;
+  padding: 12px !important;
+  border: 0 !important;
+  border-radius: 34px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, #333b2c, #1f251b) !important;
+  box-shadow:
+    0 28px 48px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
+  height: 100% !important;
+  min-height: 0 !important;
   padding: 8px !important;
+  border: 0 !important;
+  border-radius: 28px !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .screen-shell__screen,
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch #emulator-mount {
-  min-height: 100% !important;
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
+  height: 100% !important;
+  min-height: 0 !important;
+  border-radius: 22px !important;
+  background: #000000 !important;
+  box-shadow:
+    inset 0 0 0 5px #080a08,
+    inset 0 0 0 9px rgba(146, 167, 99, 0.18),
+    0 22px 34px rgba(0, 0, 0, 0.18) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch .screen-overlay {
-  font-size: clamp(0.78rem, 3vw, 0.92rem) !important;
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen canvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  image-rendering: pixelated !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-overlay {
+  inset: 8px !important;
+  border-radius: 22px !important;
+  font-size: 0.8rem !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 6 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
+  padding: 0 !important;
+  border-radius: 38px 38px 0 0 !important;
+  border: 0 !important;
+  background: linear-gradient(180deg, #fafbf8 0%, #edefe8 52%, #e8e9e3 100%) !important;
+  box-shadow:
+    0 -22px 42px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.54) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 18px !important;
+  left: 28px !important;
+  right: 28px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #b14a82, #7989c8) !important;
+  opacity: 0.9 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
+  position: absolute !important;
+  top: max(18px, env(safe-area-inset-top)) !important;
+  right: 22px !important;
+  left: 22px !important;
+  z-index: 8 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-top-actions {
+  display: flex !important;
+  gap: 12px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
+  pointer-events: auto !important;
+  min-height: 52px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background: rgba(49, 49, 49, 0.92) !important;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16) !important;
+  color: #f4f4f4 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-width: 138px !important;
+  padding: 0 20px !important;
+  font-family: var(--font-ui) !important;
+  font-size: 1.02rem !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button__icon {
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-left: 3px solid currentColor !important;
+  border-bottom: 3px solid currentColor !important;
+  transform: rotate(45deg) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
+  width: 56px !important;
+  min-width: 56px !important;
+  height: 52px !important;
+  padding: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button__glyph {
+  display: inline-block !important;
+  font-family: var(--font-ui) !important;
+  font-size: 1.2rem !important;
+  line-height: 1 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+  pointer-events: auto !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  position: absolute !important;
+  left: clamp(26px, 8vw, 56px) !important;
+  bottom: clamp(118px, 15vh, 164px) !important;
+  width: clamp(168px, 34vw, 220px) !important;
+  aspect-ratio: 1 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cross::after {
+  border-radius: 20px !important;
+  background: linear-gradient(180deg, #6f747d, #2d3139) !important;
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 5px rgba(21, 23, 27, 0.98) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__cap {
+  width: 26% !important;
+  height: 26% !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, #8a9098, #474c54) !important;
+  box-shadow:
+    inset 0 0 0 5px rgba(33, 35, 40, 0.98),
+    0 8px 14px rgba(0, 0, 0, 0.14) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad__hint {
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-size: 1.34rem !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  position: absolute !important;
+  right: clamp(36px, 9vw, 62px) !important;
+  bottom: clamp(120px, 15vh, 168px) !important;
+  width: clamp(188px, 38vw, 246px) !important;
+  height: clamp(154px, 28vw, 214px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+  width: clamp(78px, 16vw, 102px) !important;
+  height: clamp(78px, 16vw, 102px) !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background: linear-gradient(180deg, #c96aa0, #7a2d5b) !important;
+  box-shadow:
+    0 16px 24px rgba(75, 24, 49, 0.16),
+    inset 0 0 0 5px rgba(92, 24, 58, 0.94),
+    inset 0 10px 12px rgba(255, 255, 255, 0.12) !important;
+  font-size: clamp(1.28rem, 4vw, 1.72rem) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
+  top: 2px !important;
+  right: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
+  bottom: 4px !important;
+  left: 34px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: clamp(32px, 5vh, 56px) !important;
+  transform: translateX(-50%) !important;
+  justify-items: center !important;
+  width: max-content !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+  display: flex !important;
+  gap: 24px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+  min-width: 112px !important;
+  min-height: 44px !important;
+  padding: 0 18px !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background: linear-gradient(180deg, #757b84, #42464e) !important;
+  color: #f3f5ef !important;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.08em !important;
+  box-shadow:
+    0 12px 18px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 4px rgba(31, 33, 38, 0.96),
+    inset 0 7px 10px rgba(255, 255, 255, 0.08) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-control--active {
+  transform: translateY(2px) scale(0.98) !important;
+}
+
+@media (max-width: 390px) {
+  body.is-telegram-mini-app.is-mobile-device #library-view {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  body.is-telegram-mini-app.is-mobile-device #library-view .game-card__actions,
+  body.is-telegram-mini-app.is-mobile-device .party-lobby__actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs {
+    --mobile-controller-height: clamp(276px, 40dvh, 354px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
+    right: 14px !important;
+    left: 14px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button {
+    min-width: 118px !important;
+    padding: 0 16px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+    left: 22px !important;
+    bottom: 112px !important;
+    width: clamp(146px, 32vw, 184px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+    right: 20px !important;
+    bottom: 114px !important;
+    width: clamp(160px, 34vw, 206px) !important;
+    height: clamp(140px, 26vw, 188px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+    width: clamp(70px, 15vw, 90px) !important;
+    height: clamp(70px, 15vw, 90px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
+    left: 24px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+    bottom: 26px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+    gap: 14px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+    min-width: 96px !important;
+    min-height: 40px !important;
+    font-size: 0.5rem !important;
+  }
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .nes-room {
+  display: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party.room-view--mobile-fs .nes-room,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .nes-room {
+  display: block !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device .party-icon-button__glyph--chevron {
+  width: 13px !important;
+  height: 13px !important;
+  border-right: 3px solid currentColor !important;
+  border-bottom: 3px solid currentColor !important;
+  transform: translateY(-3px) rotate(45deg) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__hero {
+  padding: 4px 4px 2px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__title {
+  font-size: 1.2rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__subtitle {
+  max-width: 18rem !important;
+  font-size: 0.98rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__card {
+  border-color: rgba(209, 226, 155, 0.14) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    rgba(8, 12, 7, 0.22) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players-list {
+  max-height: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__dock {
+  padding-top: 22px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs {
+  --mobile-controller-height: clamp(304px, 41dvh, 364px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
+  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom) + 18px) !important;
+  padding-top: max(14px, env(safe-area-inset-top)) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__bezel {
+  padding: 14px !important;
+  border-radius: 32px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
+  border-radius: 20px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  border-radius: 34px 34px 0 0 !important;
+  background: linear-gradient(180deg, #fafaf7 0%, #eef0e7 54%, #eaebe4 100%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
+  top: max(16px, env(safe-area-inset-top)) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button {
+  min-width: 136px !important;
+  min-height: 50px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
+  width: 54px !important;
+  min-width: 54px !important;
+  height: 50px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  left: clamp(30px, 8vw, 60px) !important;
+  bottom: clamp(126px, 16vh, 170px) !important;
+  width: clamp(184px, 35vw, 216px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  right: clamp(44px, 10vw, 78px) !important;
+  bottom: clamp(136px, 16vh, 178px) !important;
+  width: clamp(176px, 33vw, 208px) !important;
+  height: clamp(148px, 25vw, 176px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+  width: clamp(74px, 15vw, 88px) !important;
+  height: clamp(74px, 15vw, 88px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
+  top: 0 !important;
+  right: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
+  bottom: 0 !important;
+  left: 26px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  bottom: clamp(34px, 5vh, 50px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+  gap: 18px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+  min-width: 118px !important;
+  min-height: 42px !important;
+  font-size: 0.56rem !important;
+}
+
+@media (max-width: 390px) {
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+    left: 18px !important;
+    bottom: 118px !important;
+    width: clamp(162px, 34vw, 188px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+    right: 18px !important;
+    bottom: 122px !important;
+    width: clamp(150px, 31vw, 180px) !important;
+    height: clamp(132px, 24vw, 160px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+    bottom: 30px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+    min-width: 100px !important;
+  }
 }

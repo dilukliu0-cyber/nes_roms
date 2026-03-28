@@ -37,6 +37,9 @@ const state = {
 const refs = {
   libraryView: document.querySelector("#library-view"),
   roomView: document.querySelector("#room-view"),
+  roomHead: document.querySelector(".room-head"),
+  nesRoom: document.querySelector(".nes-room"),
+  deckPanel: document.querySelector(".deck-panel"),
   catalogCount: document.querySelector("#catalog-count"),
   catalogStatus: document.querySelector("#catalog-status"),
   gameGrid: document.querySelector("#game-grid"),
@@ -54,6 +57,9 @@ const refs = {
   partyStatusCopy: document.querySelector("#party-status-copy"),
   partyPlayersList: document.querySelector("#party-players-list"),
   partyNicknameInput: document.querySelector("#party-nickname-input"),
+  partyBackButton: document.querySelector("#party-back-button"),
+  partyCopyIconButton: document.querySelector("#party-copy-icon"),
+  partyMenuButton: document.querySelector("#party-menu-button"),
   partyInviteButton: document.querySelector("#party-invite-button"),
   partyCopyButton: document.querySelector("#party-copy-button"),
   partyReadyButton: document.querySelector("#party-ready-button"),
@@ -964,6 +970,18 @@ refs.partyNicknameInput.addEventListener("change", () => {
   }
 });
 
+refs.partyBackButton.addEventListener("click", () => {
+  navigate("/");
+});
+
+refs.partyCopyIconButton.addEventListener("click", async () => {
+  await copyCurrentRoomLink();
+});
+
+refs.partyMenuButton.addEventListener("click", () => {
+  void shareCurrentRoomLink(state.currentRoom);
+});
+
 refs.toggleReady.addEventListener("click", () => {
   const me = state.currentRoom?.players?.find((player) => player.socketId === socket.id);
   socket.emit("room:ready", {
@@ -1150,13 +1168,14 @@ function updateFullscreenUi() {
   const fullscreenActive = nativeRoomFullscreen || telegramAppFullscreen;
   const roomFullscreenActive =
     hasRoom && (nativeRoomFullscreen || (telegramAppFullscreen && state.currentRoom?.status === "running"));
-  const mobileControlsActive = state.isMobileDevice && roomFullscreenActive;
-  const mobileOverlayActive = mobileControlsActive;
-  state.fullscreenActive = roomFullscreenActive;
-  const partyLobbyActive = shouldShowPartyLobby();
-  const soloLaunchActive = shouldShowSoloLaunch();
   const soloUiActive = shouldUseSoloUi();
   const partyUiActive = shouldUsePartyUi();
+  const partyLobbyActive = shouldShowPartyLobby();
+  const soloLaunchActive = shouldShowSoloLaunch();
+  const mobileControlsActive = state.isMobileDevice && (roomFullscreenActive || soloUiActive);
+  const mobileOverlayActive = mobileControlsActive;
+  state.fullscreenActive = roomFullscreenActive;
+  const appModeActive = Boolean(state.telegram?.isMiniApp && state.isMobileDevice && (soloUiActive || partyUiActive));
 
   document.body.classList.toggle("is-mobile-device", state.isMobileDevice);
   document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
@@ -1169,6 +1188,9 @@ function updateFullscreenUi() {
   refs.roomView.classList.toggle("room-view--solo-launch", soloLaunchActive);
   refs.roomView.classList.toggle("room-view--app-solo", soloUiActive);
   refs.roomView.classList.toggle("room-view--app-party", partyUiActive);
+  refs.roomHead.classList.toggle("hidden", appModeActive);
+  refs.deckPanel.classList.toggle("hidden", appModeActive);
+  refs.nesRoom.classList.toggle("hidden", partyLobbyActive);
   refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
   refs.mobileHandheld.setAttribute("aria-hidden", String(!mobileControlsActive));
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
@@ -1261,6 +1283,8 @@ function renderPartyLobby(room, me) {
       ? state.roomLoadError
       : "Сейчас появится код комнаты и кнопки приглашения.";
     refs.partyPlayersList.innerHTML = "";
+    refs.partyCopyIconButton.disabled = true;
+    refs.partyMenuButton.disabled = true;
     refs.partyInviteButton.disabled = true;
     refs.partyCopyButton.disabled = true;
     refs.partyReadyButton.disabled = true;
@@ -1277,19 +1301,19 @@ function renderPartyLobby(room, me) {
   refs.partyLobbyTitle.textContent = room.game?.title || "Party Room";
   refs.partyLobbySubtitle.textContent =
     canPartyStart
-      ? "Все готовы. Можно запускать игру."
+      ? "Оба игрока готовы. Можно запускать."
       : players.length < 2
-        ? "Позови друга и дождись, пока он зайдёт."
+        ? "Позови друга в комнату."
       : isHost
         ? "Когда второй игрок будет готов, нажми играть."
-        : "Нажми готово и жди запуска от хоста.";
+        : "Нажми готово и жди запуска.";
   refs.partyRoomCode.textContent = room.id;
   refs.partyPlayerCount.textContent = `${players.length} ${pluralizeRu(players.length, "игрок", "игрока", "игроков")}`;
   refs.partyStatusCopy.textContent =
     canPartyStart
-      ? "Комната готова. Запуск откроет игру у всех."
+      ? "Комната готова. Нажми «Играть», и игра откроется у всех."
       : players.length < 2
-        ? "Выбери приглашение или скопируй ссылку на комнату."
+        ? "Нажми «Пригласить друга» и отправь ссылку в Telegram."
         : !isHost
           ? me?.ready
             ? "Ты готов. Жди, пока хост нажмёт играть."
@@ -1312,8 +1336,10 @@ function renderPartyLobby(room, me) {
     refs.partyPlayersList.appendChild(item);
   }
 
+  refs.partyCopyIconButton.disabled = false;
+  refs.partyMenuButton.disabled = false;
   refs.partyInviteButton.disabled = false;
-  refs.partyInviteButton.textContent = "Позвать в Telegram";
+  refs.partyInviteButton.textContent = "Пригласить друга";
   refs.partyCopyButton.disabled = false;
   refs.partyCopyButton.textContent = "Скопировать ссылку";
   refs.partyReadyButton.disabled = room.status !== "lobby" || Boolean(me?.spectator);

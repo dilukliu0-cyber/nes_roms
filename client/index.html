@@ -6,7 +6,7 @@
     <title>NES Switch Online</title>
     <script src="https://telegram.org/js/telegram-web-app.js?61"></script>
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/styles.override.css?v=20260328-2048" />
+    <link rel="stylesheet" href="/styles.override.css?v=20260328-2225" />
   </head>
   <body>
     <div class="scene">
@@ -59,50 +59,58 @@
 
           <section id="party-lobby" class="party-lobby hidden" aria-hidden="true">
             <div class="party-lobby__panel">
-              <div class="party-lobby__shell">
-                <div class="party-lobby__banner">
-                  <span class="party-lobby__banner-label">Пати</span>
-                  <span id="party-player-count" class="party-lobby__banner-meta">0 игроков</span>
-                </div>
+              <div class="party-lobby__chrome">
+                <button id="party-back-button" class="party-chip party-chip--back" type="button">
+                  <span class="party-chip__arrow" aria-hidden="true"></span>
+                  <span>Назад</span>
+                </button>
 
+                <div class="party-lobby__chrome-actions">
+                  <button id="party-copy-icon" class="party-icon-button" type="button" aria-label="Скопировать ссылку">
+                    <span class="party-icon-button__glyph party-icon-button__glyph--chevron" aria-hidden="true"></span>
+                  </button>
+                  <button id="party-menu-button" class="party-icon-button" type="button" aria-label="Поделиться">
+                    <span class="party-icon-button__glyph" aria-hidden="true">•••</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="party-lobby__body">
                 <div class="party-lobby__hero">
-                  <p class="party-lobby__eyebrow">Контекстное меню</p>
+                  <p class="party-lobby__eyebrow">Пати</p>
                   <h2 id="party-lobby-title" class="party-lobby__title">Комната</h2>
-                  <p id="party-lobby-subtitle" class="party-lobby__subtitle">Ждём друзей</p>
+                  <p id="party-lobby-subtitle" class="party-lobby__subtitle">Позови друга в комнату.</p>
                 </div>
 
-                <div class="party-lobby__code">
-                  <span>Код комнаты</span>
+                <div class="party-lobby__card party-lobby__code">
+                  <div class="party-lobby__card-head">
+                    <span>Код комнаты</span>
+                    <span id="party-player-count" class="party-lobby__card-meta">0 игроков</span>
+                  </div>
                   <strong id="party-room-code">------</strong>
                 </div>
 
-                <div class="party-lobby__field">
+                <div class="party-lobby__card party-lobby__field">
                   <label class="party-lobby__label" for="party-nickname-input">Твой ник</label>
                   <input id="party-nickname-input" class="party-lobby__input" maxlength="20" placeholder="Игрок" />
                 </div>
 
-                <div class="party-lobby__players">
+                <div class="party-lobby__card party-lobby__players">
                   <div class="party-lobby__players-head">
-                    <span>Игроки</span>
-                    <span>Lobby</span>
+                    <span>В комнате</span>
+                    <span>Состав</span>
                   </div>
                   <div id="party-players-list" class="party-lobby__players-list"></div>
                 </div>
+              </div>
 
-                <div class="party-lobby__menu">
-                  <div class="party-lobby__menu-head">
-                    <span>Приглашение</span>
-                    <span>Быстро</span>
-                  </div>
-                  <div class="party-lobby__toolbar">
-                    <button id="party-invite-button" class="primary-button" type="button">Позвать в Telegram</button>
-                    <button id="party-copy-button" class="secondary-button" type="button">Скопировать ссылку</button>
-                  </div>
-                  <div id="party-status-copy" class="party-lobby__status">Позови друга и нажми готово.</div>
-                  <div class="party-lobby__actions">
-                    <button id="party-ready-button" class="secondary-button" type="button">Готов</button>
-                    <button id="party-play-button" class="primary-button" type="button">Играть</button>
-                  </div>
+              <div class="party-lobby__dock">
+                <p id="party-status-copy" class="party-lobby__status">Нажми «Пригласить друга» и отправь ссылку в Telegram.</p>
+                <div class="party-lobby__actions">
+                  <button id="party-invite-button" class="primary-button" type="button">Пригласить друга</button>
+                  <button id="party-copy-button" class="secondary-button" type="button">Скопировать ссылку</button>
+                  <button id="party-ready-button" class="secondary-button" type="button">Готов</button>
+                  <button id="party-play-button" class="primary-button" type="button">Играть</button>
                 </div>
               </div>
             </div>
@@ -214,6 +222,8 @@
                   <span>Назад</span>
                 </button>
 
+                <span id="mobile-room-badge" class="mobile-room-badge hidden" aria-hidden="true"></span>
+
                 <div class="mobile-top-actions">
                   <button
                     id="exit-mobile-fullscreen"
@@ -274,6 +284,6 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script type="module" src="/app.js?v=20260328-2048"></script>
+    <script type="module" src="/app.js?v=20260328-2225"></script>
   </body>
 </html>
