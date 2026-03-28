@@ -77,6 +77,8 @@ const refs = {
   latencyIndicator: document.querySelector("#latency-indicator"),
   mobileHandheld: document.querySelector("#mobile-handheld"),
   mobileRoomBadge: document.querySelector("#mobile-room-badge"),
+  mobileBackButton: document.querySelector("#mobile-back-button"),
+  mobileMenuButton: document.querySelector("#mobile-menu-button"),
   touchDpad: document.querySelector("#touch-dpad"),
   touchButtons: Array.from(document.querySelectorAll("[data-touch-bit]")),
   fullscreenButtons: [
@@ -905,9 +907,21 @@ refs.copyLink.addEventListener("click", async () => {
 
 refs.toggleFullscreen.addEventListener("click", toggleFullscreenMode);
 refs.screenFullscreenButton.addEventListener("click", toggleFullscreenMode);
+refs.mobileBackButton.addEventListener("click", async () => {
+  vibrateTap(18);
+  if (state.fullscreenActive) {
+    await exitFullscreenMode();
+    return;
+  }
+  navigate("/");
+});
 refs.exitMobileFullscreen.addEventListener("click", async () => {
   vibrateTap(18);
   await exitFullscreenMode();
+});
+refs.mobileMenuButton.addEventListener("click", async () => {
+  vibrateTap(18);
+  await shareCurrentRoomLink(state.currentRoom);
 });
 
 refs.nicknameInput.addEventListener("change", () => {
@@ -1134,6 +1148,8 @@ function updateFullscreenUi() {
   refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
   refs.mobileHandheld.setAttribute("aria-hidden", String(!mobileControlsActive));
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
+  refs.mobileBackButton.classList.toggle("hidden", !mobileOverlayActive);
+  refs.mobileMenuButton.classList.toggle("hidden", !mobileOverlayActive);
   refs.partyLobby.classList.toggle("hidden", !partyLobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!partyLobbyActive));
 

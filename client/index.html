@@ -6,7 +6,7 @@
     <title>NES Switch Online</title>
     <script src="https://telegram.org/js/telegram-web-app.js?61"></script>
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/styles.override.css?v=20260328-1912" />
+    <link rel="stylesheet" href="/styles.override.css?v=20260328-1930" />
   </head>
   <body>
     <div class="scene">
@@ -209,14 +209,29 @@
           <div id="mobile-handheld" class="mobile-handheld hidden" aria-hidden="true">
             <div class="mobile-handheld__body">
               <div class="mobile-handheld__topbar">
-                <div class="mobile-handheld__meta">
-                  <div class="mobile-handheld__brand">Быстрая игра</div>
-                  <div id="mobile-room-badge" class="mobile-room-badge">КОМНАТА</div>
-                </div>
-                <button id="exit-mobile-fullscreen" class="ghost-button hidden mobile-exit-button" type="button">
-                  <span class="mobile-exit-button__icon" aria-hidden="true"></span>
-                  <span>Выйти</span>
+                <button id="mobile-back-button" class="ghost-button mobile-back-button hidden" type="button">
+                  <span class="mobile-back-button__icon" aria-hidden="true"></span>
+                  <span>Назад</span>
                 </button>
+
+                <div class="mobile-top-actions">
+                  <button
+                    id="exit-mobile-fullscreen"
+                    class="ghost-button hidden mobile-exit-button mobile-icon-button"
+                    type="button"
+                    aria-label="Свернуть экран"
+                  >
+                    <span class="mobile-icon-button__glyph" aria-hidden="true">✓</span>
+                  </button>
+                  <button
+                    id="mobile-menu-button"
+                    class="ghost-button hidden mobile-menu-button mobile-icon-button"
+                    type="button"
+                    aria-label="Поделиться"
+                  >
+                    <span class="mobile-icon-button__glyph" aria-hidden="true">•••</span>
+                  </button>
+                </div>
               </div>
 
               <div class="mobile-controls mobile-controls--gameboy">
