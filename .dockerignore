@@ -1,0 +1,7 @@
+node_modules
+.run
+.git
+.gitignore
+npm-debug.log
+cover-cache
+roms

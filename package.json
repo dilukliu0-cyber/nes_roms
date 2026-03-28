@@ -1,0 +1,17 @@
+{
+  "name": "nes-switch-online",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server/index.mjs",
+    "start": "node server/index.mjs",
+    "telegram:menu": "node scripts/set-telegram-menu-button.mjs"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "express": "^4.21.2",
+    "jsnes": "2.0.0",
+    "socket.io": "^4.8.1"
+  }
+}

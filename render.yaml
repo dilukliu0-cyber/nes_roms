@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: nes-switch-online
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_BOT_USERNAME
+        value: nessnesgame_bot
+      - key: TELEGRAM_INIT_MAX_AGE_SECONDS
+        value: "86400"

@@ -1,0 +1,25 @@
+services:
+  nes-switch-online:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nes-switch-online
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      NODE_ENV: production
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN:-}"
+      TELEGRAM_BOT_USERNAME: "${TELEGRAM_BOT_USERNAME:-}"
+      TELEGRAM_MINI_APP_URL: "${TELEGRAM_MINI_APP_URL:-}"
+      TELEGRAM_INIT_MAX_AGE_SECONDS: "${TELEGRAM_INIT_MAX_AGE_SECONDS:-86400}"
+    volumes:
+      - ./roms:/app/roms
+      - ./cover-cache:/app/cover-cache
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

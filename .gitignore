@@ -1,0 +1,7 @@
+node_modules/
+cover-cache/
+.run/
+.bin/
+dist/
+.DS_Store
+Thumbs.db
