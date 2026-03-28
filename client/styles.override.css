@@ -1046,11 +1046,16 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
   position: relative !important;
   inset: auto !important;
   display: grid !important;
-  grid-template-columns: 190px auto 190px !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  grid-template-areas:
+    "dpad ab"
+    "center center" !important;
   justify-content: center !important;
-  align-items: end !important;
-  gap: 16px !important;
-  width: min(100%, 560px) !important;
+  align-content: center !important;
+  align-items: center !important;
+  row-gap: 18px !important;
+  column-gap: 18px !important;
+  width: min(100%, 390px) !important;
   height: 100% !important;
   margin: 0 auto !important;
   padding: 44px 24px calc(30px + env(safe-area-inset-bottom)) !important;
@@ -1071,20 +1076,23 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  grid-area: dpad !important;
   justify-self: center !important;
   align-self: center !important;
-  width: clamp(154px, 35vw, 208px) !important;
+  width: clamp(150px, 33vw, 182px) !important;
   aspect-ratio: 1 !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  grid-area: ab !important;
   justify-self: center !important;
   align-self: center !important;
-  width: clamp(150px, 31vw, 190px) !important;
-  height: clamp(134px, 24vw, 162px) !important;
+  width: clamp(132px, 28vw, 154px) !important;
+  height: clamp(126px, 22vw, 146px) !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  grid-area: center !important;
   justify-self: center !important;
   align-self: end !important;
   display: grid !important;
@@ -1125,19 +1133,20 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-    grid-template-columns: 156px auto 156px !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     justify-content: center !important;
-    gap: 10px !important;
-    width: min(100%, 420px) !important;
+    row-gap: 14px !important;
+    column-gap: 12px !important;
+    width: min(100%, 336px) !important;
     padding: 40px 16px calc(28px + env(safe-area-inset-bottom)) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    width: clamp(142px, 31vw, 172px) !important;
+    width: clamp(138px, 31vw, 164px) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    width: clamp(138px, 28vw, 164px) !important;
-    height: clamp(120px, 22vw, 144px) !important;
+    width: clamp(124px, 26vw, 146px) !important;
+    height: clamp(116px, 21vw, 136px) !important;
   }
 }
