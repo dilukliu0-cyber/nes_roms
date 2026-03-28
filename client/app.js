@@ -258,6 +258,15 @@ function shouldShowPartyLobby() {
   );
 }
 
+function shouldShowSoloLaunch(room = state.currentRoom) {
+  return Boolean(
+    state.telegram?.isMiniApp &&
+      state.isMobileDevice &&
+      state.pendingRoomLaunch?.mode === "solo" &&
+      (!room || room.status !== "running"),
+  );
+}
+
 function mergeCurrentRoomGame() {
   if (!state.currentRoom?.game) {
     return;
@@ -1137,14 +1146,17 @@ function updateFullscreenUi() {
   const mobileOverlayActive = mobileControlsActive;
   state.fullscreenActive = roomFullscreenActive;
   const partyLobbyActive = shouldShowPartyLobby();
+  const soloLaunchActive = shouldShowSoloLaunch();
 
   document.body.classList.toggle("is-mobile-device", state.isMobileDevice);
   document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
   document.body.classList.toggle("is-party-lobby-open", partyLobbyActive);
+  document.body.classList.toggle("is-solo-launch-open", soloLaunchActive);
   refs.roomView.classList.toggle("room-view--fullscreen-active", roomFullscreenActive);
   refs.roomView.classList.toggle("room-view--mobile-controls", mobileControlsActive);
   refs.roomView.classList.toggle("room-view--mobile-fs", mobileOverlayActive);
   refs.roomView.classList.toggle("room-view--party-lobby", partyLobbyActive);
+  refs.roomView.classList.toggle("room-view--solo-launch", soloLaunchActive);
   refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
   refs.mobileHandheld.setAttribute("aria-hidden", String(!mobileControlsActive));
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
@@ -1153,7 +1165,7 @@ function updateFullscreenUi() {
   refs.partyLobby.classList.toggle("hidden", !partyLobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!partyLobbyActive));
 
-  const showFullscreenButtons = hasRoom && !partyLobbyActive;
+  const showFullscreenButtons = hasRoom && !partyLobbyActive && !soloLaunchActive;
   for (const button of refs.fullscreenButtons) {
     button.classList.toggle("hidden", !showFullscreenButtons);
     button.setAttribute(
@@ -1279,14 +1291,19 @@ function renderPartyLobby(room, me) {
 
 function renderRoom() {
   const room = state.currentRoom;
+  const soloLaunchActive = shouldShowSoloLaunch(room);
   refs.copyLink.textContent = state.telegram?.isMiniApp ? "Позвать друга" : "Копировать ссылку";
 
   if (!room) {
-    refs.roomTitle.textContent = "Комната не найдена";
-    refs.roomSubtitle.textContent = "Создай новую комнату из библиотеки.";
+    refs.roomTitle.textContent = soloLaunchActive ? "Запускаю игру" : "Комната не найдена";
+    refs.roomSubtitle.textContent = soloLaunchActive
+      ? "Готовлю экран и подключаю сессию."
+      : "Создай новую комнату из библиотеки.";
+    refs.screenOverlay.textContent = soloLaunchActive ? "Запускаю игру..." : "Жду запуск сессии";
+    refs.screenOverlay.classList.remove("hidden");
     refs.playersList.innerHTML = "";
     renderPartyLobby(null, null);
-    refs.mobileRoomBadge.textContent = "КОМНАТА";
+    refs.mobileRoomBadge.textContent = soloLaunchActive ? "СТАРТ" : "КОМНАТА";
     updateFullscreenUi();
     return;
   }
@@ -1315,6 +1332,10 @@ function renderRoom() {
         : "Сетевая сессия активна"
       : "Комната ждёт игроков";
   refs.mobileRoomBadge.textContent = room.id;
+  if (soloLaunchActive) {
+    refs.screenOverlay.textContent = "Подключаю сессию...";
+    refs.screenOverlay.classList.remove("hidden");
+  }
 
   refs.toggleReady.disabled = !canReady;
   refs.toggleReady.textContent = amReady ? "Снять готовность" : "Готов";
@@ -1356,6 +1377,11 @@ async function syncRoute() {
 
   setView("room");
   state.currentRoomId = route.roomId;
+  if (shouldShowSoloLaunch(null)) {
+    state.currentRoom = null;
+    state.participant = null;
+    renderRoom();
+  }
 
   try {
     const payload = await fetchJson(`/api/rooms/${route.roomId}`);
@@ -1372,6 +1398,7 @@ async function syncRoute() {
   } catch (error) {
     refs.roomTitle.textContent = "Комната не найдена";
     refs.roomSubtitle.textContent = error.message;
+    state.pendingRoomLaunch = null;
     state.currentRoom = null;
     state.participant = null;
     renderRoom();
