@@ -49,11 +49,21 @@ body.is-telegram-mini-app .scene {
 }
 
 body.is-telegram-mini-app .topbar {
-  margin-bottom: 16px;
+  display: none;
 }
 
 body.is-telegram-mini-app .topbar__meta {
   display: none;
+}
+
+body.is-telegram-mini-app .app-shell {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  body.is-telegram-mini-app .scene {
+    padding-top: max(8px, calc(var(--tg-content-safe-area-inset-top, 0px) + 8px));
+  }
 }
 
 @media (max-width: 960px) {
