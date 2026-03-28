@@ -3839,6 +3839,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::be
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-power,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-status,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-speaker,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center__label,
@@ -3846,7 +3847,8 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__hint,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action::before,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill::after,
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell::after {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell::after,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
   display: none !important;
 }
 
@@ -3868,9 +3870,9 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell {
   position: absolute !important;
-  left: 7.6142% !important;
-  top: 6.25% !important;
-  width: 84.7716% !important;
+  left: 7.7834% !important;
+  top: 6.1719% !important;
+  width: 84.4332% !important;
   height: 33.5156% !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -3907,36 +3909,11 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
   background: #000 !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
-  inset: 0 !important;
-  z-index: 2 !important;
-  border: 0 !important;
-  border-radius: inherit !important;
-  background: rgba(0, 0, 0, 0.38) !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-power {
-  position: absolute !important;
-  left: 46.0237% !important;
-  top: 62.7344% !important;
-  width: 7.9526% !important;
-  height: 3.75% !important;
-  display: block !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  transform: none !important;
-  background: url("/assets/gba-sp/button-start-tight.png") center / 100% 100% no-repeat !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
-  z-index: 3 !important;
-}
-
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad {
   position: absolute !important;
-  left: 13.3672% !important;
-  top: 68.2812% !important;
-  width: 24.5347% !important;
+  left: 13.7056% !important;
+  top: 68.5938% !important;
+  width: 24.1963% !important;
   height: 11.0938% !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -3944,6 +3921,10 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
   background: none !important;
   box-shadow: none !important;
   pointer-events: auto !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
   z-index: 3 !important;
 }
 
@@ -3958,7 +3939,6 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
   inset: 0 !important;
   display: block !important;
   background: url("/assets/gba-sp/dpad.png") center / 100% 100% no-repeat !important;
-  clip-path: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%) !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-ab,
@@ -3994,44 +3974,50 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
   color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
+  text-indent: -9999px !important;
   text-shadow: none !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   pointer-events: auto !important;
   touch-action: manipulation !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
   z-index: 3 !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--a {
   left: 77.665% !important;
   top: 67.9688% !important;
-  width: 13.0288% !important;
-  height: 6.1719% !important;
+  width: 12.6904% !important;
+  height: 6.25% !important;
   background-image: url("/assets/gba-sp/button-a.png") !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--b {
-  left: 59.7293% !important;
-  top: 70.1562% !important;
+  left: 59.2217% !important;
+  top: 70.0781% !important;
   width: 12.6904% !important;
   height: 6.25% !important;
   background-image: url("/assets/gba-sp/button-b.png") !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--select {
-  left: 35.8714% !important;
-  top: 91.7188% !important;
+  left: 35.7022% !important;
+  top: 91.4844% !important;
   width: 8.9679% !important;
   height: 3.9062% !important;
-  background-image: url("/assets/gba-sp/button-select-tight.png") !important;
+  background-image: url("/assets/gba-sp/button-select.png") !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--start {
-  left: 56.176% !important;
-  top: 91.7188% !important;
+  left: 55.8376% !important;
+  top: 91.4844% !important;
   width: 7.9526% !important;
   height: 3.8281% !important;
-  background-image: url("/assets/gba-sp/button-start-tight.png") !important;
+  background-image: url("/assets/gba-sp/button-start.png") !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad:focus,
@@ -4043,6 +4029,6 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad--active .touch-dpad__cross,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action.touch-control--active,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill.touch-control--active {
-  transform: translateY(1.5px) scale(0.975) !important;
-  filter: brightness(0.96) !important;
+  transform: translateY(1px) scale(0.985) !important;
+  filter: brightness(0.94) !important;
 }
