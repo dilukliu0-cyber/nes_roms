@@ -937,55 +937,77 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
   }
 }
 
-/* Final fullscreen split fix: top half game, bottom half controls */
+/* Final fullscreen rebuild: dedicated mobile shell */
 body.is-mobile-device #room-view.room-view--mobile-fs {
-  display: grid !important;
-  grid-template-rows: minmax(0, 52dvh) minmax(0, 48dvh) !important;
   overflow: hidden !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .nes-room {
-  grid-row: 1 !important;
-  position: relative !important;
-  display: flex !important;
-  align-items: stretch !important;
-  justify-content: center !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  z-index: 1 !important;
+  display: none !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld {
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  pointer-events: auto !important;
+  z-index: 120 !important;
+  background: linear-gradient(180deg, #233019 0%, #171f11 50%, #f6f7f1 50%, #eceee7 100%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
   position: relative !important;
-  inset: auto !important;
+  display: grid !important;
+  grid-template-rows: minmax(0, 52dvh) minmax(0, 48dvh) !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  max-height: 100dvh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-stage {
+  position: relative !important;
+  min-height: 0 !important;
+  padding: max(16px, env(safe-area-inset-top)) 18px 12px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-shell {
+  position: relative !important;
   width: min(100%, 620px) !important;
   height: 100% !important;
   margin: 0 auto !important;
-  padding: max(14px, env(safe-area-inset-top)) 18px 10px !important;
+  padding: 12px !important;
+  border-radius: 34px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, #333b2c, #1f251b) !important;
+  box-shadow:
+    0 26px 48px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__bezel {
-  height: 100% !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
-  height: 100% !important;
-  min-height: 0 !important;
-  display: grid !important;
-  place-items: center !important;
-}
-
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-shell #emulator-mount {
+  position: relative !important;
   display: grid !important;
   place-items: center !important;
   width: 100% !important;
   height: 100% !important;
   min-height: 0 !important;
   overflow: hidden !important;
+  border-radius: 22px !important;
+  background: #000 !important;
+  box-shadow:
+    inset 0 0 0 5px #080a08,
+    inset 0 0 0 9px rgba(146, 167, 99, 0.18),
+    0 22px 34px rgba(0, 0, 0, 0.18) !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen canvas,
-body.is-mobile-device #room-view.room-view--mobile-fs #emulator-mount canvas {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-shell #emulator-mount canvas {
   width: 100% !important;
   height: auto !important;
   max-width: 100% !important;
@@ -995,32 +1017,48 @@ body.is-mobile-device #room-view.room-view--mobile-fs #emulator-mount canvas {
   image-rendering: pixelated !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld {
-  position: absolute !important;
-  inset: 0 !important;
-  display: block !important;
-  z-index: 5 !important;
-  pointer-events: none !important;
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-shell .screen-overlay {
+  inset: 12px !important;
+  border-radius: 22px !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar {
   position: absolute !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  height: max(320px, 48dvh) !important;
-  min-height: 320px !important;
-  max-height: 48dvh !important;
-  padding: 0 0 env(safe-area-inset-bottom) !important;
+  top: max(18px, env(safe-area-inset-top)) !important;
+  right: 22px !important;
+  left: 22px !important;
+  z-index: 8 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls-stage {
+  position: relative !important;
+  min-height: 0 !important;
+  border-radius: 34px 34px 0 0 !important;
+  background: linear-gradient(180deg, #fafaf7 0%, #eef0e7 54%, #eaebe4 100%) !important;
+  box-shadow:
+    0 -20px 36px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
   overflow: hidden !important;
 }
 
-body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls-stage::before {
+  content: "" !important;
   position: absolute !important;
-  inset: 0 !important;
+  top: 18px !important;
+  left: 28px !important;
+  right: 28px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #b14a82, #7989c8) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
+  position: relative !important;
+  inset: auto !important;
   display: block !important;
   height: 100% !important;
-  z-index: 2 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad,
@@ -1030,18 +1068,18 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-  top: 78px !important;
+  top: 86px !important;
   bottom: auto !important;
-  left: clamp(24px, 7vw, 54px) !important;
-  width: clamp(172px, 34vw, 210px) !important;
+  left: clamp(24px, 7vw, 52px) !important;
+  width: clamp(168px, 33vw, 206px) !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-  top: 90px !important;
+  top: 94px !important;
   bottom: auto !important;
   right: clamp(34px, 9vw, 66px) !important;
-  width: clamp(168px, 32vw, 200px) !important;
-  height: clamp(140px, 24vw, 170px) !important;
+  width: clamp(166px, 31vw, 194px) !important;
+  height: clamp(140px, 22vw, 164px) !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
@@ -1051,35 +1089,35 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
-  gap: 20px !important;
+  gap: 18px !important;
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
-  min-width: 110px !important;
+  min-width: 108px !important;
   min-height: 42px !important;
 }
 
 @media (max-width: 390px) {
-  body.is-mobile-device #room-view.room-view--mobile-fs {
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
     grid-template-rows: minmax(0, 50dvh) minmax(0, 50dvh) !important;
   }
 
-  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
-    height: max(314px, 50dvh) !important;
-    max-height: 50dvh !important;
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-stage {
+    padding-right: 14px !important;
+    padding-left: 14px !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    top: 72px !important;
-    left: 18px !important;
-    width: clamp(156px, 33vw, 184px) !important;
+    top: 82px !important;
+    left: 16px !important;
+    width: clamp(154px, 32vw, 182px) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    top: 86px !important;
-    right: 18px !important;
-    width: clamp(146px, 30vw, 176px) !important;
-    height: clamp(126px, 22vw, 154px) !important;
+    top: 92px !important;
+    right: 16px !important;
+    width: clamp(144px, 29vw, 170px) !important;
+    height: clamp(124px, 21vw, 146px) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {

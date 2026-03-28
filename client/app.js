@@ -67,6 +67,7 @@ const refs = {
   toggleFullscreen: document.querySelector("#toggle-fullscreen"),
   screenFullscreenButton: document.querySelector("#screen-fullscreen-button"),
   exitMobileFullscreen: document.querySelector("#exit-mobile-fullscreen"),
+  screenShell: document.querySelector(".screen-shell"),
   roomCover: document.querySelector("#room-cover"),
   nicknameInput: document.querySelector("#nickname-input"),
   inputDelay: document.querySelector("#input-delay"),
@@ -84,6 +85,7 @@ const refs = {
   syncIndicator: document.querySelector("#sync-indicator"),
   latencyIndicator: document.querySelector("#latency-indicator"),
   mobileHandheld: document.querySelector("#mobile-handheld"),
+  mobileScreenShell: document.querySelector("#mobile-screen-shell"),
   mobileRoomBadge: document.querySelector("#mobile-room-badge"),
   mobileBackButton: document.querySelector("#mobile-back-button"),
   mobileMenuButton: document.querySelector("#mobile-menu-button"),
@@ -303,6 +305,21 @@ function refreshEmulatorLayout() {
   window.requestAnimationFrame(() => {
     emulator.refreshLayout?.();
   });
+}
+
+function syncEmulatorSurface(useMobileSurface) {
+  const target = useMobileSurface ? refs.mobileScreenShell : refs.screenShell;
+  if (!target) {
+    return;
+  }
+
+  if (refs.emulatorMount.parentElement !== target) {
+    target.prepend(refs.emulatorMount);
+  }
+
+  if (refs.screenOverlay.parentElement !== target) {
+    target.append(refs.screenOverlay);
+  }
 }
 
 function legacyUpdateFullscreenUi() {
@@ -1208,6 +1225,7 @@ function updateFullscreenUi() {
     );
   }
 
+  syncEmulatorSurface(mobileOverlayActive);
   renderFullscreenButtons(roomFullscreenActive);
   syncFullscreenButtonLabels(roomFullscreenActive);
   state.telegram?.syncUi?.({
