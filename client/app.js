@@ -23,6 +23,8 @@ const state = {
   currentRoom: null,
   participant: null,
   currentRoomId: null,
+  roomUiMode: null,
+  roomLoadError: "",
   nickname: localStorage.getItem("nes-switch-online:nickname") || "",
   inputDelayFrames: Number(localStorage.getItem("nes-switch-online:input-delay") || 4),
   isMobileDevice: false,
@@ -248,23 +250,26 @@ function pluralizeRu(count, one, few, many) {
   return many;
 }
 
-function shouldShowPartyLobby() {
+function shouldShowPartyLobby(room = state.currentRoom) {
+  if (!state.telegram?.isMiniApp || !state.isMobileDevice) {
+    return false;
+  }
+
+  return state.roomUiMode === "party" && (!room || room.status !== "running");
+}
+
+function shouldUseSoloUi() {
+  return Boolean(state.telegram?.isMiniApp && state.isMobileDevice && state.roomUiMode === "solo");
+}
+
+function shouldUsePartyUi() {
   return Boolean(
-    state.telegram?.isMiniApp &&
-      state.isMobileDevice &&
-      state.currentRoom &&
-      state.currentRoom.status === "lobby" &&
-      state.pendingRoomLaunch?.mode !== "solo",
+    state.telegram?.isMiniApp && state.isMobileDevice && state.roomUiMode === "party",
   );
 }
 
 function shouldShowSoloLaunch(room = state.currentRoom) {
-  return Boolean(
-    state.telegram?.isMiniApp &&
-      state.isMobileDevice &&
-      state.pendingRoomLaunch?.mode === "solo" &&
-      (!room || room.status !== "running"),
-  );
+  return shouldUseSoloUi() && (!room || room.status !== "running");
 }
 
 function mergeCurrentRoomGame() {
@@ -538,6 +543,9 @@ async function maybeHandlePendingRoomLaunch() {
 }
 
 async function createRoomForGame(gameId, mode) {
+  state.roomUiMode = mode === "solo" ? "solo" : "party";
+  state.roomLoadError = "";
+
   if (state.telegram?.isMiniApp && mode === "solo") {
     void ensureMiniAppFullscreen();
   }
@@ -1147,6 +1155,8 @@ function updateFullscreenUi() {
   state.fullscreenActive = roomFullscreenActive;
   const partyLobbyActive = shouldShowPartyLobby();
   const soloLaunchActive = shouldShowSoloLaunch();
+  const soloUiActive = shouldUseSoloUi();
+  const partyUiActive = shouldUsePartyUi();
 
   document.body.classList.toggle("is-mobile-device", state.isMobileDevice);
   document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
@@ -1157,6 +1167,8 @@ function updateFullscreenUi() {
   refs.roomView.classList.toggle("room-view--mobile-fs", mobileOverlayActive);
   refs.roomView.classList.toggle("room-view--party-lobby", partyLobbyActive);
   refs.roomView.classList.toggle("room-view--solo-launch", soloLaunchActive);
+  refs.roomView.classList.toggle("room-view--app-solo", soloUiActive);
+  refs.roomView.classList.toggle("room-view--app-party", partyUiActive);
   refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
   refs.mobileHandheld.setAttribute("aria-hidden", String(!mobileControlsActive));
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
@@ -1165,7 +1177,7 @@ function updateFullscreenUi() {
   refs.partyLobby.classList.toggle("hidden", !partyLobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!partyLobbyActive));
 
-  const showFullscreenButtons = hasRoom && !partyLobbyActive && !soloLaunchActive;
+  const showFullscreenButtons = hasRoom && !partyLobbyActive && !soloLaunchActive && !soloUiActive && !partyUiActive;
   for (const button of refs.fullscreenButtons) {
     button.classList.toggle("hidden", !showFullscreenButtons);
     button.setAttribute(
@@ -1177,7 +1189,7 @@ function updateFullscreenUi() {
   renderFullscreenButtons(roomFullscreenActive);
   syncFullscreenButtonLabels(roomFullscreenActive);
   state.telegram?.syncUi?.({
-    inRoom: hasRoom,
+    inRoom: Boolean(state.currentRoomId),
     fullscreenActive,
     running: state.currentRoom?.status === "running",
   });
@@ -1232,7 +1244,29 @@ function renderPartyLobby(room, me) {
 
   refs.partyLobby.classList.toggle("hidden", !lobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!lobbyActive));
-  if (!lobbyActive || !room) {
+  if (!lobbyActive) {
+    return;
+  }
+
+  refs.partyNicknameInput.value = state.nickname;
+
+  if (!room) {
+    refs.partyLobbyTitle.textContent = state.roomLoadError ? "Комната не найдена" : "Создаю пати";
+    refs.partyLobbySubtitle.textContent = state.roomLoadError
+      ? "Вернись в библиотеку и создай новую комнату."
+      : "Готовлю комнату и ссылку для друга.";
+    refs.partyRoomCode.textContent = "------";
+    refs.partyPlayerCount.textContent = "0 игроков";
+    refs.partyStatusCopy.textContent = state.roomLoadError
+      ? state.roomLoadError
+      : "Сейчас появится код комнаты и кнопки приглашения.";
+    refs.partyPlayersList.innerHTML = "";
+    refs.partyInviteButton.disabled = true;
+    refs.partyCopyButton.disabled = true;
+    refs.partyReadyButton.disabled = true;
+    refs.partyPlayButton.disabled = true;
+    refs.partyReadyButton.textContent = "Готов";
+    refs.partyPlayButton.textContent = "Играть";
     return;
   }
 
@@ -1278,7 +1312,6 @@ function renderPartyLobby(room, me) {
     refs.partyPlayersList.appendChild(item);
   }
 
-  refs.partyNicknameInput.value = state.nickname;
   refs.partyInviteButton.disabled = false;
   refs.partyInviteButton.textContent = "Позвать в Telegram";
   refs.partyCopyButton.disabled = false;
@@ -1292,18 +1325,29 @@ function renderPartyLobby(room, me) {
 function renderRoom() {
   const room = state.currentRoom;
   const soloLaunchActive = shouldShowSoloLaunch(room);
+  const partyUiActive = shouldUsePartyUi();
   refs.copyLink.textContent = state.telegram?.isMiniApp ? "Позвать друга" : "Копировать ссылку";
 
   if (!room) {
-    refs.roomTitle.textContent = soloLaunchActive ? "Запускаю игру" : "Комната не найдена";
-    refs.roomSubtitle.textContent = soloLaunchActive
-      ? "Готовлю экран и подключаю сессию."
-      : "Создай новую комнату из библиотеки.";
-    refs.screenOverlay.textContent = soloLaunchActive ? "Запускаю игру..." : "Жду запуск сессии";
-    refs.screenOverlay.classList.remove("hidden");
+    if (soloLaunchActive) {
+      refs.roomTitle.textContent = "Запускаю игру";
+      refs.roomSubtitle.textContent = "Готовлю экран и подключаю сессию.";
+      refs.screenOverlay.textContent = state.roomLoadError || "Запускаю игру...";
+      refs.screenOverlay.classList.remove("hidden");
+    } else if (partyUiActive) {
+      refs.roomTitle.textContent = "Пати";
+      refs.roomSubtitle.textContent = state.roomLoadError || "Создаю комнату для друга.";
+      refs.screenOverlay.textContent = "Жду запуск сессии";
+      refs.screenOverlay.classList.remove("hidden");
+    } else {
+      refs.roomTitle.textContent = "Комната не найдена";
+      refs.roomSubtitle.textContent = "Создай новую комнату из библиотеки.";
+      refs.screenOverlay.textContent = "Жду запуск сессии";
+      refs.screenOverlay.classList.remove("hidden");
+    }
     refs.playersList.innerHTML = "";
     renderPartyLobby(null, null);
-    refs.mobileRoomBadge.textContent = soloLaunchActive ? "СТАРТ" : "КОМНАТА";
+    refs.mobileRoomBadge.textContent = soloLaunchActive ? "СТАРТ" : partyUiActive ? "ПАТИ" : "КОМНАТА";
     updateFullscreenUi();
     return;
   }
@@ -1336,6 +1380,10 @@ function renderRoom() {
     refs.screenOverlay.textContent = "Подключаю сессию...";
     refs.screenOverlay.classList.remove("hidden");
   }
+  if (partyUiActive && room.status !== "running") {
+    refs.screenOverlay.textContent = "Жду запуск сессии";
+    refs.screenOverlay.classList.remove("hidden");
+  }
 
   refs.toggleReady.disabled = !canReady;
   refs.toggleReady.textContent = amReady ? "Снять готовность" : "Готов";
@@ -1358,6 +1406,8 @@ async function syncRoute() {
     state.currentRoomId = null;
     state.currentRoom = null;
     state.participant = null;
+    state.roomUiMode = null;
+    state.roomLoadError = "";
     state.pendingRoomLaunch = null;
     socket.emit("room:leave");
     releaseAllTouchControls();
@@ -1377,7 +1427,16 @@ async function syncRoute() {
 
   setView("room");
   state.currentRoomId = route.roomId;
-  if (shouldShowSoloLaunch(null)) {
+  state.roomLoadError = "";
+  if (state.pendingRoomLaunch?.roomId === route.roomId) {
+    state.roomUiMode = state.pendingRoomLaunch.mode === "solo" ? "solo" : "party";
+  } else if (state.telegram?.isMiniApp && state.isMobileDevice) {
+    state.roomUiMode = "party";
+  } else {
+    state.roomUiMode = null;
+  }
+
+  if (shouldShowSoloLaunch(null) || shouldShowPartyLobby(null)) {
     state.currentRoom = null;
     state.participant = null;
     renderRoom();
@@ -1387,6 +1446,7 @@ async function syncRoute() {
     const payload = await fetchJson(`/api/rooms/${route.roomId}`);
     state.currentRoom = payload.room;
     state.participant = null;
+    state.roomLoadError = "";
     renderRoom();
     await maybeHandlePendingRoomLaunch();
     if (socket.connected) {
@@ -1396,11 +1456,10 @@ async function syncRoute() {
       });
     }
   } catch (error) {
-    refs.roomTitle.textContent = "Комната не найдена";
-    refs.roomSubtitle.textContent = error.message;
-    state.pendingRoomLaunch = null;
     state.currentRoom = null;
     state.participant = null;
+    state.pendingRoomLaunch = null;
+    state.roomLoadError = error.message;
     renderRoom();
   }
 }
@@ -1417,6 +1476,7 @@ socket.off("room:joined");
 socket.on("room:joined", ({ room, participant }) => {
   state.currentRoom = room;
   state.participant = participant;
+  state.roomLoadError = "";
   renderRoom();
   void maybeHandlePendingRoomLaunch();
 });
@@ -1428,6 +1488,7 @@ socket.on("room:state", (room) => {
   }
 
   state.currentRoom = room;
+  state.roomLoadError = "";
   renderRoom();
   void maybeHandlePendingRoomLaunch();
 });

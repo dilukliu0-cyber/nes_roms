@@ -1976,6 +1976,61 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
 }
 
 /* Clean solo launch screen for Telegram play mode */
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party {
+  min-height: var(--tg-viewport-stable-height, 100vh) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .room-head,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .room-head,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .deck-panel,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .deck-panel {
+  display: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .nes-room,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .nes-room {
+  display: block !important;
+  max-width: 100% !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell {
+  width: min(100%, 560px) !important;
+  margin: 0 auto !important;
+  padding-top: calc(env(safe-area-inset-top) + 12px) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell__badge,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__badge,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell__header,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__header,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell__footer,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__footer,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell__legs,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__legs {
+  display: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .tv-shell__bezel,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .tv-shell__bezel {
+  padding: 10px !important;
+  border-radius: 28px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .screen-shell,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .screen-shell {
+  min-height: calc(var(--tg-viewport-stable-height, 100vh) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px) !important;
+  padding: 8px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo .screen-shell__screen,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party .screen-shell__screen,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-solo #emulator-mount,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--app-party #emulator-mount {
+  min-height: 100% !important;
+}
+
 body.is-telegram-mini-app.is-mobile-device #room-view.room-view--solo-launch {
   min-height: var(--tg-viewport-stable-height, 100vh) !important;
 }
