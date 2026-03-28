@@ -6,7 +6,7 @@
     <title>NES Switch Online</title>
     <script src="https://telegram.org/js/telegram-web-app.js?61"></script>
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/styles.override.css?v=20260328-1746" />
+    <link rel="stylesheet" href="/styles.override.css?v=20260328-1812" />
   </head>
   <body>
     <div class="scene">
@@ -59,40 +59,46 @@
 
           <section id="party-lobby" class="party-lobby hidden" aria-hidden="true">
             <div class="party-lobby__panel">
-              <div class="party-lobby__top">
-                <p class="party-lobby__eyebrow">Party Lobby</p>
-                <h2 id="party-lobby-title" class="party-lobby__title">Комната</h2>
-                <p id="party-lobby-subtitle" class="party-lobby__subtitle">Ждём друзей</p>
-              </div>
-
-              <div class="party-lobby__code">
-                <span>Код комнаты</span>
-                <strong id="party-room-code">------</strong>
-              </div>
-
-              <div class="party-lobby__field">
-                <label class="party-lobby__label" for="party-nickname-input">Твой ник</label>
-                <input id="party-nickname-input" class="party-lobby__input" maxlength="20" placeholder="Игрок" />
-              </div>
-
-              <div class="party-lobby__players">
-                <div class="party-lobby__players-head">
-                  <span>В комнате</span>
-                  <span id="party-player-count">0 игроков</span>
+              <div class="party-lobby__stage">
+                <div class="party-lobby__top">
+                  <p class="party-lobby__eyebrow">Party Lobby</p>
+                  <h2 id="party-lobby-title" class="party-lobby__title">Комната</h2>
+                  <p id="party-lobby-subtitle" class="party-lobby__subtitle">Ждём друзей</p>
                 </div>
-                <div id="party-players-list" class="party-lobby__players-list"></div>
+
+                <div class="party-lobby__cards">
+                  <div class="party-lobby__code">
+                    <span>Код комнаты</span>
+                    <strong id="party-room-code">------</strong>
+                  </div>
+
+                  <div class="party-lobby__field">
+                    <label class="party-lobby__label" for="party-nickname-input">Твой ник</label>
+                    <input id="party-nickname-input" class="party-lobby__input" maxlength="20" placeholder="Игрок" />
+                  </div>
+
+                  <div class="party-lobby__players">
+                    <div class="party-lobby__players-head">
+                      <span>В комнате</span>
+                      <span id="party-player-count">0 игроков</span>
+                    </div>
+                    <div id="party-players-list" class="party-lobby__players-list"></div>
+                  </div>
+                </div>
               </div>
 
-              <div id="party-status-copy" class="party-lobby__status">Позови друга и нажми готово.</div>
+              <div class="party-lobby__dock">
+                <div id="party-status-copy" class="party-lobby__status">Позови друга и нажми готово.</div>
 
-              <div class="party-lobby__toolbar">
-                <button id="party-invite-button" class="primary-button" type="button">Пригласить друга</button>
-                <button id="party-copy-button" class="secondary-button" type="button">Скопировать ссылку</button>
-              </div>
+                <div class="party-lobby__toolbar">
+                  <button id="party-invite-button" class="primary-button" type="button">Пригласить друга</button>
+                  <button id="party-copy-button" class="secondary-button" type="button">Скопировать ссылку</button>
+                </div>
 
-              <div class="party-lobby__actions">
-                <button id="party-ready-button" class="secondary-button" type="button">Готов</button>
-                <button id="party-play-button" class="primary-button" type="button">Играть</button>
+                <div class="party-lobby__actions">
+                  <button id="party-ready-button" class="secondary-button" type="button">Готов</button>
+                  <button id="party-play-button" class="primary-button" type="button">Играть</button>
+                </div>
               </div>
             </div>
           </section>
