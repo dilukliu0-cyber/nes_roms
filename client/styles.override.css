@@ -1441,3 +1441,267 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
     height: clamp(54px, 15vw, 66px) !important;
   }
 }
+
+/* Final phone-first party menu */
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__panel {
+  min-height: var(--tg-viewport-stable-height, 100vh) !important;
+  padding: calc(env(safe-area-inset-top) + 44px) 12px calc(14px + env(safe-area-inset-bottom)) !important;
+  background:
+    radial-gradient(circle at top, rgba(162, 188, 104, 0.14), transparent 30%),
+    linear-gradient(180deg, #1b220f 0%, #161d0d 56%, #dde2d3 56%, #eff2e7 100%) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__shell {
+  display: grid !important;
+  align-content: start !important;
+  gap: 12px !important;
+  width: min(100%, 460px) !important;
+  margin: 0 auto !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__banner,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__field,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 14px !important;
+  border: 3px solid #222b13 !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, rgba(17, 24, 11, 0.94), rgba(12, 16, 9, 0.98)) !important;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(187, 207, 128, 0.08) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__hero {
+  display: grid !important;
+  gap: 6px !important;
+  padding: 2px 2px 6px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__banner,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu-head,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  color: rgba(227, 238, 183, 0.78) !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.46rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__hero .party-lobby__eyebrow {
+  margin: 0 !important;
+  color: rgba(227, 238, 183, 0.72) !important;
+  font-size: 0.44rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__title {
+  margin: 0 !important;
+  color: #f6faeb !important;
+  font-size: 1.22rem !important;
+  line-height: 1.18 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__subtitle {
+  color: rgba(237, 241, 225, 0.82) !important;
+  font-size: 0.92rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  color: rgba(230, 237, 197, 0.78) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__code strong {
+  color: #ffffff !important;
+  font-size: 1.56rem !important;
+  letter-spacing: 0.14em !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__label {
+  margin-bottom: 10px !important;
+  color: rgba(226, 236, 187, 0.78) !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.46rem !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__input {
+  min-height: 50px !important;
+  border: 2px solid rgba(169, 185, 108, 0.16) !important;
+  border-radius: 12px !important;
+  background: rgba(6, 10, 6, 0.78) !important;
+  color: #f7f9ef !important;
+  font-size: 1rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__players-list {
+  display: grid !important;
+  gap: 8px !important;
+  max-height: min(28vh, 210px) !important;
+  overflow: auto !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player {
+  padding: 10px 12px !important;
+  border: 1px solid rgba(180, 198, 122, 0.1) !important;
+  border-radius: 12px !important;
+  background: rgba(247, 249, 239, 0.05) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player strong {
+  color: #f9fbea !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__player span {
+  color: rgba(231, 238, 206, 0.68) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__state {
+  min-width: 72px !important;
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  font-family: var(--font-pixel) !important;
+  font-size: 0.46rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, #eef1e5, #dde2d4) !important;
+  border-color: rgba(81, 92, 47, 0.42) !important;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.32) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__menu-head,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__status {
+  color: rgba(33, 40, 22, 0.74) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar {
+  margin-top: 12px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__status {
+  margin-top: 10px !important;
+  margin-bottom: 12px !important;
+  font-size: 0.9rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar > button,
+body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions > button {
+  min-height: 54px !important;
+  border-radius: 14px !important;
+  font-size: 0.98rem !important;
+}
+
+@media (max-width: 390px) {
+  body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__toolbar,
+  body.is-telegram-mini-app.is-mobile-device #room-view.room-view--party-lobby .party-lobby__actions {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Final phone-first fullscreen handheld */
+body.is-mobile-device #room-view.room-view--mobile-fs {
+  --mobile-controller-height: clamp(198px, 31dvh, 244px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
+  height: calc(100dvh - var(--mobile-controller-height) - env(safe-area-inset-bottom)) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
+  padding: 10px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
+  min-height: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  height: calc(var(--mobile-controller-height) + env(safe-area-inset-bottom)) !important;
+  padding: 14px 12px calc(12px + env(safe-area-inset-bottom)) !important;
+  border-radius: 30px 30px 0 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
+  top: 10px !important;
+  right: 12px !important;
+  bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+  left: 12px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  left: 18px !important;
+  bottom: 72px !important;
+  width: clamp(126px, 32vw, 154px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  right: 16px !important;
+  bottom: calc(76px + env(safe-area-inset-bottom)) !important;
+  width: clamp(128px, 34vw, 160px) !important;
+  height: clamp(128px, 34vw, 160px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  right: 24px !important;
+  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+  gap: 12px !important;
+}
+
+@media (max-width: 390px) {
+  body.is-mobile-device #room-view.room-view--mobile-fs {
+    --mobile-controller-height: clamp(186px, 30dvh, 226px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+    left: 12px !important;
+    bottom: 64px !important;
+    width: clamp(112px, 30vw, 138px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+    right: 10px !important;
+    bottom: calc(68px + env(safe-area-inset-bottom)) !important;
+    width: clamp(118px, 33vw, 144px) !important;
+    height: clamp(118px, 33vw, 144px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+    right: 14px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+    width: clamp(118px, 32vw, 150px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+    min-width: 56px !important;
+    min-height: 28px !important;
+  }
+}

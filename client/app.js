@@ -56,11 +56,6 @@ const refs = {
   partyCopyButton: document.querySelector("#party-copy-button"),
   partyReadyButton: document.querySelector("#party-ready-button"),
   partyPlayButton: document.querySelector("#party-play-button"),
-  partyShareSheet: document.querySelector("#party-share-sheet"),
-  partyShareBackdrop: document.querySelector("#party-share-backdrop"),
-  partyShareTelegram: document.querySelector("#party-share-telegram"),
-  partyShareCopy: document.querySelector("#party-share-copy"),
-  partyShareClose: document.querySelector("#party-share-close"),
   toggleFullscreen: document.querySelector("#toggle-fullscreen"),
   screenFullscreenButton: document.querySelector("#screen-fullscreen-button"),
   exitMobileFullscreen: document.querySelector("#exit-mobile-fullscreen"),
@@ -233,7 +228,6 @@ function setPendingRoomLaunch(roomId, mode) {
   state.pendingRoomLaunch = {
     roomId,
     mode,
-    inviteHandled: false,
     readySent: false,
     startSent: false,
     fullscreenRequested: false,
@@ -260,12 +254,6 @@ function shouldShowPartyLobby() {
       state.currentRoom.status === "lobby" &&
       state.pendingRoomLaunch?.mode !== "solo",
   );
-}
-
-function setPartyShareSheetOpen(open) {
-  refs.partyShareSheet.classList.toggle("hidden", !open);
-  refs.partyShareSheet.setAttribute("aria-hidden", String(!open));
-  document.body.classList.toggle("party-share-sheet-open", open);
 }
 
 function mergeCurrentRoomGame() {
@@ -511,10 +499,6 @@ async function maybeHandlePendingRoomLaunch() {
   }
 
   if (launch.mode === "party") {
-    if (!launch.inviteHandled) {
-      launch.inviteHandled = true;
-      setPartyShareSheetOpen(true);
-    }
     state.pendingRoomLaunch = null;
     return;
   }
@@ -543,7 +527,7 @@ async function maybeHandlePendingRoomLaunch() {
 }
 
 async function createRoomForGame(gameId, mode) {
-  if (state.telegram?.isMiniApp) {
+  if (state.telegram?.isMiniApp && mode === "solo") {
     void ensureMiniAppFullscreen();
   }
 
@@ -963,7 +947,7 @@ refs.startSession.addEventListener("click", () => {
 });
 
 refs.partyInviteButton.addEventListener("click", () => {
-  setPartyShareSheetOpen(true);
+  void shareCurrentRoomLink(state.currentRoom);
 });
 
 refs.partyCopyButton.addEventListener("click", async () => {
@@ -976,24 +960,6 @@ refs.partyReadyButton.addEventListener("click", () => {
 
 refs.partyPlayButton.addEventListener("click", () => {
   startCurrentRoom();
-});
-
-refs.partyShareBackdrop.addEventListener("click", () => {
-  setPartyShareSheetOpen(false);
-});
-
-refs.partyShareClose.addEventListener("click", () => {
-  setPartyShareSheetOpen(false);
-});
-
-refs.partyShareTelegram.addEventListener("click", async () => {
-  await shareCurrentRoomLink(state.currentRoom);
-  setPartyShareSheetOpen(false);
-});
-
-refs.partyShareCopy.addEventListener("click", async () => {
-  await copyCurrentRoomLink();
-  setPartyShareSheetOpen(false);
 });
 
 refs.pauseSession.addEventListener("click", () => {
@@ -1170,9 +1136,6 @@ function updateFullscreenUi() {
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
   refs.partyLobby.classList.toggle("hidden", !partyLobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!partyLobbyActive));
-  if (!partyLobbyActive) {
-    setPartyShareSheetOpen(false);
-  }
 
   const showFullscreenButtons = hasRoom && !partyLobbyActive;
   for (const button of refs.fullscreenButtons) {
@@ -1242,7 +1205,6 @@ function renderPartyLobby(room, me) {
   refs.partyLobby.classList.toggle("hidden", !lobbyActive);
   refs.partyLobby.setAttribute("aria-hidden", String(!lobbyActive));
   if (!lobbyActive || !room) {
-    setPartyShareSheetOpen(false);
     return;
   }
 
@@ -1253,21 +1215,19 @@ function renderPartyLobby(room, me) {
   refs.partyLobbyTitle.textContent = room.game?.title || "Party Room";
   refs.partyLobbySubtitle.textContent =
     canPartyStart
-      ? "Все готовы. Хост может запускать игру."
+      ? "Все готовы. Можно запускать игру."
       : players.length < 2
-        ? "Сначала позови друга в комнату."
+        ? "Позови друга и дождись, пока он зайдёт."
       : isHost
-        ? "Пригласи друга, дождись готовности и жми играть."
+        ? "Когда второй игрок будет готов, нажми играть."
         : "Нажми готово и жди запуска от хоста.";
   refs.partyRoomCode.textContent = room.id;
   refs.partyPlayerCount.textContent = `${players.length} ${pluralizeRu(players.length, "игрок", "игрока", "игроков")}`;
   refs.partyStatusCopy.textContent =
     canPartyStart
-      ? "Комната готова к старту."
+      ? "Комната готова. Запуск откроет игру у всех."
       : players.length < 2
-        ? isHost
-          ? "Нажми «Пригласить друга» и отправь ссылку в Telegram."
-          : "Ждём, пока хост позовёт второго игрока."
+        ? "Выбери приглашение или скопируй ссылку на комнату."
         : !isHost
           ? me?.ready
             ? "Ты готов. Жди, пока хост нажмёт играть."
@@ -1291,8 +1251,10 @@ function renderPartyLobby(room, me) {
   }
 
   refs.partyNicknameInput.value = state.nickname;
-  refs.partyInviteButton.disabled = !isHost;
-  refs.partyInviteButton.textContent = isHost ? "Пригласить друга" : "Приглашает хост";
+  refs.partyInviteButton.disabled = false;
+  refs.partyInviteButton.textContent = "Позвать в Telegram";
+  refs.partyCopyButton.disabled = false;
+  refs.partyCopyButton.textContent = "Скопировать ссылку";
   refs.partyReadyButton.disabled = room.status !== "lobby" || Boolean(me?.spectator);
   refs.partyReadyButton.textContent = me?.ready ? "Снять готовность" : "Готов";
   refs.partyPlayButton.textContent = isHost ? "Играть" : "Ждём хоста";
@@ -1360,7 +1322,6 @@ async function syncRoute() {
     state.currentRoom = null;
     state.participant = null;
     state.pendingRoomLaunch = null;
-    setPartyShareSheetOpen(false);
     socket.emit("room:leave");
     releaseAllTouchControls();
 
