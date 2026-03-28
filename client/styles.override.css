@@ -1333,3 +1333,111 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-speaker span {
     height: 7px !important;
   }
 }
+
+/* Final handheld control alignment */
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  left: 18px !important;
+  bottom: 58px !important;
+  width: clamp(132px, 34vw, 162px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  left: auto !important;
+  right: 30px !important;
+  bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+  transform: none !important;
+  gap: 10px !important;
+  width: clamp(136px, 36vw, 176px) !important;
+  justify-items: center !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+  justify-content: center !important;
+  gap: 14px !important;
+  transform: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__label {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+  min-width: clamp(64px, 18vw, 80px) !important;
+  min-height: 32px !important;
+  padding: 0 10px !important;
+  font-size: 0.4rem !important;
+  letter-spacing: 0.08em !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  right: 18px !important;
+  bottom: calc(66px + env(safe-area-inset-bottom)) !important;
+  width: clamp(136px, 36vw, 170px) !important;
+  height: clamp(136px, 36vw, 170px) !important;
+  overflow: visible !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 14px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.44), rgba(201, 205, 213, 0.88) 60%, rgba(157, 162, 171, 0.92) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 10px 22px rgba(0, 0, 0, 0.14) !important;
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+  position: absolute !important;
+  z-index: 1 !important;
+  width: clamp(60px, 16vw, 74px) !important;
+  height: clamp(60px, 16vw, 74px) !important;
+  font-size: clamp(1rem, 4vw, 1.22rem) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--b {
+  left: 12px !important;
+  bottom: 18px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action--a {
+  top: 14px !important;
+  right: 12px !important;
+}
+
+@media (max-width: 390px) {
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+    left: 12px !important;
+    bottom: 52px !important;
+    width: clamp(118px, 32vw, 144px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+    right: 18px !important;
+    width: clamp(126px, 34vw, 156px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+    gap: 10px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+    min-width: 58px !important;
+    min-height: 30px !important;
+    font-size: 0.36rem !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+    right: 10px !important;
+    bottom: calc(60px + env(safe-area-inset-bottom)) !important;
+    width: clamp(122px, 34vw, 148px) !important;
+    height: clamp(122px, 34vw, 148px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
+    width: clamp(54px, 15vw, 66px) !important;
+    height: clamp(54px, 15vw, 66px) !important;
+  }
+}
