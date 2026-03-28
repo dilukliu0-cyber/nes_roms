@@ -217,6 +217,11 @@
           <div id="mobile-handheld" class="mobile-handheld hidden" aria-hidden="true">
             <div class="mobile-handheld__body">
               <div class="mobile-screen-stage">
+                <div class="gba-sp-lid-copy" aria-hidden="true">
+                  <span>POWER ON</span>
+                  <span>BATTERY FULL</span>
+                </div>
+
                 <div class="mobile-handheld__topbar">
                   <button id="mobile-back-button" class="ghost-button mobile-back-button hidden" type="button">
                     <span class="mobile-back-button__icon" aria-hidden="true"></span>
@@ -244,12 +249,28 @@
                     </button>
                   </div>
                 </div>
-
                 <div id="mobile-screen-shell" class="mobile-screen-shell"></div>
+
+                <div class="gba-sp-logo" aria-hidden="true">
+                  <span class="gba-sp-logo__gameboy">GAME BOY</span>
+                  <span class="gba-sp-logo__advance">ADVANCE</span>
+                  <span class="gba-sp-logo__sp">SP</span>
+                </div>
               </div>
 
               <div class="mobile-controls-stage">
+                <div class="gba-sp-hinge" aria-hidden="true">
+                  <span class="gba-sp-hinge__segment gba-sp-hinge__segment--side"></span>
+                  <span class="gba-sp-hinge__segment gba-sp-hinge__segment--center"></span>
+                  <span class="gba-sp-hinge__segment gba-sp-hinge__segment--side"></span>
+                </div>
                 <div class="mobile-controls mobile-controls--gameboy">
+                  <div class="gba-sp-power" aria-hidden="true"></div>
+                  <div class="gba-sp-status" aria-hidden="true">
+                    <span class="gba-sp-status__led gba-sp-status__led--on"></span>
+                    <span class="gba-sp-status__led"></span>
+                  </div>
+                  <div class="gba-sp-speaker" aria-hidden="true"></div>
                   <div id="touch-dpad" class="touch-dpad" role="button" tabindex="0" aria-label="Крестовина">
                     <span class="touch-dpad__cross"></span>
                     <span class="touch-dpad__cap"></span>
@@ -261,8 +282,8 @@
 
                   <div class="touch-center">
                     <div class="touch-center__row">
-                      <button class="touch-pill" data-touch-bit="4" type="button">SELECT</button>
-                      <button class="touch-pill" data-touch-bit="8" type="button">START</button>
+                      <button class="touch-pill touch-pill--select" data-touch-bit="4" type="button">SELECT</button>
+                      <button class="touch-pill touch-pill--start" data-touch-bit="8" type="button">START</button>
                     </div>
                     <div class="touch-center__label">Онлайн</div>
                   </div>
