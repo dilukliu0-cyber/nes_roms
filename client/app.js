@@ -362,6 +362,11 @@ function refreshDeviceMode() {
 
 function vibrateTap(duration = 14) {
   if (!state.isMobileDevice || typeof navigator.vibrate !== "function") {
+    try {
+      state.telegram?.webApp?.HapticFeedback?.impactOccurred?.("light");
+    } catch {
+      // Optional Telegram haptic bridge.
+    }
     return;
   }
 
@@ -371,6 +376,11 @@ function vibrateTap(duration = 14) {
   }
 
   lastHapticAt = now;
+  try {
+    state.telegram?.webApp?.HapticFeedback?.impactOccurred?.("light");
+  } catch {
+    // Optional Telegram haptic bridge.
+  }
   navigator.vibrate(duration);
 }
 
