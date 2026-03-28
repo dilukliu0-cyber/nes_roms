@@ -936,3 +936,153 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
     min-width: 100px !important;
   }
 }
+
+/* Final fullscreen split fix: top half game, bottom half controls */
+body.is-mobile-device #room-view.room-view--mobile-fs {
+  display: grid !important;
+  grid-template-rows: minmax(0, 52dvh) minmax(0, 48dvh) !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .nes-room {
+  grid-row: 1 !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  z-index: 1 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell {
+  position: relative !important;
+  inset: auto !important;
+  width: min(100%, 620px) !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  padding: max(14px, env(safe-area-inset-top)) 18px 10px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .tv-shell__bezel {
+  height: 100% !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell {
+  height: 100% !important;
+  min-height: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen {
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .screen-shell__screen canvas,
+body.is-mobile-device #room-view.room-view--mobile-fs #emulator-mount canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  aspect-ratio: 256 / 240 !important;
+  object-fit: contain !important;
+  image-rendering: pixelated !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  height: max(320px, 48dvh) !important;
+  min-height: 320px !important;
+  max-height: 48dvh !important;
+  padding: 0 0 env(safe-area-inset-bottom) !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  height: 100% !important;
+  z-index: 2 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  z-index: 2 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+  top: 78px !important;
+  bottom: auto !important;
+  left: clamp(24px, 7vw, 54px) !important;
+  width: clamp(172px, 34vw, 210px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+  top: 90px !important;
+  bottom: auto !important;
+  right: clamp(34px, 9vw, 66px) !important;
+  width: clamp(168px, 32vw, 200px) !important;
+  height: clamp(140px, 24vw, 170px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+  bottom: calc(34px + env(safe-area-inset-bottom)) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-center__row {
+  gap: 20px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+  min-width: 110px !important;
+  min-height: 42px !important;
+}
+
+@media (max-width: 390px) {
+  body.is-mobile-device #room-view.room-view--mobile-fs {
+    grid-template-rows: minmax(0, 50dvh) minmax(0, 50dvh) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+    height: max(314px, 50dvh) !important;
+    max-height: 50dvh !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
+    top: 72px !important;
+    left: 18px !important;
+    width: clamp(156px, 33vw, 184px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
+    top: 86px !important;
+    right: 18px !important;
+    width: clamp(146px, 30vw, 176px) !important;
+    height: clamp(126px, 22vw, 154px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
+    bottom: calc(28px + env(safe-area-inset-bottom)) !important;
+  }
+}
