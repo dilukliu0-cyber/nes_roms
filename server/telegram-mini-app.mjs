@@ -50,11 +50,13 @@ function extractRoomId(startParam) {
 export function getTelegramPublicConfig() {
   const botUsername = safeTrim(process.env.TELEGRAM_BOT_USERNAME);
   const miniAppUrl = safeTrim(process.env.TELEGRAM_MINI_APP_URL);
+  const directLinkPath = safeTrim(process.env.TELEGRAM_MINI_APP_DIRECT_PATH || "play");
 
   return {
     enabled: Boolean(botUsername || miniAppUrl),
     botUsername: botUsername || null,
     miniAppUrl: miniAppUrl || null,
+    directLinkPath: directLinkPath || null,
   };
 }
 

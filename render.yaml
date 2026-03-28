@@ -18,3 +18,5 @@ services:
         value: "86400"
       - key: TELEGRAM_MINI_APP_URL
         value: https://nes-switch-online.onrender.com
+      - key: TELEGRAM_MINI_APP_DIRECT_PATH
+        value: play

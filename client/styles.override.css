@@ -27,6 +27,17 @@
   max-width: 100%;
 }
 
+#library-view .game-card__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#library-view .game-card__actions > button {
+  min-width: 0;
+  width: 100%;
+}
+
 #room-title,
 #room-view .section-copy,
 #room-view .control-line,
@@ -42,10 +53,10 @@ body.is-telegram-mini-app {
 
 body.is-telegram-mini-app .scene {
   min-height: var(--tg-viewport-stable-height, 100vh);
-  padding-top: max(12px, calc(var(--tg-content-safe-area-inset-top, 0px) + 12px));
-  padding-right: max(12px, calc(var(--tg-content-safe-area-inset-right, 0px) + 12px));
-  padding-bottom: max(12px, calc(var(--tg-content-safe-area-inset-bottom, 0px) + 12px));
-  padding-left: max(12px, calc(var(--tg-content-safe-area-inset-left, 0px) + 12px));
+  padding-top: max(0px, var(--tg-content-safe-area-inset-top, 0px));
+  padding-right: max(10px, calc(var(--tg-content-safe-area-inset-right, 0px) + 10px));
+  padding-bottom: max(10px, calc(var(--tg-content-safe-area-inset-bottom, 0px) + 10px));
+  padding-left: max(10px, calc(var(--tg-content-safe-area-inset-left, 0px) + 10px));
 }
 
 body.is-telegram-mini-app .topbar {
@@ -60,9 +71,21 @@ body.is-telegram-mini-app .app-shell {
   margin-top: 0;
 }
 
+body.is-telegram-mini-app.is-mobile-device #library-view .library-head {
+  display: none;
+}
+
+body.is-telegram-mini-app.is-mobile-device .app-shell {
+  max-width: 520px;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view {
+  gap: 12px;
+}
+
 @media (max-width: 760px) {
   body.is-telegram-mini-app .scene {
-    padding-top: max(8px, calc(var(--tg-content-safe-area-inset-top, 0px) + 8px));
+    padding-top: max(0px, var(--tg-content-safe-area-inset-top, 0px));
   }
 }
 

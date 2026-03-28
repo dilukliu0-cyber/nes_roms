@@ -29,6 +29,7 @@ const state = {
   fallbackFullscreen: false,
   fullscreenActive: false,
   telegram: null,
+  pendingRoomLaunch: null,
 };
 
 const refs = {
@@ -168,6 +169,60 @@ function buildShareUrl(room) {
   return state.telegram?.buildShareUrl?.(room.id, fallbackUrl) || fallbackUrl;
 }
 
+function getCurrentPlayer(room = state.currentRoom) {
+  if (!room?.players?.length) {
+    return state.participant;
+  }
+
+  return room.players.find((player) => player.socketId === socket.id) ?? state.participant;
+}
+
+async function copyTextToClipboard(value) {
+  if (!value) {
+    return false;
+  }
+
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      // Use the fallback copy path below.
+    }
+  }
+
+  const helper = document.createElement("textarea");
+  helper.value = value;
+  helper.setAttribute("readonly", "");
+  helper.style.position = "fixed";
+  helper.style.opacity = "0";
+  helper.style.pointerEvents = "none";
+  document.body.appendChild(helper);
+  helper.focus();
+  helper.select();
+
+  let copied = false;
+  try {
+    copied = document.execCommand("copy");
+  } catch {
+    copied = false;
+  }
+
+  helper.remove();
+  return copied;
+}
+
+function setPendingRoomLaunch(roomId, mode) {
+  state.pendingRoomLaunch = {
+    roomId,
+    mode,
+    inviteHandled: false,
+    readySent: false,
+    startSent: false,
+    fullscreenRequested: false,
+  };
+}
+
 function mergeCurrentRoomGame() {
   if (!state.currentRoom?.game) {
     return;
@@ -195,16 +250,17 @@ function refreshEmulatorLayout() {
   });
 }
 
-function updateFullscreenUi() {
+function legacyUpdateFullscreenUi() {
   const hasRoom = Boolean(state.currentRoom);
-  const fullscreenActive = hasRoom && isFullscreenActive();
-  const mobileControlsActive = state.isMobileDevice && hasRoom && fullscreenActive;
+  const fullscreenActive = isFullscreenActive();
+  const roomFullscreenActive = hasRoom && fullscreenActive;
+  const mobileControlsActive = state.isMobileDevice && roomFullscreenActive;
   const mobileOverlayActive = mobileControlsActive;
   state.fullscreenActive = fullscreenActive;
 
   document.body.classList.toggle("is-mobile-device", state.isMobileDevice);
   document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
-  refs.roomView.classList.toggle("room-view--fullscreen-active", fullscreenActive);
+  refs.roomView.classList.toggle("room-view--fullscreen-active", roomFullscreenActive);
   refs.roomView.classList.toggle("room-view--mobile-controls", mobileControlsActive);
   refs.roomView.classList.toggle("room-view--mobile-fs", mobileOverlayActive);
   refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
@@ -217,8 +273,8 @@ function updateFullscreenUi() {
     button.setAttribute("aria-label", fullscreenActive ? "Выйти из полного экрана" : "Открыть на весь экран");
   }
 
-  renderFullscreenButtons(fullscreenActive);
-  syncFullscreenButtonLabels(fullscreenActive);
+  renderFullscreenButtons(roomFullscreenActive);
+  syncFullscreenButtonLabels(roomFullscreenActive);
   state.telegram?.syncUi?.({
     inRoom: hasRoom,
     fullscreenActive,
@@ -244,6 +300,21 @@ function vibrateTap(duration = 14) {
 
   lastHapticAt = now;
   navigator.vibrate(duration);
+}
+
+async function ensureMiniAppFullscreen() {
+  if (!state.telegram?.isMiniApp) {
+    return false;
+  }
+
+  if (state.telegram.isFullscreenActive?.()) {
+    updateFullscreenUi();
+    return true;
+  }
+
+  const entered = await state.telegram.requestFullscreen?.();
+  updateFullscreenUi();
+  return Boolean(entered || state.telegram.isFullscreenActive?.());
 }
 
 async function tryLockHandheldOrientation() {
@@ -282,7 +353,7 @@ async function enterFullscreenMode() {
   }
 
   if (state.telegram?.isMiniApp) {
-    const entered = await state.telegram.requestFullscreen?.();
+    const entered = await ensureMiniAppFullscreen();
     if (state.isMobileDevice) {
       await tryLockHandheldOrientation();
     }
@@ -353,7 +424,94 @@ async function toggleFullscreenMode() {
   }
 }
 
-function renderCatalog() {
+async function shareCurrentRoomLink(room = state.currentRoom) {
+  if (!room) {
+    return false;
+  }
+
+  const shareUrl = buildShareUrl(room);
+  const shareText = room.game?.title
+    ? `Залетай в комнату ${room.id} и запускай ${room.game.title}`
+    : `Залетай в комнату ${room.id} в NES Switch Online`;
+
+  if (await state.telegram?.shareRoomLink?.(shareUrl, shareText)) {
+    showToast("Открыл приглашение в Telegram");
+    return true;
+  }
+
+  const copied = await copyTextToClipboard(shareUrl);
+  if (copied) {
+    showToast(state.telegram?.botUsername ? "TG-ссылка скопирована" : "Ссылка скопирована");
+    return true;
+  }
+
+  window.prompt("Скопируй ссылку на комнату", shareUrl);
+  return false;
+}
+
+async function maybeHandlePendingRoomLaunch() {
+  const launch = state.pendingRoomLaunch;
+  if (!launch || launch.roomId !== state.currentRoomId || !state.currentRoom) {
+    return;
+  }
+
+  if (!launch.fullscreenRequested && state.telegram?.isMiniApp) {
+    launch.fullscreenRequested = true;
+    await ensureMiniAppFullscreen();
+  }
+
+  const me = getCurrentPlayer();
+  if (!me) {
+    return;
+  }
+
+  if (launch.mode === "party") {
+    if (!launch.inviteHandled) {
+      launch.inviteHandled = true;
+      await shareCurrentRoomLink(state.currentRoom);
+    }
+    state.pendingRoomLaunch = null;
+    return;
+  }
+
+  if (me.spectator || state.currentRoom.status !== "lobby") {
+    if (state.currentRoom.status === "running") {
+      state.pendingRoomLaunch = null;
+    }
+    return;
+  }
+
+  if (!me.ready && !launch.readySent) {
+    launch.readySent = true;
+    socket.emit("room:ready", {
+      ready: true,
+    });
+    return;
+  }
+
+  if (state.currentRoom.canStart && me.isHost && !launch.startSent) {
+    launch.startSent = true;
+    socket.emit("room:start", {
+      inputDelayFrames: state.inputDelayFrames,
+    });
+  }
+}
+
+async function createRoomForGame(gameId, mode) {
+  if (state.telegram?.isMiniApp) {
+    void ensureMiniAppFullscreen();
+  }
+
+  const payload = await fetchJson("/api/rooms", {
+    method: "POST",
+    body: JSON.stringify({ gameId }),
+  });
+
+  setPendingRoomLaunch(payload.room.id, mode);
+  navigate(payload.room.sharePath);
+}
+
+function legacyRenderCatalog() {
   refs.catalogCount.textContent = `${state.games.length} игр`;
   refs.catalogStatus.textContent = state.games.length ? "Готово к игре" : "Библиотека пуста";
 
@@ -420,7 +578,7 @@ function renderPlayers(room) {
   }
 }
 
-function renderRoom() {
+function legacyRenderRoom() {
   const room = state.currentRoom;
   const participant = state.participant;
   refs.copyLink.textContent = state.telegram?.botUsername ? "Скопировать TG-ссылку" : "Копировать ссылку";
@@ -609,7 +767,7 @@ function bindTouchControls() {
   refs.touchDpad.addEventListener("lostpointercapture", releaseDpadPointer);
 }
 
-async function syncRoute() {
+async function legacySyncRoute() {
   const route = parseRoute();
 
   if (route.kind === "library") {
@@ -868,6 +1026,244 @@ socket.on("session:ended", async ({ roomId, reason }) => {
   await emulator.stop(messages[reason] || "Сессия завершена");
 });
 
+function updateFullscreenUi() {
+  const hasRoom = Boolean(state.currentRoom);
+  const fullscreenActive = isFullscreenActive();
+  const roomFullscreenActive = hasRoom && fullscreenActive;
+  const mobileControlsActive = state.isMobileDevice && roomFullscreenActive;
+  const mobileOverlayActive = mobileControlsActive;
+  state.fullscreenActive = fullscreenActive;
+
+  document.body.classList.toggle("is-mobile-device", state.isMobileDevice);
+  document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
+  refs.roomView.classList.toggle("room-view--fullscreen-active", roomFullscreenActive);
+  refs.roomView.classList.toggle("room-view--mobile-controls", mobileControlsActive);
+  refs.roomView.classList.toggle("room-view--mobile-fs", mobileOverlayActive);
+  refs.mobileHandheld.classList.toggle("hidden", !mobileControlsActive);
+  refs.mobileHandheld.setAttribute("aria-hidden", String(!mobileControlsActive));
+  refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
+
+  const showFullscreenButtons = hasRoom;
+  for (const button of refs.fullscreenButtons) {
+    button.classList.toggle("hidden", !showFullscreenButtons);
+    button.setAttribute(
+      "aria-label",
+      roomFullscreenActive ? "Выйти из полного экрана" : "Открыть на весь экран",
+    );
+  }
+
+  renderFullscreenButtons(roomFullscreenActive);
+  syncFullscreenButtonLabels(roomFullscreenActive);
+  state.telegram?.syncUi?.({
+    inRoom: hasRoom,
+    fullscreenActive,
+    running: state.currentRoom?.status === "running",
+  });
+  refreshEmulatorLayout();
+}
+
+function renderCatalog() {
+  refs.catalogCount.textContent = `${state.games.length} игр`;
+  refs.catalogStatus.textContent = state.games.length ? "Готово к игре" : "Библиотека пуста";
+  refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
+  refs.gameGrid.innerHTML = "";
+
+  for (const game of state.games) {
+    const card = document.createElement("article");
+    card.className = "game-card";
+    card.innerHTML = `
+      <div class="game-card__cover">
+        <img src="${game.coverUrl}" alt="${escapeHtml(game.title)}" loading="lazy" />
+      </div>
+      <div class="game-card__meta">
+        <h3 class="game-card__title">${escapeHtml(game.title)}</h3>
+        <div class="game-card__tags">
+          <span>Mapper ${game.mapper}</span>
+          <span>${game.prgKb} KB</span>
+        </div>
+      </div>
+      <div class="game-card__actions">
+        <button class="primary-button" type="button" data-launch-mode="solo">Играть</button>
+        <button class="secondary-button" type="button" data-launch-mode="party">Пати</button>
+      </div>
+    `;
+
+    for (const button of card.querySelectorAll("[data-launch-mode]")) {
+      button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+          await createRoomForGame(game.id, button.dataset.launchMode);
+        } catch (error) {
+          showToast(error.message);
+        } finally {
+          button.disabled = false;
+        }
+      });
+    }
+
+    refs.gameGrid.appendChild(card);
+  }
+}
+
+function renderRoom() {
+  const room = state.currentRoom;
+  refs.copyLink.textContent = state.telegram?.isMiniApp ? "Позвать друга" : "Копировать ссылку";
+
+  if (!room) {
+    refs.roomTitle.textContent = "Комната не найдена";
+    refs.roomSubtitle.textContent = "Создай новую комнату из библиотеки.";
+    refs.playersList.innerHTML = "";
+    refs.mobileRoomBadge.textContent = "КОМНАТА";
+    updateFullscreenUi();
+    return;
+  }
+
+  const playerNames = room.players.map((player) => player.name).join(", ");
+  const me = getCurrentPlayer(room);
+  const isHost = Boolean(me?.isHost);
+  const isSpectator = Boolean(me?.spectator);
+  const canReady = room.status === "lobby" && !isSpectator;
+  const amReady = Boolean(me?.ready);
+
+  refs.roomTitle.textContent = room.game?.title || "Комната";
+  refs.roomSubtitle.textContent =
+    room.status === "running"
+      ? `Комната ${room.id} • игра идёт`
+      : playerNames
+        ? `В комнате: ${playerNames} • код ${room.id}`
+        : `Комната ${room.id} • ждёт игроков`;
+  refs.roomCover.src = room.game?.coverUrl || "";
+  refs.roomCover.alt = room.game?.title || "";
+  refs.readySummary.textContent = room.canStart ? "Можно стартовать" : room.status === "running" ? "Сессия в игре" : "Не готово";
+  refs.statusTitle.textContent =
+    room.status === "running"
+      ? room.session?.paused
+        ? "Сессия на паузе"
+        : "Сетевая сессия активна"
+      : "Комната ждёт игроков";
+  refs.mobileRoomBadge.textContent = room.id;
+
+  refs.toggleReady.disabled = !canReady;
+  refs.toggleReady.textContent = amReady ? "Снять готовность" : "Готов";
+  refs.startSession.disabled = !(isHost && room.canStart && room.status === "lobby");
+  refs.pauseSession.disabled = !(isHost && room.status === "running" && !room.session?.paused);
+  refs.resumeSession.disabled = !(isHost && room.status === "running" && room.session?.paused);
+  refs.stopSession.disabled = !(isHost && room.status === "running");
+  refs.nicknameInput.disabled = room.status === "running";
+  refs.inputDelay.disabled = !isHost || room.status === "running";
+
+  renderPlayers(room);
+  updateFullscreenUi();
+}
+
+async function syncRoute() {
+  const route = parseRoute();
+
+  if (route.kind === "library") {
+    state.currentRoomId = null;
+    state.currentRoom = null;
+    state.participant = null;
+    state.pendingRoomLaunch = null;
+    socket.emit("room:leave");
+    releaseAllTouchControls();
+
+    if (!state.telegram?.isMiniApp) {
+      await exitFullscreenMode();
+    } else {
+      await ensureMiniAppFullscreen();
+      updateFullscreenUi();
+    }
+
+    await emulator.stop();
+    setView("library");
+    renderCatalog();
+    return;
+  }
+
+  setView("room");
+  state.currentRoomId = route.roomId;
+
+  try {
+    const payload = await fetchJson(`/api/rooms/${route.roomId}`);
+    state.currentRoom = payload.room;
+    state.participant = null;
+    renderRoom();
+    await maybeHandlePendingRoomLaunch();
+    if (socket.connected) {
+      socket.emit("room:join", {
+        roomId: route.roomId,
+        name: state.nickname || "Игрок",
+      });
+    }
+  } catch (error) {
+    refs.roomTitle.textContent = "Комната не найдена";
+    refs.roomSubtitle.textContent = error.message;
+    state.currentRoom = null;
+    state.participant = null;
+    renderRoom();
+  }
+}
+
+refs.copyLink.replaceWith(refs.copyLink.cloneNode(true));
+refs.copyLink = document.querySelector("#copy-link");
+refs.copyLink.addEventListener("click", async (event) => {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  await shareCurrentRoomLink(state.currentRoom);
+});
+
+socket.off("room:joined");
+socket.on("room:joined", ({ room, participant }) => {
+  state.currentRoom = room;
+  state.participant = participant;
+  renderRoom();
+  void maybeHandlePendingRoomLaunch();
+});
+
+socket.off("room:state");
+socket.on("room:state", (room) => {
+  if (room.id !== state.currentRoomId) {
+    return;
+  }
+
+  state.currentRoom = room;
+  renderRoom();
+  void maybeHandlePendingRoomLaunch();
+});
+
+socket.off("session:starting");
+socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requiredSlots }) => {
+  if (roomId !== state.currentRoomId || !state.currentRoom?.game) {
+    return;
+  }
+
+  const player = state.currentRoom.players.find((entry) => entry.socketId === socket.id);
+  if (player?.spectator) {
+    refs.screenOverlay.textContent = "Наблюдатель не участвует в текущей сессии";
+    refs.screenOverlay.classList.remove("hidden");
+    return;
+  }
+
+  try {
+    await enterFullscreenMode();
+    await emulator.start({
+      roomId,
+      slot: player?.slot ?? state.participant?.slot ?? 1,
+      socket,
+      startedAt,
+      inputDelayFrames,
+      requiredSlots,
+      romUrl: `/api/roms/${state.currentRoom.game.id}/file`,
+    });
+    refs.statusTitle.textContent = "Синхронизация перед стартом";
+    state.pendingRoomLaunch = null;
+  } catch (error) {
+    releaseAllTouchControls();
+    await emulator.stop(error.message);
+    console.error(error);
+  }
+});
+
 function syncFullscreenButtonLabels(fullscreenActive) {
   if (refs.toggleFullscreen) {
     refs.toggleFullscreen.textContent = fullscreenActive ? "Свернуть экран" : "Во весь экран";
@@ -880,7 +1276,7 @@ function syncFullscreenButtonLabels(fullscreenActive) {
 
 state.telegram = await initializeTelegramMiniApp();
 state.telegram.setBackHandler?.(() => {
-  if (state.fullscreenActive) {
+  if (state.currentRoomId && state.fullscreenActive) {
     void exitFullscreenMode();
     return;
   }
@@ -907,6 +1303,7 @@ refs.inputDelay.value = String(state.inputDelayFrames);
 
 bindTouchControls();
 refreshDeviceMode();
+await ensureMiniAppFullscreen();
 
 const initialCatalog = await fetchJson("/api/games");
 state.games = initialCatalog.games;

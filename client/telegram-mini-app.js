@@ -88,6 +88,7 @@ export async function initializeTelegramMiniApp() {
     webApp,
     botUsername: config?.botUsername || null,
     miniAppUrl: config?.miniAppUrl || null,
+    directLinkPath: safeTrim(config?.directLinkPath) || "play",
     initData: "",
     user: null,
     startParam: "",
@@ -148,7 +149,7 @@ export async function initializeTelegramMiniApp() {
         return;
       }
 
-      const showBack = inRoom || fullscreenActive;
+      const showBack = inRoom;
       if (showBack) {
         safeCall(webApp.BackButton?.show?.bind(webApp.BackButton));
       } else {
@@ -171,12 +172,43 @@ export async function initializeTelegramMiniApp() {
       safeCall(webApp.setBackgroundColor?.bind(webApp), fullscreenActive ? "#0a0c10" : "#10141c");
       safeCall(webApp.setBottomBarColor?.bind(webApp), fullscreenActive ? "#0a0c10" : "#10141c");
     },
+    async shareRoomLink(url, text = "") {
+      if (!url) {
+        return false;
+      }
+
+      const shareUrl = new URL("https://t.me/share/url");
+      shareUrl.searchParams.set("url", url);
+      if (text) {
+        shareUrl.searchParams.set("text", text);
+      }
+
+      const openInTelegram = webApp?.openTelegramLink?.bind(webApp);
+      const openLink = webApp?.openLink?.bind(webApp);
+
+      try {
+        if (openInTelegram) {
+          openInTelegram(shareUrl.toString());
+          return true;
+        }
+
+        if (openLink) {
+          openLink(shareUrl.toString());
+          return true;
+        }
+      } catch {
+        return false;
+      }
+
+      return false;
+    },
     buildShareUrl(roomId, fallbackUrl) {
       if (!this.botUsername || !roomId) {
         return fallbackUrl;
       }
 
-      return `https://t.me/${this.botUsername}?startapp=${encodeURIComponent(`room-${roomId}`)}`;
+      const directPath = this.directLinkPath ? `/${this.directLinkPath}` : "";
+      return `https://t.me/${this.botUsername}${directPath}?startapp=${encodeURIComponent(`room-${roomId}`)}`;
     },
     setBackHandler(handler) {
       if (!webApp?.BackButton) {
@@ -223,6 +255,7 @@ export async function initializeTelegramMiniApp() {
   safeCall(webApp.setHeaderColor?.bind(webApp), "#202735");
   safeCall(webApp.setBackgroundColor?.bind(webApp), "#10141c");
   safeCall(webApp.setBottomBarColor?.bind(webApp), "#10141c");
+  void bridge.requestFullscreen();
 
   const session = await fetchTelegramSession(bridge.initData);
   if (session?.telegram?.botUsername) {
