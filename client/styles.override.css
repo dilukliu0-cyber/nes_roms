@@ -1047,19 +1047,19 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
   inset: auto !important;
   box-sizing: border-box !important;
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  grid-template-columns: 146px 126px !important;
   grid-template-areas:
     "dpad ab"
     "center center" !important;
-  justify-content: center !important;
+  justify-content: end !important;
   align-content: center !important;
   align-items: center !important;
   row-gap: 18px !important;
   column-gap: 18px !important;
-  width: min(100%, 332px) !important;
+  width: min(100%, 306px) !important;
   height: 100% !important;
-  margin: 0 18px 0 auto !important;
-  padding: 32px 8px calc(24px + env(safe-area-inset-bottom)) !important;
+  margin: 0 6px 0 auto !important;
+  padding: 28px 0 calc(24px + env(safe-area-inset-bottom)) !important;
   pointer-events: none !important;
 }
 
@@ -1078,7 +1078,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
   grid-area: dpad !important;
-  justify-self: center !important;
+  justify-self: end !important;
   align-self: center !important;
   width: clamp(150px, 33vw, 182px) !important;
   aspect-ratio: 1 !important;
@@ -1086,7 +1086,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
   grid-area: ab !important;
-  justify-self: center !important;
+  justify-self: end !important;
   align-self: center !important;
   width: clamp(132px, 28vw, 154px) !important;
   height: clamp(126px, 22vw, 146px) !important;
@@ -1094,10 +1094,10 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
 
 body.is-mobile-device #room-view.room-view--mobile-fs .touch-center {
   grid-area: center !important;
-  justify-self: center !important;
+  justify-self: end !important;
   align-self: end !important;
   display: grid !important;
-  justify-items: center !important;
+  justify-items: end !important;
   width: max-content !important;
   transform: none !important;
 }
@@ -1134,13 +1134,13 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-    justify-content: center !important;
+    grid-template-columns: 136px 118px !important;
+    justify-content: end !important;
     row-gap: 14px !important;
     column-gap: 10px !important;
-    width: min(100%, 300px) !important;
-    margin: 0 10px 0 auto !important;
-    padding: 28px 4px calc(22px + env(safe-area-inset-bottom)) !important;
+    width: min(100%, 280px) !important;
+    margin: 0 4px 0 auto !important;
+    padding: 24px 0 calc(22px + env(safe-area-inset-bottom)) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
