@@ -3091,3 +3091,323 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
     min-height: 32px !important;
   }
 }
+
+/* Final photo-match lock: no selectable text, graphic-only controls */
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  grid-template-rows: minmax(0, 50%) minmax(0, 50%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  caret-color: transparent !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body ::selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-stage {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  padding: max(8px, env(safe-area-inset-top)) 12px 8px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy {
+  top: calc(max(6px, env(safe-area-inset-top)) + 12px) !important;
+  width: calc(100% - 44px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy span {
+  font-size: clamp(0.58rem, 1.8vw, 0.74rem) !important;
+  letter-spacing: 0.03em !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell {
+  width: min(calc(100vw - 32px), calc(50dvh - env(safe-area-inset-top) - 18px)) !important;
+  max-width: calc(100vw - 32px) !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 32px 10px 40px !important;
+  border-radius: 34px 34px 18px 18px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount {
+  position: relative !important;
+  padding: 8px !important;
+  border-radius: 22px !important;
+  background: linear-gradient(180deg, #fefdfb 0%, #efe9e1 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -2px 0 rgba(92, 70, 55, 0.1),
+    0 10px 16px rgba(46, 20, 21, 0.1) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 8px !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  z-index: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount canvas {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  margin: 0 auto !important;
+  border-radius: 16px !important;
+  background: #050505 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
+  z-index: 2 !important;
+  inset: 40px 18px 48px !important;
+  border-radius: 16px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo {
+  bottom: 16px !important;
+  gap: 4px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo__gameboy,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo__advance {
+  font-size: clamp(0.96rem, 4.3vw, 1.22rem) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo__sp {
+  font-size: clamp(1.44rem, 5.8vw, 1.78rem) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls-stage {
+  padding: 46px 12px calc(20px + env(safe-area-inset-bottom)) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge {
+  height: 60px !important;
+  padding-bottom: 6px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge__segment {
+  height: 44px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge__segment--center {
+  height: 46px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-power {
+  top: 22px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-status {
+  top: 28px !important;
+  right: 0 !important;
+  gap: 8px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-speaker {
+  top: 146px !important;
+  width: 64px !important;
+  height: 88px !important;
+  background-size: 20px 20px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad {
+  top: 96px !important;
+  left: 18px !important;
+  width: clamp(128px, 31vw, 156px) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad::before {
+  inset: -18px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::after {
+  border-radius: 14px !important;
+  box-shadow:
+    0 8px 14px rgba(70, 22, 22, 0.12),
+    inset 0 0 0 3px rgba(39, 5, 9, 0.96) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab {
+  top: 108px !important;
+  right: 34px !important;
+  width: clamp(126px, 30vw, 148px) !important;
+  height: clamp(80px, 16vw, 92px) !important;
+  overflow: visible !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab::before {
+  inset: -12px -8px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill {
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action {
+  width: clamp(60px, 14vw, 68px) !important;
+  height: clamp(60px, 14vw, 68px) !important;
+  touch-action: manipulation !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action::before {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  font-family: var(--font-ui) !important;
+  font-size: clamp(1.18rem, 3.6vw, 1.42rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  color: rgba(95, 27, 35, 0.34) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--a::before {
+  content: "A" !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--b::before {
+  content: "B" !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--b {
+  left: 2px !important;
+  bottom: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--a {
+  right: 6px !important;
+  top: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center {
+  bottom: calc(36px + env(safe-area-inset-bottom)) !important;
+  width: 146px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center__row {
+  gap: 40px !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill {
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  box-shadow:
+    0 0 0 6px rgba(217, 205, 188, 0.96),
+    0 8px 12px rgba(86, 62, 42, 0.14),
+    inset 0 0 0 3px rgba(35, 4, 8, 0.94) !important;
+  touch-action: manipulation !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad:focus {
+  outline: none !important;
+}
+
+@media (max-width: 390px) {
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+    grid-template-rows: minmax(0, 49%) minmax(0, 51%) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-stage {
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy {
+    width: calc(100% - 36px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy span {
+    font-size: 0.5rem !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell {
+    width: min(calc(100vw - 24px), calc(49dvh - env(safe-area-inset-top) - 16px)) !important;
+    max-width: calc(100vw - 24px) !important;
+    padding: 28px 8px 36px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
+    inset: 36px 14px 44px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo {
+    bottom: 12px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls-stage {
+    padding: 42px 8px calc(16px + env(safe-area-inset-bottom)) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-speaker,
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-speaker {
+    top: 138px !important;
+    width: 58px !important;
+    height: 78px !important;
+    background-size: 18px 18px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad {
+    top: 92px !important;
+    left: 10px !important;
+    width: 122px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab {
+    top: 104px !important;
+    right: 24px !important;
+    width: 118px !important;
+    height: 80px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--a {
+    right: 4px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--b {
+    left: 0 !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center {
+    bottom: calc(30px + env(safe-area-inset-bottom)) !important;
+    width: 132px !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+  }
+}
