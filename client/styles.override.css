@@ -1056,10 +1056,10 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
   align-items: center !important;
   row-gap: 18px !important;
   column-gap: 18px !important;
-  width: min(100%, 360px) !important;
+  width: min(100%, 332px) !important;
   height: 100% !important;
-  margin: 0 auto !important;
-  padding: 36px 14px calc(26px + env(safe-area-inset-bottom)) !important;
+  margin: 0 18px 0 auto !important;
+  padding: 32px 8px calc(24px + env(safe-area-inset-bottom)) !important;
   pointer-events: none !important;
 }
 
@@ -1138,8 +1138,9 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
     justify-content: center !important;
     row-gap: 14px !important;
     column-gap: 10px !important;
-    width: min(100%, 320px) !important;
-    padding: 32px 10px calc(24px + env(safe-area-inset-bottom)) !important;
+    width: min(100%, 300px) !important;
+    margin: 0 10px 0 auto !important;
+    padding: 28px 4px calc(22px + env(safe-area-inset-bottom)) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
