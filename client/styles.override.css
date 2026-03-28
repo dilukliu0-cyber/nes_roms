@@ -1510,6 +1510,325 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
   }
 }
 
+/* Asset pass: exact exported GBA shell and buttons */
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  background:
+    url("/assets/gba-sp/background.PNG") center / 100% 100% no-repeat,
+    #f2e7d8 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-status,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-speaker,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center__label,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cap,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__hint,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-stage,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls-stage,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy {
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell {
+  position: absolute !important;
+  left: 7.6142% !important;
+  top: 6.25% !important;
+  width: 84.7716% !important;
+  height: 33.5156% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 4.5% !important;
+  background: #000 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: #000 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount::before {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: inherit !important;
+  background: #000 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
+  inset: 0 !important;
+  z-index: 2 !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-power {
+  position: absolute !important;
+  left: 46.0237% !important;
+  top: 62.7344% !important;
+  width: 7.9526% !important;
+  height: 3.75% !important;
+  display: block !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  transform: none !important;
+  background: url("/assets/gba-sp/button-start-tight.png") center / 100% 100% no-repeat !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad {
+  position: absolute !important;
+  left: 13.3672% !important;
+  top: 68.2812% !important;
+  width: 24.5347% !important;
+  height: 11.0938% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  background: url("/assets/gba-sp/dpad.png") center / 100% 100% no-repeat !important;
+  clip-path: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-ab,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center__row {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  gap: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-ab::before {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill {
+  position: absolute !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background-color: transparent !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--a {
+  left: 77.665% !important;
+  top: 67.9688% !important;
+  width: 13.0288% !important;
+  height: 6.1719% !important;
+  background-image: url("/assets/gba-sp/button-a.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--b {
+  left: 59.7293% !important;
+  top: 70.1562% !important;
+  width: 12.6904% !important;
+  height: 6.25% !important;
+  background-image: url("/assets/gba-sp/button-b.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--select {
+  left: 35.8714% !important;
+  top: 91.7188% !important;
+  width: 8.9679% !important;
+  height: 3.9062% !important;
+  background-image: url("/assets/gba-sp/button-select-tight.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--start {
+  left: 56.176% !important;
+  top: 91.7188% !important;
+  width: 7.9526% !important;
+  height: 3.8281% !important;
+  background-image: url("/assets/gba-sp/button-start-tight.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill:focus {
+  outline: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad--active .touch-dpad__cross,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action.touch-control--active,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill.touch-control--active {
+  transform: translateY(1.5px) scale(0.975) !important;
+  filter: brightness(0.96) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-power {
+  left: 46.0237% !important;
+  top: 62.7344% !important;
+  width: 7.9526% !important;
+  height: 3.75% !important;
+  background: url("/assets/gba-sp/button-start-tight.png") center / 100% 100% no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad {
+  left: 13.3672% !important;
+  top: 68.2812% !important;
+  width: 24.5347% !important;
+  height: 11.0938% !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::after,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross {
+  position: absolute !important;
+  inset: 0 !important;
+  background: url("/assets/gba-sp/dpad.png") center / 100% 100% no-repeat !important;
+  clip-path: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center__row {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  gap: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill {
+  position: absolute !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background-color: transparent !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--a {
+  left: 77.665% !important;
+  top: 67.9688% !important;
+  width: 13.0288% !important;
+  height: 6.1719% !important;
+  background-image: url("/assets/gba-sp/button-a.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--b {
+  left: 59.7293% !important;
+  top: 70.1562% !important;
+  width: 12.6904% !important;
+  height: 6.25% !important;
+  background-image: url("/assets/gba-sp/button-b.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill--select {
+  left: 35.8714% !important;
+  top: 91.7188% !important;
+  width: 8.9679% !important;
+  height: 3.9062% !important;
+  background-image: url("/assets/gba-sp/button-select-tight.png") !important;
+  background-size: 100% 100% !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill--start {
+  left: 56.176% !important;
+  top: 91.7188% !important;
+  width: 7.9526% !important;
+  height: 3.8281% !important;
+  background-image: url("/assets/gba-sp/button-start-tight.png") !important;
+  background-size: 100% 100% !important;
+}
+
 /* Final controller pass: closer GBA SP shell */
 :root {
   --gba-logo-font: "Arial Black", "Trebuchet MS", sans-serif;
@@ -3410,4 +3729,320 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
     height: 30px !important;
     min-height: 30px !important;
   }
+}
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-power {
+  left: 46.0237% !important;
+  top: 62.7344% !important;
+  width: 7.9526% !important;
+  height: 3.75% !important;
+  background: url("/assets/gba-sp/button-start-tight.png") center / 100% 100% no-repeat !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad {
+  left: 13.3672% !important;
+  top: 68.2812% !important;
+  width: 24.5347% !important;
+  height: 11.0938% !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross::after,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad__cross {
+  position: absolute !important;
+  inset: 0 !important;
+  background: url("/assets/gba-sp/dpad.png") center / 100% 100% no-repeat !important;
+  clip-path: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-ab,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-center__row {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  gap: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill {
+  position: absolute !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background-color: transparent !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--a {
+  left: 77.665% !important;
+  top: 67.9688% !important;
+  width: 13.0288% !important;
+  height: 6.1719% !important;
+  background-image: url("/assets/gba-sp/button-a.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action--b {
+  left: 59.7293% !important;
+  top: 70.1562% !important;
+  width: 12.6904% !important;
+  height: 6.25% !important;
+  background-image: url("/assets/gba-sp/button-b.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill--select {
+  left: 35.8714% !important;
+  top: 91.7188% !important;
+  width: 8.9679% !important;
+  height: 3.9062% !important;
+  background-image: url("/assets/gba-sp/button-select-tight.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill--start {
+  left: 56.176% !important;
+  top: 91.7188% !important;
+  width: 7.9526% !important;
+  height: 3.8281% !important;
+  background-image: url("/assets/gba-sp/button-start-tight.png") !important;
+}
+
+/* Asset lock at EOF */
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
+  background:
+    url("/assets/gba-sp/background.PNG") center / 100% 100% no-repeat,
+    #f2e7d8 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-status,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-speaker,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center__label,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cap,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__hint,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill::after,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-stage,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls-stage,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy {
+  pointer-events: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell {
+  position: absolute !important;
+  left: 7.6142% !important;
+  top: 6.25% !important;
+  width: 84.7716% !important;
+  height: 33.5156% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 4.5% !important;
+  background: #000 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: #000 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount::before {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > #emulator-mount canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: inherit !important;
+  background: #000 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell > .screen-overlay {
+  inset: 0 !important;
+  z-index: 2 !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-power {
+  position: absolute !important;
+  left: 46.0237% !important;
+  top: 62.7344% !important;
+  width: 7.9526% !important;
+  height: 3.75% !important;
+  display: block !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  transform: none !important;
+  background: url("/assets/gba-sp/button-start-tight.png") center / 100% 100% no-repeat !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad {
+  position: absolute !important;
+  left: 13.3672% !important;
+  top: 68.2812% !important;
+  width: 24.5347% !important;
+  height: 11.0938% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross::after {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad__cross {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  background: url("/assets/gba-sp/dpad.png") center / 100% 100% no-repeat !important;
+  clip-path: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-ab,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-center__row {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  gap: 0 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-ab::before {
+  display: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill {
+  position: absolute !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  clip-path: none !important;
+  background-color: transparent !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  z-index: 3 !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--a {
+  left: 77.665% !important;
+  top: 67.9688% !important;
+  width: 13.0288% !important;
+  height: 6.1719% !important;
+  background-image: url("/assets/gba-sp/button-a.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action--b {
+  left: 59.7293% !important;
+  top: 70.1562% !important;
+  width: 12.6904% !important;
+  height: 6.25% !important;
+  background-image: url("/assets/gba-sp/button-b.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--select {
+  left: 35.8714% !important;
+  top: 91.7188% !important;
+  width: 8.9679% !important;
+  height: 3.9062% !important;
+  background-image: url("/assets/gba-sp/button-select-tight.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--start {
+  left: 56.176% !important;
+  top: 91.7188% !important;
+  width: 7.9526% !important;
+  height: 3.8281% !important;
+  background-image: url("/assets/gba-sp/button-start-tight.png") !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action:focus,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill:focus {
+  outline: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-dpad--active .touch-dpad__cross,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-action.touch-control--active,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill.touch-control--active {
+  transform: translateY(1.5px) scale(0.975) !important;
+  filter: brightness(0.96) !important;
 }
