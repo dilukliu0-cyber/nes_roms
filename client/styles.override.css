@@ -1045,6 +1045,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls-stage::be
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
   position: relative !important;
   inset: auto !important;
+  box-sizing: border-box !important;
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
   grid-template-areas:
@@ -1055,10 +1056,10 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-controls {
   align-items: center !important;
   row-gap: 18px !important;
   column-gap: 18px !important;
-  width: min(100%, 390px) !important;
+  width: min(100%, 360px) !important;
   height: 100% !important;
   margin: 0 auto !important;
-  padding: 44px 24px calc(30px + env(safe-area-inset-bottom)) !important;
+  padding: 36px 14px calc(26px + env(safe-area-inset-bottom)) !important;
   pointer-events: none !important;
 }
 
@@ -1136,17 +1137,21 @@ body.is-mobile-device #room-view.room-view--mobile-fs .touch-action {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     justify-content: center !important;
     row-gap: 14px !important;
-    column-gap: 12px !important;
-    width: min(100%, 336px) !important;
-    padding: 40px 16px calc(28px + env(safe-area-inset-bottom)) !important;
+    column-gap: 10px !important;
+    width: min(100%, 320px) !important;
+    padding: 32px 10px calc(24px + env(safe-area-inset-bottom)) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad {
-    width: clamp(138px, 31vw, 164px) !important;
+    width: clamp(132px, 30vw, 156px) !important;
   }
 
   body.is-mobile-device #room-view.room-view--mobile-fs .touch-ab {
-    width: clamp(124px, 26vw, 146px) !important;
-    height: clamp(116px, 21vw, 136px) !important;
+    width: clamp(118px, 25vw, 138px) !important;
+    height: clamp(110px, 20vw, 128px) !important;
+  }
+
+  body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill {
+    min-width: 96px !important;
   }
 }
