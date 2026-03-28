@@ -1518,6 +1518,8 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body {
 }
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::after,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-handheld__topbar,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-lid-copy,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-logo,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .gba-sp-hinge,
@@ -3852,6 +3854,17 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
   display: none !important;
 }
 
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::before {
+  content: none !important;
+  background: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body::after {
+  content: none !important;
+  background: none !important;
+  display: none !important;
+}
+
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-stage,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls-stage,
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy {
@@ -4006,7 +4019,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--select {
   left: 35.7022% !important;
-  top: 91.4844% !important;
+  top: 91.1719% !important;
   width: 8.9679% !important;
   height: 3.9062% !important;
   background-image: url("/assets/gba-sp/button-select.png") !important;
@@ -4014,7 +4027,7 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .to
 
 body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .touch-pill--start {
   left: 55.8376% !important;
-  top: 91.4844% !important;
+  top: 91.1719% !important;
   width: 7.9526% !important;
   height: 3.8281% !important;
   background-image: url("/assets/gba-sp/button-start.png") !important;
