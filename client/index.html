@@ -41,39 +41,31 @@
           </div>
 
           <div id="mini-library-screen" class="mini-library hidden" aria-hidden="true">
-            <div class="mini-library__panel">
-              <div class="mini-library__topbar">
-                <div class="mini-library__title-wrap">
-                  <p class="mini-library__eyebrow">ROM LIBRARY</p>
-                  <span id="mini-library-status" class="mini-library__status">ONLINE</span>
-                </div>
-                <button id="mini-library-refresh" class="mini-library__refresh" type="button" aria-label="Refresh library"></button>
+            <div class="mini-library__phone">
+              <div class="mini-library__bar">
+                <button id="mini-profile-button" class="mini-library__avatar" type="button" aria-label="Telegram profile">
+                  <span id="mini-profile-initials">TG</span>
+                </button>
+                <button id="mini-console-back" class="mini-library__back hidden" type="button">Назад</button>
+                <label id="mini-library-search-wrap" class="mini-library__search hidden">
+                  <input id="mini-library-search" type="search" placeholder="Поиск" />
+                </label>
               </div>
 
-              <div class="mini-library__preview">
-                <div class="mini-library__preview-frame">
-                  <img id="mini-library-cover" alt="" />
-                </div>
+              <div id="mini-console-view" class="mini-library__view">
+                <div id="mini-console-grid" class="mini-library__console-grid"></div>
               </div>
 
-              <div class="mini-library__details">
-                <h3 id="mini-library-title" class="mini-library__title">SELECT A GAME</h3>
-                <p id="mini-library-subtitle" class="mini-library__subtitle">Choose a ROM and open a room.</p>
-                <div class="mini-library__chips">
-                  <span id="mini-library-chip-players" class="mini-library__chip"></span>
-                  <span id="mini-library-chip-mapper" class="mini-library__chip"></span>
-                  <span id="mini-library-chip-size" class="mini-library__chip"></span>
-                </div>
+              <div id="mini-rom-view" class="mini-library__view hidden">
+                <div id="mini-rom-grid" class="mini-library__rom-grid"></div>
               </div>
 
-              <div id="mini-library-list" class="mini-library__list"></div>
-
-              <div class="mini-library__actions">
+              <div id="mini-library-actions" class="mini-library__actions hidden">
                 <button id="mini-library-play" class="mini-library__action" type="button">
-                  <span>PLAY</span>
+                  <span>Играть</span>
                 </button>
                 <button id="mini-library-host" class="mini-library__action" type="button">
-                  <span>HOST ROOM</span>
+                  <span>Пати</span>
                 </button>
               </div>
             </div>

@@ -17,7 +17,46 @@ const TOUCH_BITS = {
 };
 
 const MOBILE_DEVICE_RE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i;
+const SELECTED_CONSOLE_STORAGE_KEY = "nes-switch-online:selected-console";
 const SELECTED_GAME_STORAGE_KEY = "nes-switch-online:selected-game";
+const CONSOLE_OPTIONS = [
+  {
+    id: "nes",
+    label: "NES",
+    subtitle: "Nintendo",
+    available: true,
+  },
+  {
+    id: "snes",
+    label: "SNES",
+    subtitle: "Soon",
+    available: false,
+  },
+  {
+    id: "gb",
+    label: "GB",
+    subtitle: "Soon",
+    available: false,
+  },
+  {
+    id: "gba",
+    label: "GBA",
+    subtitle: "Soon",
+    available: false,
+  },
+  {
+    id: "gamecube",
+    label: "GC",
+    subtitle: "Soon",
+    available: false,
+  },
+  {
+    id: "ds",
+    label: "DS",
+    subtitle: "Soon",
+    available: false,
+  },
+];
 const PIXEL_AVATAR_ASSETS = [
   "/assets/pixel-ui/avatars/avatar-cap-red-large.png",
   "/assets/pixel-ui/avatars/avatar-bob-brown-large.png",
@@ -42,7 +81,9 @@ const state = {
   roomLoadError: "",
   nickname: localStorage.getItem("nes-switch-online:nickname") || "",
   inputDelayFrames: Number(localStorage.getItem("nes-switch-online:input-delay") || 4),
+  selectedConsoleId: localStorage.getItem(SELECTED_CONSOLE_STORAGE_KEY) || "",
   selectedGameId: localStorage.getItem(SELECTED_GAME_STORAGE_KEY) || "",
+  librarySearchQuery: "",
   isMobileDevice: false,
   fallbackFullscreen: false,
   fullscreenActive: false,
@@ -62,15 +103,16 @@ const refs = {
   emptyLibrary: document.querySelector("#empty-library"),
   refreshLibrary: document.querySelector("#refresh-library"),
   miniLibraryScreen: document.querySelector("#mini-library-screen"),
-  miniLibraryStatus: document.querySelector("#mini-library-status"),
-  miniLibraryRefresh: document.querySelector("#mini-library-refresh"),
-  miniLibraryCover: document.querySelector("#mini-library-cover"),
-  miniLibraryTitle: document.querySelector("#mini-library-title"),
-  miniLibrarySubtitle: document.querySelector("#mini-library-subtitle"),
-  miniLibraryChipPlayers: document.querySelector("#mini-library-chip-players"),
-  miniLibraryChipMapper: document.querySelector("#mini-library-chip-mapper"),
-  miniLibraryChipSize: document.querySelector("#mini-library-chip-size"),
-  miniLibraryList: document.querySelector("#mini-library-list"),
+  miniProfileButton: document.querySelector("#mini-profile-button"),
+  miniProfileInitials: document.querySelector("#mini-profile-initials"),
+  miniConsoleBack: document.querySelector("#mini-console-back"),
+  miniLibrarySearchWrap: document.querySelector("#mini-library-search-wrap"),
+  miniLibrarySearch: document.querySelector("#mini-library-search"),
+  miniConsoleView: document.querySelector("#mini-console-view"),
+  miniConsoleGrid: document.querySelector("#mini-console-grid"),
+  miniRomView: document.querySelector("#mini-rom-view"),
+  miniRomGrid: document.querySelector("#mini-rom-grid"),
+  miniLibraryActions: document.querySelector("#mini-library-actions"),
   miniLibraryPlay: document.querySelector("#mini-library-play"),
   miniLibraryHost: document.querySelector("#mini-library-host"),
   backToLibrary: document.querySelector("#back-to-library"),
@@ -180,19 +222,17 @@ function pluralizeEn(count, singular, plural) {
   return count === 1 ? singular : plural;
 }
 
-function getSelectedGame() {
-  if (!state.games.length) {
+function getSelectedGame(games = state.games) {
+  if (!games.length) {
     state.selectedGameId = "";
+    localStorage.removeItem(SELECTED_GAME_STORAGE_KEY);
     return null;
   }
 
-  const selected =
-    state.games.find((game) => game.id === state.selectedGameId) ??
-    state.games[0];
+  const selected = games.find((game) => game.id === state.selectedGameId) ?? games[0];
 
   if (selected && selected.id !== state.selectedGameId) {
-    state.selectedGameId = selected.id;
-    localStorage.setItem(SELECTED_GAME_STORAGE_KEY, selected.id);
+    setSelectedGame(selected.id);
   }
 
   return selected;
@@ -200,7 +240,11 @@ function getSelectedGame() {
 
 function setSelectedGame(gameId) {
   state.selectedGameId = gameId;
-  localStorage.setItem(SELECTED_GAME_STORAGE_KEY, gameId);
+  if (gameId) {
+    localStorage.setItem(SELECTED_GAME_STORAGE_KEY, gameId);
+  } else {
+    localStorage.removeItem(SELECTED_GAME_STORAGE_KEY);
+  }
 }
 
 function getPlayerAvatarSrc(player, index = 0) {
@@ -212,24 +256,111 @@ function getPlayerAvatarSrc(player, index = 0) {
   return PIXEL_AVATAR_ASSETS[seed % PIXEL_AVATAR_ASSETS.length];
 }
 
-function buildLibraryMeta(game) {
-  if (!game) {
-    return {
-      players: "1-2P",
-      mapper: "MAPPER -",
-      size: "-- KB",
-    };
-  }
-
-  const estimatedPlayers = game.mapper % 2 === 0 ? "1-2P" : "1-4P";
-  return {
-    players: estimatedPlayers,
-    mapper: `MAPPER ${game.mapper}`,
-    size: `${game.prgKb} KB`,
-  };
+function getMiniProfileInitials() {
+  const source = state.telegram?.user?.firstName || state.nickname || "TG";
+  return source.slice(0, 2).toUpperCase();
 }
 
-function renderMiniLibrary() {
+function getSelectedConsole() {
+  return CONSOLE_OPTIONS.find((option) => option.id === state.selectedConsoleId && option.available) ?? null;
+}
+
+function setSelectedConsole(consoleId) {
+  state.selectedConsoleId = consoleId;
+  if (consoleId) {
+    localStorage.setItem(SELECTED_CONSOLE_STORAGE_KEY, consoleId);
+  } else {
+    localStorage.removeItem(SELECTED_CONSOLE_STORAGE_KEY);
+  }
+  state.librarySearchQuery = "";
+  if (refs.miniLibrarySearch) {
+    refs.miniLibrarySearch.value = "";
+  }
+  setSelectedGame("");
+}
+
+function getVisibleLibraryGames() {
+  if (state.selectedConsoleId !== "nes") {
+    return [];
+  }
+
+  const query = state.librarySearchQuery.trim().toLowerCase();
+  if (!query) {
+    return state.games;
+  }
+
+  return state.games.filter((game) => {
+    const haystack = `${game.title} ${game.fileName} ${game.mapper}`.toLowerCase();
+    return haystack.includes(query);
+  });
+}
+
+function renderConsoleSelection() {
+  refs.miniConsoleGrid.innerHTML = "";
+
+  for (const option of CONSOLE_OPTIONS) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "mini-library__console-card";
+    button.dataset.available = String(option.available);
+    button.innerHTML = `
+      <strong>${option.label}</strong>
+      <span>${option.subtitle}</span>
+    `;
+    button.addEventListener("click", () => {
+      if (!option.available) {
+        showToast(`${option.label} скоро добавим`);
+        return;
+      }
+
+      setSelectedConsole(option.id);
+      renderMiniLibrary();
+    });
+    refs.miniConsoleGrid.appendChild(button);
+  }
+}
+
+function renderRomSelection() {
+  const visibleGames = getVisibleLibraryGames();
+  const selectedGame = state.selectedGameId ? getSelectedGame(visibleGames) : null;
+  if (state.selectedGameId && !selectedGame) {
+    setSelectedGame("");
+  }
+
+  refs.miniRomGrid.innerHTML = "";
+  for (const game of visibleGames) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "mini-library__rom-card";
+    button.dataset.selected = String(game.id === selectedGame?.id);
+    button.innerHTML = `
+      <span class="mini-library__rom-thumb">
+        <img src="${game.coverUrl}" alt="${escapeHtml(game.title)}" loading="lazy" />
+      </span>
+      <span class="mini-library__rom-name">${escapeHtml(game.title)}</span>
+    `;
+    button.addEventListener("click", () => {
+      setSelectedGame(game.id);
+      renderMiniLibrary();
+    });
+    refs.miniRomGrid.appendChild(button);
+  }
+
+  if (!visibleGames.length) {
+    const empty = document.createElement("div");
+    empty.className = "mini-library__empty";
+    empty.textContent = state.librarySearchQuery ? "Ничего не найдено" : "ROMы пока пусты";
+    refs.miniRomGrid.appendChild(empty);
+  }
+
+  const shouldShowActions = Boolean(selectedGame);
+  refs.miniLibraryActions.classList.toggle("hidden", !shouldShowActions);
+  refs.miniLibraryActions.setAttribute("aria-hidden", String(!shouldShowActions));
+  refs.miniLibraryPlay.disabled = !selectedGame;
+  refs.miniLibraryHost.disabled = !selectedGame;
+}
+
+function legacyRenderMiniLibrary() {
   const active = shouldUsePixelMiniUi() && !state.currentRoomId;
   refs.miniLibraryScreen.classList.toggle("hidden", !active);
   refs.miniLibraryScreen.setAttribute("aria-hidden", String(!active));
@@ -238,22 +369,17 @@ function renderMiniLibrary() {
     return;
   }
 
-  const game = getSelectedGame();
-  const hasGames = Boolean(game);
-  const meta = buildLibraryMeta(game);
+  refs.miniProfileInitials.textContent = getMiniProfileInitials();
 
-  refs.miniLibraryStatus.textContent = state.games.length ? "ONLINE" : "EMPTY";
-  refs.miniLibraryCover.src = game?.coverUrl || "";
-  refs.miniLibraryCover.alt = game?.title || "";
-  refs.miniLibraryTitle.textContent = game?.title || "NO ROMS FOUND";
-  refs.miniLibrarySubtitle.textContent = game
-    ? "Pick a ROM, then launch solo or open a party room."
-    : "Add a ROM and it will appear here.";
-  refs.miniLibraryChipPlayers.textContent = meta.players;
-  refs.miniLibraryChipMapper.textContent = meta.mapper;
-  refs.miniLibraryChipSize.textContent = meta.size;
-  refs.miniLibraryPlay.disabled = !hasGames;
-  refs.miniLibraryHost.disabled = !hasGames;
+  const selectedConsole = getSelectedConsole();
+  const showConsoleSelection = !selectedConsole;
+
+  refs.miniConsoleView.classList.toggle("hidden", !showConsoleSelection);
+  refs.miniConsoleView.setAttribute("aria-hidden", String(!showConsoleSelection));
+  refs.miniRomView.classList.toggle("hidden", showConsoleSelection);
+  refs.miniRomView.setAttribute("aria-hidden", String(showConsoleSelection));
+  refs.miniConsoleBack.classList.toggle("hidden", showConsoleSelection);
+  refs.miniLibrarySearchWrap.classList.toggle("hidden", showConsoleSelection);
 
   refs.miniLibraryList.innerHTML = "";
   for (const entry of state.games) {
@@ -276,6 +402,37 @@ function renderMiniLibrary() {
     });
     refs.miniLibraryList.appendChild(item);
   }
+}
+
+function renderMiniLibrary() {
+  const active = shouldUsePixelMiniUi() && !state.currentRoomId;
+  refs.miniLibraryScreen.classList.toggle("hidden", !active);
+  refs.miniLibraryScreen.setAttribute("aria-hidden", String(!active));
+
+  if (!active) {
+    return;
+  }
+
+  refs.miniProfileInitials.textContent = getMiniProfileInitials();
+
+  const selectedConsole = getSelectedConsole();
+  const showConsoleSelection = !selectedConsole;
+
+  refs.miniConsoleView.classList.toggle("hidden", !showConsoleSelection);
+  refs.miniConsoleView.setAttribute("aria-hidden", String(!showConsoleSelection));
+  refs.miniRomView.classList.toggle("hidden", showConsoleSelection);
+  refs.miniRomView.setAttribute("aria-hidden", String(showConsoleSelection));
+  refs.miniConsoleBack.classList.toggle("hidden", showConsoleSelection);
+  refs.miniLibrarySearchWrap.classList.toggle("hidden", showConsoleSelection);
+
+  if (showConsoleSelection) {
+    refs.miniLibraryActions.classList.add("hidden");
+    refs.miniLibraryActions.setAttribute("aria-hidden", "true");
+    renderConsoleSelection();
+    return;
+  }
+
+  renderRomSelection();
 }
 
 async function fetchJson(url, options) {
@@ -1092,14 +1249,18 @@ refs.refreshLibrary.addEventListener("click", async () => {
   renderCatalog();
 });
 
-refs.miniLibraryRefresh?.addEventListener("click", async () => {
-  const payload = await fetchJson("/api/games");
-  state.games = payload.games;
-  renderCatalog();
+refs.miniConsoleBack?.addEventListener("click", () => {
+  setSelectedConsole("");
+  renderMiniLibrary();
+});
+
+refs.miniLibrarySearch?.addEventListener("input", () => {
+  state.librarySearchQuery = refs.miniLibrarySearch.value;
+  renderMiniLibrary();
 });
 
 refs.miniLibraryPlay?.addEventListener("click", async () => {
-  const game = getSelectedGame();
+  const game = getSelectedGame(getVisibleLibraryGames());
   if (!game) {
     return;
   }
@@ -1115,7 +1276,7 @@ refs.miniLibraryPlay?.addEventListener("click", async () => {
 });
 
 refs.miniLibraryHost?.addEventListener("click", async () => {
-  const game = getSelectedGame();
+  const game = getSelectedGame(getVisibleLibraryGames());
   if (!game) {
     return;
   }
@@ -1688,7 +1849,6 @@ function renderCatalog() {
   refs.catalogStatus.textContent = state.games.length ? "Ready to launch" : "Library is empty";
   refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
   refs.gameGrid.innerHTML = "";
-  getSelectedGame();
 
   for (const game of state.games) {
     const card = document.createElement("article");
@@ -1816,6 +1976,7 @@ async function syncRoute() {
     state.roomUiMode = null;
     state.roomLoadError = "";
     state.pendingRoomLaunch = null;
+    setSelectedConsole("");
     socket.emit("room:leave");
     releaseAllTouchControls();
 
