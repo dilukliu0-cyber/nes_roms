@@ -17,6 +17,21 @@ const TOUCH_BITS = {
 };
 
 const MOBILE_DEVICE_RE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i;
+const SELECTED_GAME_STORAGE_KEY = "nes-switch-online:selected-game";
+const PIXEL_AVATAR_ASSETS = [
+  "/assets/pixel-ui/avatars/avatar-cap-red-large.png",
+  "/assets/pixel-ui/avatars/avatar-bob-brown-large.png",
+  "/assets/pixel-ui/avatars/avatar-goggles-blond-large.png",
+  "/assets/pixel-ui/avatars/avatar-hood-blue-large.png",
+  "/assets/pixel-ui/avatars/avatar-cap-blue-large.png",
+  "/assets/pixel-ui/avatars/avatar-glasses-dark-large.png",
+  "/assets/pixel-ui/avatars/avatar-headband-white-large.png",
+  "/assets/pixel-ui/avatars/avatar-pigtails-blonde-large.png",
+  "/assets/pixel-ui/avatars/avatar-headband-red-large.png",
+  "/assets/pixel-ui/avatars/avatar-glasses-brown-large.png",
+  "/assets/pixel-ui/avatars/avatar-cap-redblue-large.png",
+  "/assets/pixel-ui/avatars/avatar-cap-green-large.png",
+];
 
 const state = {
   games: [],
@@ -27,6 +42,7 @@ const state = {
   roomLoadError: "",
   nickname: localStorage.getItem("nes-switch-online:nickname") || "",
   inputDelayFrames: Number(localStorage.getItem("nes-switch-online:input-delay") || 4),
+  selectedGameId: localStorage.getItem(SELECTED_GAME_STORAGE_KEY) || "",
   isMobileDevice: false,
   fallbackFullscreen: false,
   fullscreenActive: false,
@@ -45,6 +61,18 @@ const refs = {
   gameGrid: document.querySelector("#game-grid"),
   emptyLibrary: document.querySelector("#empty-library"),
   refreshLibrary: document.querySelector("#refresh-library"),
+  miniLibraryScreen: document.querySelector("#mini-library-screen"),
+  miniLibraryStatus: document.querySelector("#mini-library-status"),
+  miniLibraryRefresh: document.querySelector("#mini-library-refresh"),
+  miniLibraryCover: document.querySelector("#mini-library-cover"),
+  miniLibraryTitle: document.querySelector("#mini-library-title"),
+  miniLibrarySubtitle: document.querySelector("#mini-library-subtitle"),
+  miniLibraryChipPlayers: document.querySelector("#mini-library-chip-players"),
+  miniLibraryChipMapper: document.querySelector("#mini-library-chip-mapper"),
+  miniLibraryChipSize: document.querySelector("#mini-library-chip-size"),
+  miniLibraryList: document.querySelector("#mini-library-list"),
+  miniLibraryPlay: document.querySelector("#mini-library-play"),
+  miniLibraryHost: document.querySelector("#mini-library-host"),
   backToLibrary: document.querySelector("#back-to-library"),
   roomTitle: document.querySelector("#room-title"),
   roomSubtitle: document.querySelector("#room-subtitle"),
@@ -54,6 +82,9 @@ const refs = {
   partyLobbySubtitle: document.querySelector("#party-lobby-subtitle"),
   partyRoomCode: document.querySelector("#party-room-code"),
   partyPlayerCount: document.querySelector("#party-player-count"),
+  partyGameCover: document.querySelector("#party-game-cover"),
+  partyGameTitle: document.querySelector("#party-game-title"),
+  partyGameMeta: document.querySelector("#party-game-meta"),
   partyStatusCopy: document.querySelector("#party-status-copy"),
   partyPlayersList: document.querySelector("#party-players-list"),
   partyNicknameInput: document.querySelector("#party-nickname-input"),
@@ -131,6 +162,120 @@ function navigate(pathName, { replace = false } = {}) {
 
 function showToast(message) {
   refs.catalogStatus.textContent = message;
+}
+
+function shouldUsePixelMiniUi() {
+  return Boolean(state.telegram?.isMiniApp && state.isMobileDevice);
+}
+
+function hashString(value) {
+  let hash = 0;
+  for (const char of String(value || "")) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+  return hash;
+}
+
+function pluralizeEn(count, singular, plural) {
+  return count === 1 ? singular : plural;
+}
+
+function getSelectedGame() {
+  if (!state.games.length) {
+    state.selectedGameId = "";
+    return null;
+  }
+
+  const selected =
+    state.games.find((game) => game.id === state.selectedGameId) ??
+    state.games[0];
+
+  if (selected && selected.id !== state.selectedGameId) {
+    state.selectedGameId = selected.id;
+    localStorage.setItem(SELECTED_GAME_STORAGE_KEY, selected.id);
+  }
+
+  return selected;
+}
+
+function setSelectedGame(gameId) {
+  state.selectedGameId = gameId;
+  localStorage.setItem(SELECTED_GAME_STORAGE_KEY, gameId);
+}
+
+function getPlayerAvatarSrc(player, index = 0) {
+  if (player?.spectator) {
+    return "/assets/pixel-ui/avatars/avatar-placeholder-large.png";
+  }
+
+  const seed = hashString(`${player?.socketId || ""}:${player?.name || ""}:${player?.slot || index}`);
+  return PIXEL_AVATAR_ASSETS[seed % PIXEL_AVATAR_ASSETS.length];
+}
+
+function buildLibraryMeta(game) {
+  if (!game) {
+    return {
+      players: "1-2P",
+      mapper: "MAPPER -",
+      size: "-- KB",
+    };
+  }
+
+  const estimatedPlayers = game.mapper % 2 === 0 ? "1-2P" : "1-4P";
+  return {
+    players: estimatedPlayers,
+    mapper: `MAPPER ${game.mapper}`,
+    size: `${game.prgKb} KB`,
+  };
+}
+
+function renderMiniLibrary() {
+  const active = shouldUsePixelMiniUi() && !state.currentRoomId;
+  refs.miniLibraryScreen.classList.toggle("hidden", !active);
+  refs.miniLibraryScreen.setAttribute("aria-hidden", String(!active));
+
+  if (!active) {
+    return;
+  }
+
+  const game = getSelectedGame();
+  const hasGames = Boolean(game);
+  const meta = buildLibraryMeta(game);
+
+  refs.miniLibraryStatus.textContent = state.games.length ? "ONLINE" : "EMPTY";
+  refs.miniLibraryCover.src = game?.coverUrl || "";
+  refs.miniLibraryCover.alt = game?.title || "";
+  refs.miniLibraryTitle.textContent = game?.title || "NO ROMS FOUND";
+  refs.miniLibrarySubtitle.textContent = game
+    ? "Pick a ROM, then launch solo or open a party room."
+    : "Add a ROM and it will appear here.";
+  refs.miniLibraryChipPlayers.textContent = meta.players;
+  refs.miniLibraryChipMapper.textContent = meta.mapper;
+  refs.miniLibraryChipSize.textContent = meta.size;
+  refs.miniLibraryPlay.disabled = !hasGames;
+  refs.miniLibraryHost.disabled = !hasGames;
+
+  refs.miniLibraryList.innerHTML = "";
+  for (const entry of state.games) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "mini-library__item";
+    item.dataset.selected = String(entry.id === game?.id);
+    item.innerHTML = `
+      <span class="mini-library__item-thumb">
+        <img src="${entry.coverUrl}" alt="${escapeHtml(entry.title)}" loading="lazy" />
+      </span>
+      <span class="mini-library__item-copy">
+        <strong>${escapeHtml(entry.title)}</strong>
+        <small>MAPPER ${entry.mapper} • ${entry.prgKb} KB</small>
+      </span>
+    `;
+    item.addEventListener("click", () => {
+      setSelectedGame(entry.id);
+      renderCatalog();
+    });
+    refs.miniLibraryList.appendChild(item);
+  }
 }
 
 async function fetchJson(url, options) {
@@ -627,6 +772,8 @@ function legacyRenderCatalog() {
 
   refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
   refs.gameGrid.innerHTML = "";
+  getSelectedGame();
+  getSelectedGame();
 
   for (const game of state.games) {
     const card = document.createElement("article");
@@ -661,6 +808,8 @@ function legacyRenderCatalog() {
 
     refs.gameGrid.appendChild(card);
   }
+
+  renderMiniLibrary();
 }
 
 function renderPlayers(room) {
@@ -686,6 +835,8 @@ function renderPlayers(room) {
     `;
     refs.playersList.appendChild(card);
   }
+
+  renderMiniLibrary();
 }
 
 function legacyRenderRoom() {
@@ -939,6 +1090,44 @@ refs.refreshLibrary.addEventListener("click", async () => {
   const payload = await fetchJson("/api/games");
   state.games = payload.games;
   renderCatalog();
+});
+
+refs.miniLibraryRefresh?.addEventListener("click", async () => {
+  const payload = await fetchJson("/api/games");
+  state.games = payload.games;
+  renderCatalog();
+});
+
+refs.miniLibraryPlay?.addEventListener("click", async () => {
+  const game = getSelectedGame();
+  if (!game) {
+    return;
+  }
+
+  try {
+    refs.miniLibraryPlay.disabled = true;
+    await createRoomForGame(game.id, "solo");
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    refs.miniLibraryPlay.disabled = false;
+  }
+});
+
+refs.miniLibraryHost?.addEventListener("click", async () => {
+  const game = getSelectedGame();
+  if (!game) {
+    return;
+  }
+
+  try {
+    refs.miniLibraryHost.disabled = true;
+    await createRoomForGame(game.id, "party");
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    refs.miniLibraryHost.disabled = false;
+  }
 });
 
 refs.backToLibrary.addEventListener("click", () => {
@@ -1208,6 +1397,7 @@ function updateFullscreenUi() {
   document.body.classList.toggle("is-mobile-fullscreen", mobileOverlayActive);
   document.body.classList.toggle("is-party-lobby-open", partyLobbyActive);
   document.body.classList.toggle("is-solo-launch-open", soloLaunchActive);
+  document.body.classList.toggle("is-pixel-mini-ui", shouldUsePixelMiniUi());
   refs.roomView.classList.toggle("room-view--fullscreen-active", roomFullscreenActive);
   refs.roomView.classList.toggle("room-view--mobile-controls", mobileControlsActive);
   refs.roomView.classList.toggle("room-view--mobile-fs", mobileOverlayActive);
@@ -1246,7 +1436,7 @@ function updateFullscreenUi() {
   refreshEmulatorLayout();
 }
 
-function renderCatalog() {
+function legacyRenderCatalogV2() {
   refs.catalogCount.textContent = `${state.games.length} игр`;
   refs.catalogStatus.textContent = state.games.length ? "Готово к игре" : "Библиотека пуста";
   refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
@@ -1289,7 +1479,7 @@ function renderCatalog() {
   }
 }
 
-function renderPartyLobby(room, me) {
+function legacyRenderPartyLobby(room, me) {
   const lobbyActive = shouldShowPartyLobby();
 
   refs.partyLobby.classList.toggle("hidden", !lobbyActive);
@@ -1351,7 +1541,7 @@ function renderPartyLobby(room, me) {
   refs.partyPlayersList.innerHTML = "";
   for (const player of room.players) {
     const item = document.createElement("div");
-    item.className = "party-lobby__player";
+    item.className = `party-lobby__player${player.isHost ? " party-lobby__player--host" : ""}`;
     item.innerHTML = `
       <div>
         <strong>${escapeHtml(player.name)}</strong>
@@ -1374,6 +1564,169 @@ function renderPartyLobby(room, me) {
   refs.partyReadyButton.textContent = me?.ready ? "Снять готовность" : "Готов";
   refs.partyPlayButton.textContent = isHost ? "Играть" : "Ждём хоста";
   refs.partyPlayButton.disabled = !canPartyStart;
+}
+
+function renderPartyLobby(room, me) {
+  const lobbyActive = shouldShowPartyLobby();
+
+  refs.partyLobby.classList.toggle("hidden", !lobbyActive);
+  refs.partyLobby.setAttribute("aria-hidden", String(!lobbyActive));
+  if (!lobbyActive) {
+    return;
+  }
+
+  refs.partyNicknameInput.value = state.nickname;
+
+  if (!room) {
+    refs.partyLobbyTitle.textContent = state.roomLoadError ? "ROOM NOT FOUND" : "CREATING PARTY";
+    refs.partyLobbySubtitle.textContent = state.roomLoadError
+      ? "Return to the library and create a new room."
+      : "Preparing room code and invite actions.";
+    refs.partyRoomCode.textContent = "------";
+    refs.partyPlayerCount.textContent = "0 PLAYERS";
+    refs.partyGameCover.src = "";
+    refs.partyGameCover.alt = "";
+    refs.partyGameTitle.textContent = "CURRENT GAME";
+    refs.partyGameMeta.innerHTML = `
+      <span class="party-lobby__meta-chip">WAITING</span>
+      <span class="party-lobby__meta-chip">ROOM</span>
+    `;
+    refs.partyStatusCopy.textContent = state.roomLoadError
+      ? state.roomLoadError
+      : "The room code and invite controls will appear in a moment.";
+    refs.partyPlayersList.innerHTML = "";
+    refs.partyCopyIconButton.disabled = true;
+    refs.partyMenuButton.disabled = true;
+    refs.partyInviteButton.disabled = true;
+    refs.partyCopyButton.disabled = true;
+    refs.partyReadyButton.disabled = true;
+    refs.partyPlayButton.disabled = true;
+    refs.partyInviteButton.textContent = "INVITE FRIEND";
+    refs.partyCopyButton.textContent = "COPY LINK";
+    refs.partyReadyButton.textContent = "READY";
+    refs.partyPlayButton.textContent = "START GAME";
+    return;
+  }
+
+  const players = room.players.filter((player) => !player.spectator);
+  const isHost = Boolean(me?.isHost);
+  const readyPlayers = players.filter((player) => player.ready).length;
+  const canPartyStart = Boolean(isHost && room.canStart && room.status === "lobby" && players.length > 1);
+
+  refs.partyLobbyTitle.textContent = room.game?.title || "PARTY MODE";
+  refs.partyLobbySubtitle.textContent =
+    canPartyStart
+      ? "Both players are ready. Start the game."
+      : players.length < 2
+        ? "Invite a friend to join the room."
+        : isHost
+          ? "Start once the second player is ready."
+          : "Press READY and wait for the host.";
+  refs.partyRoomCode.textContent = room.id;
+  refs.partyPlayerCount.textContent = `${players.length} ${pluralizeEn(players.length, "PLAYER", "PLAYERS")}`;
+  refs.partyGameCover.src = room.game?.coverUrl || "";
+  refs.partyGameCover.alt = room.game?.title || "";
+  refs.partyGameTitle.textContent = room.game?.title || "CURRENT GAME";
+  refs.partyGameMeta.innerHTML = `
+    <span class="party-lobby__meta-chip">MAPPER ${room.game?.mapper ?? "-"}</span>
+    <span class="party-lobby__meta-chip">${room.game?.prgKb ?? "--"} KB</span>
+    <span class="party-lobby__meta-chip">${players.length}P ROOM</span>
+  `;
+  refs.partyStatusCopy.textContent =
+    canPartyStart
+      ? "The room is ready. Press START GAME and launch for everyone."
+      : players.length < 2
+        ? "Press INVITE FRIEND and send the Telegram room link."
+        : !isHost
+          ? me?.ready
+            ? "You are ready. Wait for the host to start."
+            : "Press READY so the host can launch the game."
+          : `${readyPlayers} / ${players.length} players are ready.`;
+
+  refs.partyPlayersList.innerHTML = "";
+  room.players.forEach((player, index) => {
+    const stateClass = player.spectator
+      ? "party-lobby__state party-lobby__state--spectator"
+      : player.ready
+        ? "party-lobby__state party-lobby__state--ready"
+        : "party-lobby__state party-lobby__state--waiting";
+    const stateLabel = player.spectator ? "WATCHING" : player.ready ? "READY" : "WAITING";
+    const item = document.createElement("div");
+    item.className = `party-lobby__player${player.isHost ? " party-lobby__player--host" : ""}`;
+    item.innerHTML = `
+      <div class="party-lobby__player-main">
+        <div class="party-lobby__avatar-shell">
+          <img src="${getPlayerAvatarSrc(player, index)}" alt="${escapeHtml(player.name)}" loading="lazy" />
+        </div>
+        <div class="party-lobby__player-copy">
+          <strong>${escapeHtml(player.name)}</strong>
+          <span>${player.spectator ? "SPECTATOR" : `PLAYER ${player.slot}`}</span>
+          ${player.isHost ? '<img class="party-lobby__host-tag" src="/assets/pixel-ui/avatars/badge-host-ribbon-large.png" alt="Host" />' : ""}
+        </div>
+      </div>
+      <b class="${stateClass}">
+        ${stateLabel}
+      </b>
+    `;
+    refs.partyPlayersList.appendChild(item);
+  });
+
+  refs.partyCopyIconButton.disabled = false;
+  refs.partyMenuButton.disabled = false;
+  refs.partyInviteButton.disabled = false;
+  refs.partyInviteButton.textContent = "INVITE FRIEND";
+  refs.partyCopyButton.disabled = false;
+  refs.partyCopyButton.textContent = "COPY LINK";
+  refs.partyReadyButton.disabled = room.status !== "lobby" || Boolean(me?.spectator);
+  refs.partyReadyButton.textContent = me?.ready ? "UNREADY" : "READY";
+  refs.partyPlayButton.textContent = isHost ? "START GAME" : "WAIT HOST";
+  refs.partyPlayButton.disabled = !canPartyStart;
+}
+
+function renderCatalog() {
+  refs.catalogCount.textContent = `${state.games.length} games`;
+  refs.catalogStatus.textContent = state.games.length ? "Ready to launch" : "Library is empty";
+  refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
+  refs.gameGrid.innerHTML = "";
+  getSelectedGame();
+
+  for (const game of state.games) {
+    const card = document.createElement("article");
+    card.className = "game-card";
+    card.innerHTML = `
+      <div class="game-card__cover">
+        <img src="${game.coverUrl}" alt="${escapeHtml(game.title)}" loading="lazy" />
+      </div>
+      <div class="game-card__meta">
+        <h3 class="game-card__title">${escapeHtml(game.title)}</h3>
+        <div class="game-card__tags">
+          <span>Mapper ${game.mapper}</span>
+          <span>${game.prgKb} KB</span>
+        </div>
+      </div>
+      <div class="game-card__actions">
+        <button class="primary-button" type="button" data-launch-mode="solo">Play</button>
+        <button class="secondary-button" type="button" data-launch-mode="party">Party</button>
+      </div>
+    `;
+
+    for (const button of card.querySelectorAll("[data-launch-mode]")) {
+      button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+          await createRoomForGame(game.id, button.dataset.launchMode);
+        } catch (error) {
+          showToast(error.message);
+        } finally {
+          button.disabled = false;
+        }
+      });
+    }
+
+    refs.gameGrid.appendChild(card);
+  }
+
+  renderMiniLibrary();
 }
 
 function renderRoom() {

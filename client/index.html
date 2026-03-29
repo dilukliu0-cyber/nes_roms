@@ -6,7 +6,7 @@
     <title>NES Switch Online</title>
     <script src="https://telegram.org/js/telegram-web-app.js?61"></script>
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/styles.override.css?v=20260329-0001" />
+    <link rel="stylesheet" href="/styles.override.css?v=20260329-0105" />
   </head>
   <body>
     <div class="scene">
@@ -38,6 +38,45 @@
           <div id="empty-library" class="empty-state">
             <h3>Пока пусто</h3>
             <p>Добавь игру, и она появится здесь.</p>
+          </div>
+
+          <div id="mini-library-screen" class="mini-library hidden" aria-hidden="true">
+            <div class="mini-library__panel">
+              <div class="mini-library__topbar">
+                <div class="mini-library__title-wrap">
+                  <p class="mini-library__eyebrow">ROM LIBRARY</p>
+                  <span id="mini-library-status" class="mini-library__status">ONLINE</span>
+                </div>
+                <button id="mini-library-refresh" class="mini-library__refresh" type="button" aria-label="Refresh library"></button>
+              </div>
+
+              <div class="mini-library__preview">
+                <div class="mini-library__preview-frame">
+                  <img id="mini-library-cover" alt="" />
+                </div>
+              </div>
+
+              <div class="mini-library__details">
+                <h3 id="mini-library-title" class="mini-library__title">SELECT A GAME</h3>
+                <p id="mini-library-subtitle" class="mini-library__subtitle">Choose a ROM and open a room.</p>
+                <div class="mini-library__chips">
+                  <span id="mini-library-chip-players" class="mini-library__chip"></span>
+                  <span id="mini-library-chip-mapper" class="mini-library__chip"></span>
+                  <span id="mini-library-chip-size" class="mini-library__chip"></span>
+                </div>
+              </div>
+
+              <div id="mini-library-list" class="mini-library__list"></div>
+
+              <div class="mini-library__actions">
+                <button id="mini-library-play" class="mini-library__action" type="button">
+                  <span>PLAY</span>
+                </button>
+                <button id="mini-library-host" class="mini-library__action" type="button">
+                  <span>HOST ROOM</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <div id="game-grid" class="game-grid"></div>
@@ -88,6 +127,16 @@
                     <span id="party-player-count" class="party-lobby__card-meta">0 игроков</span>
                   </div>
                   <strong id="party-room-code">------</strong>
+                </div>
+
+                <div class="party-lobby__card party-lobby__game">
+                  <div class="party-lobby__game-frame">
+                    <img id="party-game-cover" alt="" />
+                  </div>
+                  <div class="party-lobby__game-copy">
+                    <strong id="party-game-title">CURRENT GAME</strong>
+                    <div id="party-game-meta" class="party-lobby__game-meta"></div>
+                  </div>
                 </div>
 
                 <div class="party-lobby__card party-lobby__field">
