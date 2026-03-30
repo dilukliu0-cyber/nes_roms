@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>NES Switch Online</title>
     <script src="https://telegram.org/js/telegram-web-app.js?61"></script>
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/styles.override.css?v=20260329-0105" />
+    <link rel="stylesheet" href="/styles.css?v=20260330-1945" />
+    <link rel="stylesheet" href="/styles.override.css?v=20260330-1945" />
   </head>
   <body>
     <div class="scene">
       <div class="scene__glow scene__glow--left"></div>
       <div class="scene__glow scene__glow--right"></div>
 
-      <header class="topbar">
+      <header class="topbar hidden" aria-hidden="true">
         <div>
           <p class="eyebrow">Онлайн-комнаты</p>
           <h1>NES Switch Online</h1>
@@ -26,7 +26,7 @@
 
       <main class="app-shell">
         <section id="library-view" class="view">
-          <div class="library-head">
+          <div class="library-head hidden" aria-hidden="true">
             <div class="library-head__copy">
               <p class="section-kicker">Игры</p>
               <h2>Библиотека</h2>
@@ -35,7 +35,57 @@
             <button id="refresh-library" class="ghost-button" type="button">Обновить</button>
           </div>
 
-          <div id="empty-library" class="empty-state">
+          <section id="library-hub" class="library-hub" aria-label="Quick start">
+            <div class="library-hub__hero">
+              <div class="library-hub__copy">
+                <p class="section-kicker">Retro Party</p>
+                <div class="library-hub__stats">
+                  <span id="hub-catalog-count" class="library-hub__stat">0 games</span>
+                  <span id="hub-catalog-status" class="library-hub__stat">Library is empty</span>
+                </div>
+                <h3 id="library-hub-title">Play retro with a friend in 15 seconds</h3>
+                <p id="library-hub-copy" class="library-hub__subtitle">
+                  Pick a featured game, open a room, and drop the invite straight into Telegram.
+                </p>
+                <div class="library-hub__actions">
+                  <button id="hub-party-button" class="primary-button" type="button">Quick Party</button>
+                  <button id="hub-play-button" class="secondary-button" type="button">Quick Play</button>
+                  <button id="hub-refresh-button" class="ghost-button" type="button">Refresh Library</button>
+                </div>
+              </div>
+
+              <aside class="library-hub__side">
+                <div class="library-hub__panel library-hub__panel--highlight">
+                  <p class="library-hub__panel-label">Tonight's Pick</p>
+                  <strong id="hub-featured-title">No games yet</strong>
+                  <p id="hub-featured-copy" class="library-hub__panel-copy">
+                    Add ROMs to your library to unlock quick party launches.
+                  </p>
+                  <div id="hub-featured-tags" class="library-hub__tags"></div>
+                </div>
+
+                <div id="hub-recent-card" class="library-hub__panel hidden">
+                  <p class="library-hub__panel-label">Continue</p>
+                  <strong id="hub-recent-title">Last room</strong>
+                  <p id="hub-recent-copy" class="library-hub__panel-copy"></p>
+                  <button id="hub-resume-button" class="ghost-button" type="button">Resume Room</button>
+                </div>
+              </aside>
+            </div>
+
+            <div id="spotlight-section" class="library-spotlight hidden">
+              <div class="library-spotlight__head">
+                <div>
+                  <p class="section-kicker">Quick Picks</p>
+                  <h3>Short-session favorites</h3>
+                  <p>Good for phone screens, fast invites, and easy rematches.</p>
+                </div>
+              </div>
+              <div id="spotlight-grid" class="spotlight-grid"></div>
+            </div>
+          </section>
+
+          <div id="empty-library" class="empty-state hidden" aria-hidden="true">
             <h3>Пока пусто</h3>
             <p>Добавь игру, и она появится здесь.</p>
           </div>
@@ -51,6 +101,20 @@
                   <input id="mini-library-search" type="search" placeholder="Поиск" />
                 </label>
               </div>
+
+              <section id="mini-library-hero" class="mini-library__hero">
+                <div class="mini-library__hero-copy">
+                  <p class="mini-library__hero-kicker">Retro Party</p>
+                  <strong id="mini-library-hero-title">Pick a game and invite a friend</strong>
+                  <p id="mini-library-hero-subtitle">
+                    We will keep your latest room here so it is always one tap away.
+                  </p>
+                </div>
+                <div id="mini-resume-card" class="mini-library__resume hidden">
+                  <span id="mini-resume-meta" class="mini-library__resume-meta"></span>
+                  <button id="mini-resume-button" class="mini-library__resume-button" type="button">Resume Room</button>
+                </div>
+              </section>
 
               <div id="mini-console-view" class="mini-library__view">
                 <div id="mini-console-grid" class="mini-library__console-grid"></div>
@@ -343,6 +407,6 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script type="module" src="/app.js?v=20260329-0001"></script>
+    <script type="module" src="/app.js?v=20260330-1945"></script>
   </body>
 </html>

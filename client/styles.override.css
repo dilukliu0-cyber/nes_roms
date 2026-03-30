@@ -32,28 +32,9 @@ body.is-telegram-mini-app.is-mobile-device #library-view {
   padding: calc(env(safe-area-inset-top) + 16px) 14px calc(20px + env(safe-area-inset-bottom)) !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device #library-view .library-head {
-  margin-bottom: 14px !important;
-  padding: 18px 18px 16px !important;
-  border-radius: 26px !important;
-  border: 1px solid rgba(151, 171, 90, 0.22) !important;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
-    linear-gradient(180deg, rgba(28, 36, 18, 0.96), rgba(14, 19, 10, 0.98)) !important;
-  box-shadow:
-    0 18px 34px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #library-view .library-head__copy h2 {
-  font-size: 1.18rem !important;
-  line-height: 1.2 !important;
-}
-
-body.is-telegram-mini-app.is-mobile-device #library-view .library-subline {
-  max-width: 20rem !important;
-  color: rgba(236, 241, 226, 0.78) !important;
-  font-size: 0.98rem !important;
+body.is-telegram-mini-app.is-mobile-device #library-view .library-head,
+body.is-telegram-mini-app.is-mobile-device #library-view #empty-library {
+  display: none !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device #library-view #refresh-library {
@@ -4753,4 +4734,103 @@ body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__actio
 body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__action[disabled] {
   opacity: 0.4 !important;
   filter: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub {
+  margin-bottom: 16px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__hero,
+body.is-telegram-mini-app.is-mobile-device #library-view .spotlight-grid {
+  grid-template-columns: 1fr !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__copy,
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__panel {
+  border-radius: 26px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__copy {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    linear-gradient(180deg, rgba(30, 38, 20, 0.96), rgba(14, 19, 10, 0.98)) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)) top/100% 1px no-repeat,
+    rgba(16, 21, 13, 0.92) !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__actions {
+  grid-template-columns: 1fr !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__actions > button,
+body.is-telegram-mini-app.is-mobile-device #library-view .library-hub__panel .ghost-button {
+  min-height: 56px !important;
+  border-radius: 16px !important;
+  clip-path: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #library-view #library-hub,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #library-view #spotlight-section {
+  display: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero {
+  gap: 10px !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero-copy {
+  padding: 14px 16px !important;
+  border: 4px solid #111111 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero-kicker {
+  margin-bottom: 6px !important;
+  color: #4b5f35 !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero-copy strong {
+  margin-bottom: 8px !important;
+  color: #111111 !important;
+  font-size: 0.62rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero-copy p {
+  color: #4a4a4a !important;
+  font-size: 0.94rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__resume {
+  padding: 12px 14px !important;
+  border: 4px solid #111111 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__resume-meta {
+  color: #111111 !important;
+  font-size: 0.46rem !important;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__resume-button {
+  min-height: 44px !important;
+  padding: 0 14px !important;
+  border: 4px solid #111111 !important;
+  border-radius: 12px !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.92rem !important;
+  text-transform: none !important;
 }

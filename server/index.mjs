@@ -99,6 +99,7 @@ app.get("/api/games/:gameId/cover", async (req, res) => {
 });
 
 app.get(["/", "/room/:roomId"], (_req, res) => {
+  res.set("Cache-Control", "no-store, max-age=0");
   res.sendFile(path.join(clientDir, "index.html"));
 });
 

@@ -19,6 +19,10 @@ const TOUCH_BITS = {
 const MOBILE_DEVICE_RE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i;
 const SELECTED_CONSOLE_STORAGE_KEY = "nes-switch-online:selected-console";
 const SELECTED_GAME_STORAGE_KEY = "nes-switch-online:selected-game";
+const RECENT_ROOM_STORAGE_KEY = "nes-switch-online:recent-room";
+const RECENT_GAMES_STORAGE_KEY = "nes-switch-online:recent-games";
+const MAX_RECENT_GAMES = 6;
+const MAX_SPOTLIGHT_GAMES = 3;
 const CONSOLE_OPTIONS = [
   {
     id: "nes",
@@ -71,6 +75,65 @@ const PIXEL_AVATAR_ASSETS = [
   "/assets/pixel-ui/avatars/avatar-cap-redblue-large.png",
   "/assets/pixel-ui/avatars/avatar-cap-green-large.png",
 ];
+const GAME_TAG_PATTERNS = [
+  { tag: "2P", score: 5, pattern: /(contra|chip|dale|double dragon|battletoads|tmnt|ice climber|mario bros|river city|gauntlet|tennis|soccer|track|field|wrestle|blades of steel)/i },
+  { tag: "Fast", score: 3, pattern: /(tetris|dr\.?\s*mario|pac|galaga|balloon|duck|pinball|excitebike|arkanoid|mario|ninja)/i },
+  { tag: "Hard", score: 2, pattern: /(castlevania|ninja gaiden|ghosts|goblins|battletoads|mega man|gradius)/i },
+  { tag: "Co-op", score: 4, pattern: /(contra|chip|dale|double dragon|river city|ice climber|gauntlet|tmnt)/i },
+];
+
+function readJsonStorage(key, fallbackValue) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallbackValue;
+  } catch {
+    return fallbackValue;
+  }
+}
+
+function writeJsonStorage(key, value) {
+  try {
+    if (value == null) {
+      localStorage.removeItem(key);
+      return;
+    }
+
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
+function loadRecentRoom() {
+  const value = readJsonStorage(RECENT_ROOM_STORAGE_KEY, null);
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const roomId = typeof value.roomId === "string" ? value.roomId.trim().toUpperCase() : "";
+  if (!roomId) {
+    return null;
+  }
+
+  return {
+    roomId,
+    sharePath: typeof value.sharePath === "string" && value.sharePath ? value.sharePath : `/room/${roomId}`,
+    gameId: typeof value.gameId === "string" ? value.gameId : "",
+    gameTitle: typeof value.gameTitle === "string" ? value.gameTitle : "",
+    coverUrl: typeof value.coverUrl === "string" ? value.coverUrl : "",
+    mode: value.mode === "solo" ? "solo" : "party",
+    updatedAt: typeof value.updatedAt === "string" ? value.updatedAt : "",
+  };
+}
+
+function loadRecentGameIds() {
+  const value = readJsonStorage(RECENT_GAMES_STORAGE_KEY, []);
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter((entry) => typeof entry === "string" && entry).slice(0, MAX_RECENT_GAMES);
+}
 
 const state = {
   games: [],
@@ -89,6 +152,8 @@ const state = {
   fullscreenActive: false,
   telegram: null,
   pendingRoomLaunch: null,
+  recentRoom: loadRecentRoom(),
+  recentGameIds: loadRecentGameIds(),
 };
 
 const refs = {
@@ -99,6 +164,23 @@ const refs = {
   deckPanel: document.querySelector(".deck-panel"),
   catalogCount: document.querySelector("#catalog-count"),
   catalogStatus: document.querySelector("#catalog-status"),
+  libraryHub: document.querySelector("#library-hub"),
+  libraryHubTitle: document.querySelector("#library-hub-title"),
+  libraryHubCopy: document.querySelector("#library-hub-copy"),
+  hubCatalogCount: document.querySelector("#hub-catalog-count"),
+  hubCatalogStatus: document.querySelector("#hub-catalog-status"),
+  hubPartyButton: document.querySelector("#hub-party-button"),
+  hubPlayButton: document.querySelector("#hub-play-button"),
+  hubRefreshButton: document.querySelector("#hub-refresh-button"),
+  hubFeaturedTitle: document.querySelector("#hub-featured-title"),
+  hubFeaturedCopy: document.querySelector("#hub-featured-copy"),
+  hubFeaturedTags: document.querySelector("#hub-featured-tags"),
+  hubRecentCard: document.querySelector("#hub-recent-card"),
+  hubRecentTitle: document.querySelector("#hub-recent-title"),
+  hubRecentCopy: document.querySelector("#hub-recent-copy"),
+  hubResumeButton: document.querySelector("#hub-resume-button"),
+  spotlightSection: document.querySelector("#spotlight-section"),
+  spotlightGrid: document.querySelector("#spotlight-grid"),
   gameGrid: document.querySelector("#game-grid"),
   emptyLibrary: document.querySelector("#empty-library"),
   refreshLibrary: document.querySelector("#refresh-library"),
@@ -108,6 +190,11 @@ const refs = {
   miniConsoleBack: document.querySelector("#mini-console-back"),
   miniLibrarySearchWrap: document.querySelector("#mini-library-search-wrap"),
   miniLibrarySearch: document.querySelector("#mini-library-search"),
+  miniLibraryHeroTitle: document.querySelector("#mini-library-hero-title"),
+  miniLibraryHeroSubtitle: document.querySelector("#mini-library-hero-subtitle"),
+  miniResumeCard: document.querySelector("#mini-resume-card"),
+  miniResumeMeta: document.querySelector("#mini-resume-meta"),
+  miniResumeButton: document.querySelector("#mini-resume-button"),
   miniConsoleView: document.querySelector("#mini-console-view"),
   miniConsoleGrid: document.querySelector("#mini-console-grid"),
   miniRomView: document.querySelector("#mini-rom-view"),
@@ -265,6 +352,15 @@ function getSelectedConsole() {
   return CONSOLE_OPTIONS.find((option) => option.id === state.selectedConsoleId && option.available) ?? null;
 }
 
+function getAvailableConsoles() {
+  return CONSOLE_OPTIONS.filter((option) => option.available);
+}
+
+function getDefaultConsoleId() {
+  const available = getAvailableConsoles();
+  return available.length === 1 ? available[0].id : "";
+}
+
 function setSelectedConsole(consoleId) {
   state.selectedConsoleId = consoleId;
   if (consoleId) {
@@ -277,6 +373,156 @@ function setSelectedConsole(consoleId) {
     refs.miniLibrarySearch.value = "";
   }
   setSelectedGame("");
+}
+
+function getGameTags(game) {
+  const title = String(game?.title || "");
+  const tags = new Set();
+  let score = 0;
+
+  for (const rule of GAME_TAG_PATTERNS) {
+    if (rule.pattern.test(title)) {
+      tags.add(rule.tag);
+      score += rule.score;
+    }
+  }
+
+  if (!tags.size) {
+    tags.add("Classic");
+    score += 1;
+  }
+
+  if (game?.prgKb <= 256) {
+    tags.add("Quick");
+    score += 1;
+  }
+
+  return {
+    tags: [...tags].slice(0, 3),
+    score,
+  };
+}
+
+function getGamePitch(game) {
+  const { tags } = getGameTags(game);
+
+  if (tags.includes("2P") && tags.includes("Co-op")) {
+    return "Great for fast couch-style co-op inside Telegram.";
+  }
+
+  if (tags.includes("2P")) {
+    return "Easy to invite a friend and jump in right away.";
+  }
+
+  if (tags.includes("Fast")) {
+    return "A quick session pick for short phone play.";
+  }
+
+  if (tags.includes("Hard")) {
+    return "High-pressure runs that are fun to retry and rematch.";
+  }
+
+  return "A clean retro pick for a quick room launch.";
+}
+
+function truncateLabel(value, maxLength = 16) {
+  const text = String(value || "").trim();
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
+}
+
+function getRecentGames() {
+  const recentGames = [];
+
+  for (const gameId of state.recentGameIds) {
+    const game = state.games.find((entry) => entry.id === gameId);
+    if (game && !recentGames.some((entry) => entry.id === game.id)) {
+      recentGames.push(game);
+    }
+  }
+
+  return recentGames;
+}
+
+function getSpotlightGames() {
+  const recentGames = getRecentGames();
+  const scoredGames = state.games
+    .map((game) => ({
+      game,
+      score: getGameTags(game).score + (recentGames.findIndex((entry) => entry.id === game.id) === 0 ? 4 : 0),
+    }))
+    .sort((left, right) => right.score - left.score || left.game.title.localeCompare(right.game.title))
+    .map((entry) => entry.game);
+
+  const uniqueGames = [];
+  for (const game of [...recentGames, ...scoredGames]) {
+    if (!uniqueGames.some((entry) => entry.id === game.id)) {
+      uniqueGames.push(game);
+    }
+  }
+
+  return uniqueGames.slice(0, MAX_SPOTLIGHT_GAMES);
+}
+
+function getPrimaryLaunchGame(games = state.games) {
+  if (!games.length) {
+    return null;
+  }
+
+  const selectedGame = games.find((game) => game.id === state.selectedGameId);
+  if (selectedGame) {
+    return selectedGame;
+  }
+
+  const recentGame = getRecentGames().find((game) => games.some((entry) => entry.id === game.id));
+  if (recentGame) {
+    return recentGame;
+  }
+
+  const spotlightGame = getSpotlightGames().find((game) => games.some((entry) => entry.id === game.id));
+  return spotlightGame || games[0];
+}
+
+function rememberRecentGame(gameId) {
+  if (!gameId) {
+    return;
+  }
+
+  state.recentGameIds = [gameId, ...state.recentGameIds.filter((entry) => entry !== gameId)].slice(0, MAX_RECENT_GAMES);
+  writeJsonStorage(RECENT_GAMES_STORAGE_KEY, state.recentGameIds);
+}
+
+function rememberRecentRoom(room = state.currentRoom) {
+  if (!room?.id) {
+    return;
+  }
+
+  state.recentRoom = {
+    roomId: room.id,
+    sharePath: room.sharePath || `/room/${room.id}`,
+    gameId: room.game?.id || "",
+    gameTitle: room.game?.title || "",
+    coverUrl: room.game?.coverUrl || "",
+    mode: state.roomUiMode === "solo" ? "solo" : "party",
+    updatedAt: new Date().toISOString(),
+  };
+
+  writeJsonStorage(RECENT_ROOM_STORAGE_KEY, state.recentRoom);
+  if (room.game?.id) {
+    rememberRecentGame(room.game.id);
+  }
+}
+
+function clearRecentRoom(roomId = "") {
+  if (roomId && state.recentRoom?.roomId !== roomId) {
+    return;
+  }
+
+  state.recentRoom = null;
+  writeJsonStorage(RECENT_ROOM_STORAGE_KEY, null);
 }
 
 function getVisibleLibraryGames() {
@@ -293,6 +539,148 @@ function getVisibleLibraryGames() {
     const haystack = `${game.title} ${game.fileName} ${game.mapper}`.toLowerCase();
     return haystack.includes(query);
   });
+}
+
+function renderTagList(container, tags, className = "library-hub__tag") {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+  for (const tag of tags) {
+    const item = document.createElement("span");
+    item.className = className;
+    item.textContent = tag;
+    container.appendChild(item);
+  }
+}
+
+function buildGameCard(game, { compact = false } = {}) {
+  const card = document.createElement("article");
+  const { tags } = getGameTags(game);
+  const recent = state.recentGameIds.includes(game.id);
+  card.className = `game-card${compact ? " game-card--compact" : ""}`;
+  card.innerHTML = `
+    <div class="game-card__cover">
+      ${recent ? '<span class="game-card__badge">Recent</span>' : ""}
+      <img src="${game.coverUrl}" alt="${escapeHtml(game.title)}" loading="lazy" />
+    </div>
+    <div class="game-card__meta">
+      <h3 class="game-card__title">${escapeHtml(game.title)}</h3>
+      <p class="game-card__summary">${escapeHtml(getGamePitch(game))}</p>
+      <div class="game-card__tags">
+        ${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
+      </div>
+    </div>
+    <div class="game-card__actions">
+      <button class="primary-button" type="button" data-launch-mode="solo">Play</button>
+      <button class="secondary-button" type="button" data-launch-mode="party">Party</button>
+    </div>
+  `;
+
+  for (const button of card.querySelectorAll("[data-launch-mode]")) {
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      try {
+        await createRoomForGame(game.id, button.dataset.launchMode);
+      } catch (error) {
+        showToast(error.message);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+
+  return card;
+}
+
+function resumeRecentRoom() {
+  if (!state.recentRoom?.sharePath) {
+    return;
+  }
+
+  navigate(state.recentRoom.sharePath);
+}
+
+async function launchPrimaryGame(mode) {
+  const game = getPrimaryLaunchGame();
+  if (!game) {
+    showToast("Add a ROM to unlock quick launch.");
+    return;
+  }
+
+  await createRoomForGame(game.id, mode);
+}
+
+function renderLibraryHub() {
+  const featuredGame = getPrimaryLaunchGame();
+  const spotlightGames = getSpotlightGames();
+  const hasGames = state.games.length > 0;
+  const recentRoom = state.recentRoom;
+  const recentRoomGame = recentRoom?.gameId ? state.games.find((game) => game.id === recentRoom.gameId) : null;
+  const recentRoomTitle = recentRoomGame?.title || recentRoom?.gameTitle || "";
+
+  if (refs.libraryHubTitle) {
+    refs.libraryHubTitle.textContent = hasGames
+      ? "Play retro with a friend in 15 seconds"
+      : "Drop ROMs in and build your retro party shelf";
+  }
+
+  if (refs.libraryHubCopy) {
+    refs.libraryHubCopy.textContent = hasGames
+      ? recentRoom
+        ? `Resume room ${recentRoom.roomId} or launch a new quick session from the picks below.`
+        : "Pick a featured game, open a room, and drop the invite straight into Telegram."
+      : "Once the library is populated, the app will surface quick party picks and one-tap relaunches.";
+  }
+
+  if (featuredGame) {
+    refs.hubFeaturedTitle.textContent = featuredGame.title;
+    refs.hubFeaturedCopy.textContent = getGamePitch(featuredGame);
+    renderTagList(refs.hubFeaturedTags, getGameTags(featuredGame).tags);
+  } else {
+    refs.hubFeaturedTitle.textContent = "No games yet";
+    refs.hubFeaturedCopy.textContent = "Add ROMs to your library to unlock quick party launches.";
+    renderTagList(refs.hubFeaturedTags, []);
+  }
+
+  refs.hubPlayButton.disabled = !featuredGame;
+  refs.hubPartyButton.disabled = !featuredGame;
+  refs.hubPlayButton.textContent = featuredGame ? `Quick Play ${truncateLabel(featuredGame.title, 12)}` : "Quick Play";
+  refs.hubPartyButton.textContent = featuredGame ? `Party ${truncateLabel(featuredGame.title, 14)}` : "Quick Party";
+
+  const showRecentRoom = Boolean(recentRoom?.sharePath);
+  refs.hubRecentCard.classList.toggle("hidden", !showRecentRoom);
+  if (showRecentRoom) {
+    refs.hubRecentTitle.textContent = recentRoomTitle || `Room ${recentRoom.roomId}`;
+    refs.hubRecentCopy.textContent = `Room ${recentRoom.roomId} is still one tap away. Use it for a fast rematch or to keep the invite thread alive.`;
+  }
+
+  const showSpotlight = spotlightGames.length > 0;
+  refs.spotlightSection.classList.toggle("hidden", !showSpotlight);
+  refs.spotlightGrid.innerHTML = "";
+  for (const game of spotlightGames) {
+    refs.spotlightGrid.appendChild(buildGameCard(game, { compact: true }));
+  }
+}
+
+function renderMiniLibraryHero(currentGame) {
+  const recentRoom = state.recentRoom;
+  const recentRoomGame = recentRoom?.gameId ? state.games.find((game) => game.id === recentRoom.gameId) : null;
+  const featuredGame = currentGame || getPrimaryLaunchGame(getVisibleLibraryGames()) || getPrimaryLaunchGame();
+
+  refs.miniLibraryHeroTitle.textContent = featuredGame
+    ? `Start with ${featuredGame.title}`
+    : "Pick a game and invite a friend";
+  refs.miniLibraryHeroSubtitle.textContent = recentRoom
+    ? `Room ${recentRoom.roomId} is saved here, so you can jump back in without hunting for the invite.`
+    : "Pick a ROM, open a room, and keep the invite loop inside Telegram.";
+
+  const hasRecentRoom = Boolean(recentRoom?.sharePath);
+  refs.miniResumeCard.classList.toggle("hidden", !hasRecentRoom);
+  if (hasRecentRoom) {
+    refs.miniResumeMeta.textContent = `${recentRoomGame?.title || recentRoom.gameTitle || "Last room"} · ${recentRoom.roomId}`;
+  }
 }
 
 function renderConsoleSelection() {
@@ -322,6 +710,14 @@ function renderConsoleSelection() {
 
 function renderRomSelection() {
   const visibleGames = getVisibleLibraryGames();
+
+  if (!state.selectedGameId && visibleGames.length) {
+    const fallbackGame = getPrimaryLaunchGame(visibleGames) || visibleGames[0];
+    if (fallbackGame) {
+      setSelectedGame(fallbackGame.id);
+    }
+  }
+
   const selectedGame = state.selectedGameId ? getSelectedGame(visibleGames) : null;
   if (state.selectedGameId && !selectedGame) {
     setSelectedGame("");
@@ -358,6 +754,7 @@ function renderRomSelection() {
   refs.miniLibraryActions.setAttribute("aria-hidden", String(!shouldShowActions));
   refs.miniLibraryPlay.disabled = !selectedGame;
   refs.miniLibraryHost.disabled = !selectedGame;
+  renderMiniLibraryHero(selectedGame);
 }
 
 function legacyRenderMiniLibrary() {
@@ -413,21 +810,30 @@ function renderMiniLibrary() {
     return;
   }
 
+  if (!state.selectedConsoleId) {
+    const defaultConsoleId = getDefaultConsoleId();
+    if (defaultConsoleId) {
+      setSelectedConsole(defaultConsoleId);
+    }
+  }
+
   refs.miniProfileInitials.textContent = getMiniProfileInitials();
 
   const selectedConsole = getSelectedConsole();
   const showConsoleSelection = !selectedConsole;
+  const canGoBack = !showConsoleSelection && getAvailableConsoles().length > 1;
 
   refs.miniConsoleView.classList.toggle("hidden", !showConsoleSelection);
   refs.miniConsoleView.setAttribute("aria-hidden", String(!showConsoleSelection));
   refs.miniRomView.classList.toggle("hidden", showConsoleSelection);
   refs.miniRomView.setAttribute("aria-hidden", String(showConsoleSelection));
-  refs.miniConsoleBack.classList.toggle("hidden", showConsoleSelection);
+  refs.miniConsoleBack.classList.toggle("hidden", !canGoBack);
   refs.miniLibrarySearchWrap.classList.toggle("hidden", showConsoleSelection);
 
   if (showConsoleSelection) {
     refs.miniLibraryActions.classList.add("hidden");
     refs.miniLibraryActions.setAttribute("aria-hidden", "true");
+    renderMiniLibraryHero(null);
     renderConsoleSelection();
     return;
   }
@@ -815,8 +1221,8 @@ async function shareCurrentRoomLink(room = state.currentRoom) {
 
   const shareUrl = buildShareUrl(room);
   const shareText = room.game?.title
-    ? `Залетай в комнату ${room.id} и запускай ${room.game.title}`
-    : `Залетай в комнату ${room.id} в NES Switch Online`;
+    ? `Join room ${room.id} and launch ${room.game.title} with me in NES Switch Online.`
+    : `Join room ${room.id} in NES Switch Online.`;
 
   if (await state.telegram?.shareRoomLink?.(shareUrl, shareText)) {
     showToast("Открыл приглашение в Telegram");
@@ -890,6 +1296,7 @@ async function createRoomForGame(gameId, mode) {
     body: JSON.stringify({ gameId }),
   });
 
+  rememberRecentGame(gameId);
   setPendingRoomLaunch(payload.room.id, mode);
   navigate(payload.room.sharePath);
 }
@@ -1243,10 +1650,39 @@ function startLatencyProbe() {
   }, 2000);
 }
 
-refs.refreshLibrary.addEventListener("click", async () => {
+async function refreshLibraryCatalog() {
   const payload = await fetchJson("/api/games");
   state.games = payload.games;
   renderCatalog();
+}
+
+refs.refreshLibrary?.addEventListener("click", refreshLibraryCatalog);
+refs.hubRefreshButton?.addEventListener("click", refreshLibraryCatalog);
+
+refs.hubPartyButton?.addEventListener("click", async () => {
+  try {
+    refs.hubPartyButton.disabled = true;
+    await launchPrimaryGame("party");
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    refs.hubPartyButton.disabled = false;
+  }
+});
+
+refs.hubPlayButton?.addEventListener("click", async () => {
+  try {
+    refs.hubPlayButton.disabled = true;
+    await launchPrimaryGame("solo");
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    refs.hubPlayButton.disabled = false;
+  }
+});
+
+refs.hubResumeButton?.addEventListener("click", () => {
+  resumeRecentRoom();
 });
 
 refs.miniConsoleBack?.addEventListener("click", () => {
@@ -1289,6 +1725,10 @@ refs.miniLibraryHost?.addEventListener("click", async () => {
   } finally {
     refs.miniLibraryHost.disabled = false;
   }
+});
+
+refs.miniResumeButton?.addEventListener("click", () => {
+  resumeRecentRoom();
 });
 
 refs.backToLibrary.addEventListener("click", () => {
@@ -1437,6 +1877,9 @@ socket.on("disconnect", () => {
 socket.on("catalog:updated", (games) => {
   state.games = games;
   mergeCurrentRoomGame();
+  if (state.currentRoom) {
+    rememberRecentRoom(state.currentRoom);
+  }
   renderCatalog();
   renderRoom();
 });
@@ -1845,45 +2288,34 @@ function renderPartyLobby(room, me) {
 }
 
 function renderCatalog() {
-  refs.catalogCount.textContent = `${state.games.length} games`;
-  refs.catalogStatus.textContent = state.games.length ? "Ready to launch" : "Library is empty";
-  refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
+  const catalogCountText = `${state.games.length} games`;
+  const catalogStatusText = state.recentRoom?.roomId
+    ? `Room ${state.recentRoom.roomId} ready to resume`
+    : state.games.length
+      ? "Ready to launch"
+      : "Library is empty";
+
+  if (refs.catalogCount) {
+    refs.catalogCount.textContent = catalogCountText;
+  }
+  if (refs.catalogStatus) {
+    refs.catalogStatus.textContent = catalogStatusText;
+  }
+  if (refs.hubCatalogCount) {
+    refs.hubCatalogCount.textContent = catalogCountText;
+  }
+  if (refs.hubCatalogStatus) {
+    refs.hubCatalogStatus.textContent = catalogStatusText;
+  }
+  if (refs.emptyLibrary) {
+    refs.emptyLibrary.classList.add("hidden");
+    refs.emptyLibrary.setAttribute("aria-hidden", "true");
+  }
   refs.gameGrid.innerHTML = "";
+  renderLibraryHub();
 
   for (const game of state.games) {
-    const card = document.createElement("article");
-    card.className = "game-card";
-    card.innerHTML = `
-      <div class="game-card__cover">
-        <img src="${game.coverUrl}" alt="${escapeHtml(game.title)}" loading="lazy" />
-      </div>
-      <div class="game-card__meta">
-        <h3 class="game-card__title">${escapeHtml(game.title)}</h3>
-        <div class="game-card__tags">
-          <span>Mapper ${game.mapper}</span>
-          <span>${game.prgKb} KB</span>
-        </div>
-      </div>
-      <div class="game-card__actions">
-        <button class="primary-button" type="button" data-launch-mode="solo">Play</button>
-        <button class="secondary-button" type="button" data-launch-mode="party">Party</button>
-      </div>
-    `;
-
-    for (const button of card.querySelectorAll("[data-launch-mode]")) {
-      button.addEventListener("click", async () => {
-        button.disabled = true;
-        try {
-          await createRoomForGame(game.id, button.dataset.launchMode);
-        } catch (error) {
-          showToast(error.message);
-        } finally {
-          button.disabled = false;
-        }
-      });
-    }
-
-    refs.gameGrid.appendChild(card);
+    refs.gameGrid.appendChild(buildGameCard(game));
   }
 
   renderMiniLibrary();
@@ -2015,6 +2447,7 @@ async function syncRoute() {
     state.currentRoom = payload.room;
     state.participant = null;
     state.roomLoadError = "";
+    rememberRecentRoom(payload.room);
     renderRoom();
     await maybeHandlePendingRoomLaunch();
     if (socket.connected) {
@@ -2028,6 +2461,9 @@ async function syncRoute() {
     state.participant = null;
     state.pendingRoomLaunch = null;
     state.roomLoadError = error.message;
+    if (error.message === "Room not found.") {
+      clearRecentRoom(route.roomId);
+    }
     renderRoom();
   }
 }
@@ -2045,6 +2481,7 @@ socket.on("room:joined", ({ room, participant }) => {
   state.currentRoom = room;
   state.participant = participant;
   state.roomLoadError = "";
+  rememberRecentRoom(room);
   renderRoom();
   void maybeHandlePendingRoomLaunch();
 });
@@ -2057,6 +2494,7 @@ socket.on("room:state", (room) => {
 
   state.currentRoom = room;
   state.roomLoadError = "";
+  rememberRecentRoom(room);
   renderRoom();
   void maybeHandlePendingRoomLaunch();
 });
