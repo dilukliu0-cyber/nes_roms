@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-labelledby="title desc">
+  <title id="title">Sega Mega Drive</title>
+  <desc id="desc">Stylized Sega Mega Drive console.</desc>
+  <defs>
+    <linearGradient id="base" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#2f3236"/>
+      <stop offset="100%" stop-color="#101215"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#e33d3d"/>
+      <stop offset="100%" stop-color="#c81f1f"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(32 30)">
+    <ellipse cx="128" cy="146" rx="116" ry="18" fill="#000000" fill-opacity=".18"/>
+    <rect x="8" y="54" width="240" height="72" rx="24" fill="url(#base)" stroke="#121212" stroke-width="8"/>
+    <circle cx="128" cy="68" r="68" fill="#1a1d21" stroke="#0f0f10" stroke-width="8"/>
+    <circle cx="128" cy="68" r="42" fill="none" stroke="url(#ring)" stroke-width="10"/>
+    <circle cx="128" cy="68" r="26" fill="#0e1013" stroke="#32363c" stroke-width="6"/>
+    <rect x="28" y="86" width="60" height="12" rx="6" fill="#2e3237"/>
+    <rect x="168" y="86" width="60" height="12" rx="6" fill="#2e3237"/>
+    <rect x="96" y="124" width="64" height="10" rx="5" fill="#25292d"/>
+    <rect x="58" y="14" width="140" height="14" rx="7" fill="#ffffff" fill-opacity=".08"/>
+  </g>
+</svg>

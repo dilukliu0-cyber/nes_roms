@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-labelledby="title desc">
+  <title id="title">SNES</title>
+  <desc id="desc">Stylized Super Nintendo console.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#edeaf1"/>
+      <stop offset="100%" stop-color="#cac6d1"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(30 36)">
+    <ellipse cx="130" cy="138" rx="114" ry="18" fill="#000000" fill-opacity=".12"/>
+    <path d="M30 42c0-20 16-36 36-36h128c20 0 36 16 36 36v52c0 22-18 40-40 40H70c-22 0-40-18-40-40Z" fill="url(#shell)" stroke="#1a1a1a" stroke-width="8"/>
+    <rect x="56" y="54" width="152" height="34" rx="17" fill="#d6d1da"/>
+    <rect x="64" y="62" width="68" height="18" rx="9" fill="#8b7aa5"/>
+    <rect x="144" y="62" width="56" height="18" rx="9" fill="#676079"/>
+    <circle cx="82" cy="108" r="12" fill="#6c6682"/>
+    <circle cx="114" cy="108" r="12" fill="#6b9acb"/>
+    <circle cx="146" cy="108" r="12" fill="#8d63b8"/>
+    <circle cx="178" cy="108" r="12" fill="#67a374"/>
+    <rect x="40" y="24" width="180" height="16" rx="8" fill="#ffffff" fill-opacity=".42"/>
+  </g>
+</svg>

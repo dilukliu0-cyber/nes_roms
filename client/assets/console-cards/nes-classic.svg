@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-labelledby="title desc">
+  <title id="title">NES Classic</title>
+  <desc id="desc">Stylized Nintendo Entertainment System console.</desc>
+  <defs>
+    <linearGradient id="body" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4ede3"/>
+      <stop offset="100%" stop-color="#d6cec3"/>
+    </linearGradient>
+    <linearGradient id="tray" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#b6b2aa"/>
+      <stop offset="100%" stop-color="#8f8a83"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(28 28)">
+    <ellipse cx="132" cy="152" rx="112" ry="18" fill="#000000" fill-opacity=".12"/>
+    <rect x="0" y="28" width="264" height="116" rx="24" fill="url(#body)" stroke="#171717" stroke-width="8"/>
+    <rect x="22" y="52" width="140" height="42" rx="10" fill="url(#tray)"/>
+    <rect x="176" y="52" width="56" height="14" rx="7" fill="#d94a44"/>
+    <rect x="176" y="78" width="32" height="10" rx="5" fill="#272727"/>
+    <rect x="24" y="100" width="214" height="12" rx="6" fill="#c1bbb2"/>
+    <rect x="22" y="120" width="58" height="10" rx="5" fill="#323232"/>
+    <rect x="90" y="120" width="58" height="10" rx="5" fill="#323232"/>
+    <rect x="158" y="120" width="58" height="10" rx="5" fill="#323232"/>
+    <rect x="54" y="0" width="152" height="26" rx="13" fill="#ffffff" fill-opacity=".42"/>
+  </g>
+</svg>
