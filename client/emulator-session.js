@@ -72,6 +72,9 @@ export class EmulatorSession {
     this.touchMask = 0;
     this.animationFrame = null;
     this.resizeHandler = null;
+    this.inputInterceptor = null;
+    this.previousInputMask = 0;
+    this.menuPaused = false;
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -96,6 +99,8 @@ export class EmulatorSession {
     this.lastAppliedMasks = { 1: 0, 2: 0 };
     this.authoritativeInputs.clear();
     this.touchMask = 0;
+    this.previousInputMask = 0;
+    this.menuPaused = false;
 
     this.mount.innerHTML = "";
     this.screen = new Screen(this.mount);
@@ -148,6 +153,8 @@ export class EmulatorSession {
     this.lastTick = 0;
     this.authoritativeInputs.clear();
     this.touchMask = 0;
+    this.previousInputMask = 0;
+    this.menuPaused = false;
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
@@ -234,11 +241,13 @@ export class EmulatorSession {
   }
 
   applySnapshot({ frame, state }) {
-    if (!this.running || !this.nes) {
+    if (!this.running || !this.nes || !this.screen) {
       return;
     }
 
     this.nes.fromJSON(state);
+    this.screen.setBuffer(this.nes.ppu.buffer);
+    this.screen.writeBuffer();
     this.localFrame = frame;
     this.accumulator = 0;
     this.lastTick = 0;
@@ -258,6 +267,49 @@ export class EmulatorSession {
       this.touchMask |= bit;
     } else {
       this.touchMask &= ~bit;
+    }
+  }
+
+  setInputInterceptor(handler) {
+    this.inputInterceptor = typeof handler === "function" ? handler : null;
+    this.previousInputMask = 0;
+  }
+
+  setMenuPaused(paused) {
+    this.menuPaused = Boolean(paused);
+    this.previousInputMask = 0;
+    if (!this.menuPaused) {
+      this.lastTick = 0;
+    }
+  }
+
+  serializeState() {
+    if (!this.running || !this.nes) {
+      return null;
+    }
+
+    try {
+      return this.nes.toJSON();
+    } catch {
+      return null;
+    }
+  }
+
+  restoreState(state) {
+    if (!this.running || !this.nes || !this.screen || !state) {
+      return false;
+    }
+
+    try {
+      this.nes.fromJSON(state);
+      this.screen.setBuffer(this.nes.ppu.buffer);
+      this.screen.writeBuffer();
+      this.accumulator = 0;
+      this.lastTick = 0;
+      this.setSyncStatus("Локальный сейв загружен");
+      return true;
+    } catch {
+      return false;
     }
   }
 
@@ -326,7 +378,20 @@ export class EmulatorSession {
       return;
     }
 
-    const currentMask = this.readLocalMask();
+    const rawMask = this.readLocalMask();
+    let currentMask = rawMask;
+    if (this.inputInterceptor) {
+      const intercepted = this.inputInterceptor({
+        mask: rawMask,
+        previousMask: this.previousInputMask,
+      });
+      if (typeof intercepted === "number") {
+        currentMask = intercepted;
+      } else if (intercepted && typeof intercepted.mask === "number") {
+        currentMask = intercepted.mask;
+      }
+    }
+    this.previousInputMask = rawMask;
     const targetFrame = this.localFrame + this.inputDelayFrames;
 
     while (this.sentThroughFrame < targetFrame) {
@@ -398,7 +463,7 @@ export class EmulatorSession {
 
     this.bufferLocalInput();
 
-    if (this.paused) {
+    if (this.paused || this.menuPaused) {
       this.animationFrame = requestAnimationFrame(this.tick);
       return;
     }

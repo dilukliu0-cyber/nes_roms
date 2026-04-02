@@ -98,7 +98,7 @@ app.get("/api/games/:gameId/cover", async (req, res) => {
   await library.sendCover(req, res);
 });
 
-app.get(["/", "/room/:roomId"], (_req, res) => {
+app.get(["/", "/room/:roomId", "/party/:roomId", "/party/:roomId/saves"], (_req, res) => {
   res.set("Cache-Control", "no-store, max-age=0");
   res.sendFile(path.join(clientDir, "index.html"));
 });
