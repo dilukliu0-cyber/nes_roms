@@ -4555,7 +4555,7 @@ body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-library-screen
 
 body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__phone {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 16px;
   min-height: min(78vh, 680px);
   padding: 16px;
@@ -4566,9 +4566,9 @@ body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__phone
 }
 
 body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__bar {
-  display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
 }
 
@@ -4619,6 +4619,17 @@ body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__view 
   min-height: 0;
   display: grid;
   align-content: start;
+  width: 100%;
+}
+
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-console-view.hidden,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-rom-view.hidden,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__bar.hidden,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__search,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__hero,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__resume,
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__actions {
+  display: none !important;
 }
 
 body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui .mini-library__console-grid,
@@ -5003,7 +5014,7 @@ body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-library-screen
   gap: 14px !important;
 }
 
-body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-library-screen[data-stage="console"] .mini-library__view {
+body.is-telegram-mini-app.is-mobile-device.is-pixel-mini-ui #mini-library-screen[data-stage="console"] #mini-console-view:not(.hidden) {
   display: grid !important;
 }
 
@@ -6343,4 +6354,49 @@ body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mo
   margin: 0 !important;
   font-size: 0.52rem !important;
   color: rgba(27, 17, 13, 0.66) !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs,
+body.is-mobile-device #room-view.room-view--mobile-fs *,
+body.is-mobile-device #room-view.room-view--mobile-fs *::before,
+body.is-mobile-device #room-view.room-view--mobile-fs *::after {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-drag: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__topbar,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-screen-shell,
+body.is-mobile-device #room-view.room-view--mobile-fs #emulator-mount,
+body.is-mobile-device #room-view.room-view--mobile-fs #emulator-mount canvas,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-dpad,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-pill,
+body.is-mobile-device #room-view.room-view--mobile-fs .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .gba-sp-power,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-back-button,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-icon-button {
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+}
+
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-dpad,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-pill,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .touch-action,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-controls.mobile-controls--gameboy .gba-sp-power,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body .mobile-screen-shell * ,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body #emulator-mount,
+body.is-mobile-device #room-view.room-view--mobile-fs .mobile-handheld__body #emulator-mount canvas {
+  touch-action: none !important;
+  overscroll-behavior: none !important;
 }

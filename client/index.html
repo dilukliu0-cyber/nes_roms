@@ -15,12 +15,12 @@
 
       <header class="topbar hidden" aria-hidden="true">
         <div>
-          <p class="eyebrow">Онлайн-комнаты</p>
+          <p class="eyebrow">ÐžÐ½Ð»Ð°Ð¹Ð½-ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹</p>
           <h1>NES Switch Online</h1>
         </div>
         <div class="topbar__meta">
-          <span id="catalog-count">0 игр</span>
-          <span id="catalog-status">Библиотека пуста</span>
+          <span id="catalog-count">0 Ð¸Ð³Ñ€</span>
+          <span id="catalog-status">Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð¿ÑƒÑÑ‚Ð°</span>
         </div>
       </header>
 
@@ -28,17 +28,16 @@
         <section id="library-view" class="view">
           <div class="library-head hidden" aria-hidden="true">
             <div class="library-head__copy">
-              <p class="section-kicker">Игры</p>
-              <h2>Библиотека</h2>
-              <p class="library-subline">Выбирай игру и открывай комнату.</p>
+              <p class="section-kicker">Ð˜Ð³Ñ€Ñ‹</p>
+              <h2>Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ°</h2>
+              <p class="library-subline">Ð’Ñ‹Ð±Ð¸Ñ€Ð°Ð¹ Ð¸Ð³Ñ€Ñƒ Ð¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ð¹ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ.</p>
             </div>
-            <button id="refresh-library" class="ghost-button" type="button">Обновить</button>
+            <button id="refresh-library" class="ghost-button" type="button">ÐžÐ±Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ</button>
           </div>
 
           <section id="library-hub" class="library-hub" aria-label="Quick start">
             <div class="library-hub__hero">
               <div class="library-hub__copy">
-                <p class="section-kicker">Retro Party</p>
                 <div class="library-hub__stats">
                   <span id="hub-catalog-count" class="library-hub__stat">0 games</span>
                   <span id="hub-catalog-status" class="library-hub__stat">Library is empty</span>
@@ -63,13 +62,6 @@
                   </p>
                   <div id="hub-featured-tags" class="library-hub__tags"></div>
                 </div>
-
-                <div id="hub-recent-card" class="library-hub__panel hidden">
-                  <p class="library-hub__panel-label">Continue</p>
-                  <strong id="hub-recent-title">Last room</strong>
-                  <p id="hub-recent-copy" class="library-hub__panel-copy"></p>
-                  <button id="hub-resume-button" class="ghost-button" type="button">Resume Room</button>
-                </div>
               </aside>
             </div>
 
@@ -86,35 +78,15 @@
           </section>
 
           <div id="empty-library" class="empty-state hidden" aria-hidden="true">
-            <h3>Пока пусто</h3>
-            <p>Добавь игру, и она появится здесь.</p>
+            <h3>ÐŸÐ¾ÐºÐ° Ð¿ÑƒÑÑ‚Ð¾</h3>
+            <p>Ð”Ð¾Ð±Ð°Ð²ÑŒ Ð¸Ð³Ñ€Ñƒ, Ð¸ Ð¾Ð½Ð° Ð¿Ð¾ÑÐ²Ð¸Ñ‚ÑÑ Ð·Ð´ÐµÑÑŒ.</p>
           </div>
 
           <div id="mini-library-screen" class="mini-library hidden" aria-hidden="true">
             <div class="mini-library__phone">
-              <div class="mini-library__bar">
-                <button id="mini-profile-button" class="mini-library__avatar" type="button" aria-label="Telegram profile">
-                  <span id="mini-profile-initials">TG</span>
-                </button>
-                <button id="mini-console-back" class="mini-library__back hidden" type="button">Назад</button>
-                <label id="mini-library-search-wrap" class="mini-library__search hidden">
-                  <input id="mini-library-search" type="search" placeholder="Поиск" />
-                </label>
+              <div class="mini-library__bar hidden">
+                <button id="mini-console-back" class="mini-library__back" type="button">&#1053;&#1072;&#1079;&#1072;&#1076;</button>
               </div>
-
-              <section id="mini-library-hero" class="mini-library__hero">
-                <div class="mini-library__hero-copy">
-                  <p class="mini-library__hero-kicker">Retro Party</p>
-                  <strong id="mini-library-hero-title">Pick a game and invite a friend</strong>
-                  <p id="mini-library-hero-subtitle">
-                    We will keep your latest room here so it is always one tap away.
-                  </p>
-                </div>
-                <div id="mini-resume-card" class="mini-library__resume hidden">
-                  <span id="mini-resume-meta" class="mini-library__resume-meta"></span>
-                  <button id="mini-resume-button" class="mini-library__resume-button" type="button">Resume Room</button>
-                </div>
-              </section>
 
               <div id="mini-console-view" class="mini-library__view">
                 <div id="mini-console-grid" class="mini-library__console-grid"></div>
@@ -122,15 +94,6 @@
 
               <div id="mini-rom-view" class="mini-library__view hidden">
                 <div id="mini-rom-grid" class="mini-library__rom-grid"></div>
-              </div>
-
-              <div id="mini-library-actions" class="mini-library__actions hidden">
-                <button id="mini-library-play" class="mini-library__action" type="button">
-                  <span>Играть</span>
-                </button>
-                <button id="mini-library-host" class="mini-library__action" type="button">
-                  <span>Пати</span>
-                </button>
               </div>
             </div>
           </div>
@@ -140,15 +103,15 @@
 
         <section id="room-view" class="view hidden">
           <div class="room-head">
-            <button id="back-to-library" class="ghost-button" type="button">Назад</button>
+            <button id="back-to-library" class="ghost-button" type="button">ÐÐ°Ð·Ð°Ð´</button>
             <div class="room-head__details">
-              <p class="section-kicker">Комната</p>
-              <h2 id="room-title">Комната</h2>
+              <p class="section-kicker">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°</p>
+              <h2 id="room-title">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°</h2>
               <p id="room-subtitle" class="section-copy"></p>
             </div>
             <div class="room-head__actions">
-              <button id="copy-link" class="primary-button" type="button">Копировать ссылку</button>
-              <button id="toggle-fullscreen" class="secondary-button" type="button">Во весь экран</button>
+              <button id="copy-link" class="primary-button" type="button">ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ</button>
+              <button id="toggle-fullscreen" class="secondary-button" type="button">Ð’Ð¾ Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½</button>
             </div>
           </div>
 
@@ -157,30 +120,30 @@
               <div class="party-lobby__chrome">
                 <button id="party-back-button" class="party-chip party-chip--back" type="button">
                   <span class="party-chip__arrow" aria-hidden="true"></span>
-                  <span>Назад</span>
+                  <span>ÐÐ°Ð·Ð°Ð´</span>
                 </button>
 
                 <div class="party-lobby__chrome-actions">
-                  <button id="party-copy-icon" class="party-icon-button" type="button" aria-label="Скопировать ссылку">
+                  <button id="party-copy-icon" class="party-icon-button" type="button" aria-label="Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ">
                     <span class="party-icon-button__glyph party-icon-button__glyph--chevron" aria-hidden="true"></span>
                   </button>
-                  <button id="party-menu-button" class="party-icon-button" type="button" aria-label="Поделиться">
-                    <span class="party-icon-button__glyph" aria-hidden="true">•••</span>
+                  <button id="party-menu-button" class="party-icon-button" type="button" aria-label="ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ">
+                    <span class="party-icon-button__glyph" aria-hidden="true">â€¢â€¢â€¢</span>
                   </button>
                 </div>
               </div>
 
               <div class="party-lobby__body">
                 <div class="party-lobby__hero">
-                  <p class="party-lobby__eyebrow">Пати</p>
-                  <h2 id="party-lobby-title" class="party-lobby__title">Комната</h2>
-                  <p id="party-lobby-subtitle" class="party-lobby__subtitle">Позови друга в комнату.</p>
+                  <p class="party-lobby__eyebrow">ÐŸÐ°Ñ‚Ð¸</p>
+                  <h2 id="party-lobby-title" class="party-lobby__title">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°</h2>
+                  <p id="party-lobby-subtitle" class="party-lobby__subtitle">ÐŸÐ¾Ð·Ð¾Ð²Ð¸ Ð´Ñ€ÑƒÐ³Ð° Ð² ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ.</p>
                 </div>
 
                 <div class="party-lobby__card party-lobby__code">
                   <div class="party-lobby__card-head">
-                    <span>Код комнаты</span>
-                    <span id="party-player-count" class="party-lobby__card-meta">0 игроков</span>
+                    <span>ÐšÐ¾Ð´ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹</span>
+                    <span id="party-player-count" class="party-lobby__card-meta">0 Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²</span>
                   </div>
                   <strong id="party-room-code">------</strong>
                 </div>
@@ -196,26 +159,26 @@
                 </div>
 
                 <div class="party-lobby__card party-lobby__field">
-                  <label class="party-lobby__label" for="party-nickname-input">Твой ник</label>
-                  <input id="party-nickname-input" class="party-lobby__input" maxlength="20" placeholder="Игрок" />
+                  <label class="party-lobby__label" for="party-nickname-input">Ð¢Ð²Ð¾Ð¹ Ð½Ð¸Ðº</label>
+                  <input id="party-nickname-input" class="party-lobby__input" maxlength="20" placeholder="Ð˜Ð³Ñ€Ð¾Ðº" />
                 </div>
 
                 <div class="party-lobby__card party-lobby__players">
                   <div class="party-lobby__players-head">
-                    <span>В комнате</span>
-                    <span>Состав</span>
+                    <span>Ð’ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ðµ</span>
+                    <span>Ð¡Ð¾ÑÑ‚Ð°Ð²</span>
                   </div>
                   <div id="party-players-list" class="party-lobby__players-list"></div>
                 </div>
               </div>
 
               <div class="party-lobby__dock">
-                <p id="party-status-copy" class="party-lobby__status">Нажми «Пригласить друга» и отправь ссылку в Telegram.</p>
+                <p id="party-status-copy" class="party-lobby__status">ÐÐ°Ð¶Ð¼Ð¸ Â«ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð°Â» Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒ ÑÑÑ‹Ð»ÐºÑƒ Ð² Telegram.</p>
                 <div class="party-lobby__actions">
-                  <button id="party-invite-button" class="primary-button" type="button">Пригласить друга</button>
-                  <button id="party-copy-button" class="secondary-button" type="button">Скопировать ссылку</button>
-                  <button id="party-ready-button" class="secondary-button" type="button">Готов</button>
-                  <button id="party-play-button" class="primary-button" type="button">Играть</button>
+                  <button id="party-invite-button" class="primary-button" type="button">ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð°</button>
+                  <button id="party-copy-button" class="secondary-button" type="button">Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ</button>
+                  <button id="party-ready-button" class="secondary-button" type="button">Ð“Ð¾Ñ‚Ð¾Ð²</button>
+                  <button id="party-play-button" class="primary-button" type="button">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ</button>
                 </div>
               </div>
             </div>
@@ -223,22 +186,22 @@
 
           <div class="nes-room" id="room-console">
             <div class="tv-shell">
-              <div class="tv-shell__badge">Комната</div>
+              <div class="tv-shell__badge">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°</div>
               <div class="tv-shell__bezel">
                 <div class="tv-shell__header">
-                  <span class="tv-shell__brand">Экран</span>
+                  <span class="tv-shell__brand">Ð­ÐºÑ€Ð°Ð½</span>
                   <button
                     id="screen-fullscreen-button"
                     class="icon-button"
                     type="button"
-                    aria-label="Переключить полноэкранный режим"
+                    aria-label="ÐŸÐµÑ€ÐµÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð»Ð½Ð¾ÑÐºÑ€Ð°Ð½Ð½Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼"
                   >
                     FULL
                   </button>
                 </div>
                 <div class="screen-shell">
                   <div id="emulator-mount" class="screen-shell__screen"></div>
-                  <div id="screen-overlay" class="screen-overlay">Жду запуск сессии</div>
+                  <div id="screen-overlay" class="screen-overlay">Ð–Ð´Ñƒ Ð·Ð°Ð¿ÑƒÑÐº ÑÐµÑÑÐ¸Ð¸</div>
                 </div>
                 <div class="tv-shell__footer">
                   <span class="tv-shell__power"></span>
@@ -260,38 +223,38 @@
                 <div class="deck-status">
                   <div class="deck-status__header">
                     <div>
-                      <p class="section-kicker">Статус</p>
-                      <h3 id="status-title">Комната ждёт игроков</h3>
+                      <p class="section-kicker">Ð¡Ñ‚Ð°Ñ‚ÑƒÑ</p>
+                      <h3 id="status-title">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð¶Ð´Ñ‘Ñ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²</h3>
                     </div>
-                    <span id="ready-summary" class="status-pill">Не готово</span>
+                    <span id="ready-summary" class="status-pill">ÐÐµ Ð³Ð¾Ñ‚Ð¾Ð²Ð¾</span>
                   </div>
 
                   <div class="touch-grid">
                     <div class="panel">
-                      <label class="field-label" for="nickname-input">Твоё имя</label>
-                      <input id="nickname-input" class="text-input" maxlength="20" placeholder="Игрок 1" />
+                      <label class="field-label" for="nickname-input">Ð¢Ð²Ð¾Ñ‘ Ð¸Ð¼Ñ</label>
+                      <input id="nickname-input" class="text-input" maxlength="20" placeholder="Ð˜Ð³Ñ€Ð¾Ðº 1" />
                     </div>
                     <div class="panel">
-                      <label class="field-label" for="input-delay">Задержка</label>
+                      <label class="field-label" for="input-delay">Ð—Ð°Ð´ÐµÑ€Ð¶ÐºÐ°</label>
                       <select id="input-delay" class="text-input">
-                        <option value="2">2 кадра</option>
-                        <option value="3">3 кадра</option>
-                        <option value="4" selected>4 кадра</option>
-                        <option value="5">5 кадров</option>
-                        <option value="6">6 кадров</option>
-                        <option value="7">7 кадров</option>
-                        <option value="8">8 кадров</option>
+                        <option value="2">2 ÐºÐ°Ð´Ñ€Ð°</option>
+                        <option value="3">3 ÐºÐ°Ð´Ñ€Ð°</option>
+                        <option value="4" selected>4 ÐºÐ°Ð´Ñ€Ð°</option>
+                        <option value="5">5 ÐºÐ°Ð´Ñ€Ð¾Ð²</option>
+                        <option value="6">6 ÐºÐ°Ð´Ñ€Ð¾Ð²</option>
+                        <option value="7">7 ÐºÐ°Ð´Ñ€Ð¾Ð²</option>
+                        <option value="8">8 ÐºÐ°Ð´Ñ€Ð¾Ð²</option>
                       </select>
                     </div>
                     <div class="panel">
-                      <p class="field-label">Диагностика</p>
-                      <div class="diag-line"><span>Пинг</span><strong id="latency-indicator">-- ms</strong></div>
-                      <div class="diag-line"><span>Кадр</span><strong id="frame-indicator">0</strong></div>
-                      <div class="diag-line"><span>Синхро</span><strong id="sync-indicator">Ожидание</strong></div>
+                      <p class="field-label">Ð”Ð¸Ð°Ð³Ð½Ð¾ÑÑ‚Ð¸ÐºÐ°</p>
+                      <div class="diag-line"><span>ÐŸÐ¸Ð½Ð³</span><strong id="latency-indicator">-- ms</strong></div>
+                      <div class="diag-line"><span>ÐšÐ°Ð´Ñ€</span><strong id="frame-indicator">0</strong></div>
+                      <div class="diag-line"><span>Ð¡Ð¸Ð½Ñ…Ñ€Ð¾</span><strong id="sync-indicator">ÐžÐ¶Ð¸Ð´Ð°Ð½Ð¸Ðµ</strong></div>
                     </div>
                     <div class="panel">
-                      <p class="field-label">Управление</p>
-                      <p class="control-line">Стрелки: движение</p>
+                      <p class="field-label">Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ</p>
+                      <p class="control-line">Ð¡Ñ‚Ñ€ÐµÐ»ÐºÐ¸: Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ðµ</p>
                       <p class="control-line">Z = B, X = A</p>
                       <p class="control-line">Enter = Start, Shift = Select</p>
                     </div>
@@ -301,18 +264,18 @@
 
               <div class="deck-panel__bottom">
                 <div class="panel">
-                  <p class="field-label">Игроки</p>
+                  <p class="field-label">Ð˜Ð³Ñ€Ð¾ÐºÐ¸</p>
                   <div id="players-list" class="players-list"></div>
                 </div>
 
                 <div class="panel">
-                  <p class="field-label">Сессия</p>
+                  <p class="field-label">Ð¡ÐµÑÑÐ¸Ñ</p>
                   <div class="action-stack">
-                    <button id="toggle-ready" class="primary-button" type="button">Готов</button>
-                    <button id="start-session" class="secondary-button" type="button">Старт</button>
-                    <button id="pause-session" class="secondary-button" type="button">Пауза</button>
-                    <button id="resume-session" class="secondary-button" type="button">Продолжить</button>
-                    <button id="stop-session" class="ghost-button danger-button" type="button">Стоп</button>
+                    <button id="toggle-ready" class="primary-button" type="button">Ð“Ð¾Ñ‚Ð¾Ð²</button>
+                    <button id="start-session" class="secondary-button" type="button">Ð¡Ñ‚Ð°Ñ€Ñ‚</button>
+                    <button id="pause-session" class="secondary-button" type="button">ÐŸÐ°ÑƒÐ·Ð°</button>
+                    <button id="resume-session" class="secondary-button" type="button">ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ</button>
+                    <button id="stop-session" class="ghost-button danger-button" type="button">Ð¡Ñ‚Ð¾Ð¿</button>
                   </div>
                 </div>
               </div>
@@ -330,7 +293,7 @@
                 <div class="mobile-handheld__topbar">
                   <button id="mobile-back-button" class="ghost-button mobile-back-button hidden" type="button">
                     <span class="mobile-back-button__icon" aria-hidden="true"></span>
-                    <span>Назад</span>
+                    <span>ÐÐ°Ð·Ð°Ð´</span>
                   </button>
 
                   <span id="mobile-room-badge" class="mobile-room-badge hidden" aria-hidden="true"></span>
@@ -340,17 +303,17 @@
                       id="exit-mobile-fullscreen"
                       class="ghost-button hidden mobile-exit-button mobile-icon-button"
                       type="button"
-                      aria-label="Свернуть экран"
+                      aria-label="Ð¡Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÑÐºÑ€Ð°Ð½"
                     >
-                      <span class="mobile-icon-button__glyph" aria-hidden="true">✓</span>
+                      <span class="mobile-icon-button__glyph" aria-hidden="true">âœ“</span>
                     </button>
                     <button
                       id="mobile-menu-button"
                       class="ghost-button hidden mobile-menu-button mobile-icon-button"
                       type="button"
-                      aria-label="Поделиться"
+                      aria-label="ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ"
                     >
-                      <span class="mobile-icon-button__glyph" aria-hidden="true">•••</span>
+                      <span class="mobile-icon-button__glyph" aria-hidden="true">â€¢â€¢â€¢</span>
                     </button>
                   </div>
                 </div>
@@ -376,13 +339,13 @@
                     <span class="gba-sp-status__led"></span>
                   </div>
                   <div class="gba-sp-speaker" aria-hidden="true"></div>
-                  <div id="touch-dpad" class="touch-dpad" role="button" tabindex="0" aria-label="Крестовина">
+                  <div id="touch-dpad" class="touch-dpad" role="button" tabindex="0" aria-label="ÐšÑ€ÐµÑÑ‚Ð¾Ð²Ð¸Ð½Ð°">
                     <span class="touch-dpad__cross"></span>
                     <span class="touch-dpad__cap"></span>
-                    <span class="touch-dpad__hint touch-dpad__hint--up">▲</span>
-                    <span class="touch-dpad__hint touch-dpad__hint--down">▼</span>
-                    <span class="touch-dpad__hint touch-dpad__hint--left">◀</span>
-                    <span class="touch-dpad__hint touch-dpad__hint--right">▶</span>
+                    <span class="touch-dpad__hint touch-dpad__hint--up">â–²</span>
+                    <span class="touch-dpad__hint touch-dpad__hint--down">â–¼</span>
+                    <span class="touch-dpad__hint touch-dpad__hint--left">â—€</span>
+                    <span class="touch-dpad__hint touch-dpad__hint--right">â–¶</span>
                   </div>
 
                   <div class="touch-center">
@@ -390,7 +353,7 @@
                       <button class="touch-pill touch-pill--select" data-touch-bit="4" type="button">SELECT</button>
                       <button class="touch-pill touch-pill--start" data-touch-bit="8" type="button">START</button>
                     </div>
-                    <div class="touch-center__label">Онлайн</div>
+                    <div class="touch-center__label">ÐžÐ½Ð»Ð°Ð¹Ð½</div>
                   </div>
 
                   <div class="touch-ab">

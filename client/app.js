@@ -285,7 +285,7 @@ if (!refs.partySaveButton && refs.partyPlayButton?.parentElement) {
   partySaveButton.id = "party-save-button";
   partySaveButton.className = "secondary-button";
   partySaveButton.type = "button";
-  partySaveButton.textContent = "Запустить сейв";
+  partySaveButton.textContent = "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ð²";
   refs.partyPlayButton.parentElement.appendChild(partySaveButton);
   refs.partySaveButton = partySaveButton;
 }
@@ -298,10 +298,10 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   const partyMenuScreen = document.createElement("div");
   partyMenuScreen.className = "party-room-menu";
 
-  refs.partyMenuButton.setAttribute("aria-label", "Закрыть");
-  refs.partyMenuButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">×</span>';
-  refs.partyCopyIconButton.setAttribute("aria-label", "Скопировать ссылку");
-  refs.partyCopyIconButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">⧉</span>';
+  refs.partyMenuButton.setAttribute("aria-label", "Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ");
+  refs.partyMenuButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">Ã—</span>';
+  refs.partyCopyIconButton.setAttribute("aria-label", "Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ");
+  refs.partyCopyIconButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">â§‰</span>';
 
   const partyMenuBar = document.createElement("div");
   partyMenuBar.className = "party-room-menu__bar";
@@ -316,7 +316,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   partyInviteHeading.className = "party-room-menu__section-head";
   partyInviteHeading.innerHTML = `
     <span aria-hidden="true"></span>
-    <h2>Пригласите друзей</h2>
+    <h2>ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚Ðµ Ð´Ñ€ÑƒÐ·ÐµÐ¹</h2>
     <span aria-hidden="true"></span>
   `;
 
@@ -332,7 +332,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
 
   const partyMenuTitle = document.createElement("strong");
   partyMenuTitle.className = "party-room-menu__title";
-  partyMenuTitle.textContent = "Выбранная игра";
+  partyMenuTitle.textContent = "Ð’Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð°Ñ Ð¸Ð³Ñ€Ð°";
 
   partyMenuGame.append(partyMenuCover, partyMenuTitle);
 
@@ -341,11 +341,11 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
 
   const partyMenuPlayersMeta = document.createElement("p");
   partyMenuPlayersMeta.className = "party-room-menu__players-meta";
-  partyMenuPlayersMeta.textContent = "0 игроков";
+  partyMenuPlayersMeta.textContent = "0 Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²";
 
   const partyMenuCodeLabel = document.createElement("span");
   partyMenuCodeLabel.className = "party-room-menu__eyebrow";
-  partyMenuCodeLabel.textContent = "Код комнаты";
+  partyMenuCodeLabel.textContent = "ÐšÐ¾Ð´ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹";
 
   const partyMenuCodeRow = document.createElement("div");
   partyMenuCodeRow.className = "party-room-menu__code-row";
@@ -358,7 +358,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
 
   const partyMenuInviteMeta = document.createElement("p");
   partyMenuInviteMeta.className = "party-room-menu__invite-meta";
-  partyMenuInviteMeta.textContent = "Открой комнату для друзей и поделись ссылкой через Telegram.";
+  partyMenuInviteMeta.textContent = "ÐžÑ‚ÐºÑ€Ð¾Ð¹ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ Ð´Ð»Ñ Ð´Ñ€ÑƒÐ·ÐµÐ¹ Ð¸ Ð¿Ð¾Ð´ÐµÐ»Ð¸ÑÑŒ ÑÑÑ‹Ð»ÐºÐ¾Ð¹ Ñ‡ÐµÑ€ÐµÐ· Telegram.";
 
   partyMenuInviteInfo.append(
     partyMenuPlayersMeta,
@@ -374,7 +374,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   const partyPlayersHeading = document.createElement("div");
   partyPlayersHeading.className = "party-room-menu__players-headline";
   partyPlayersHeading.innerHTML = `
-    <h2>Игроки</h2>
+    <h2>Ð˜Ð³Ñ€Ð¾ÐºÐ¸</h2>
     <span aria-hidden="true"></span>
   `;
 
@@ -383,7 +383,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
 
   const partyMenuLimit = document.createElement("p");
   partyMenuLimit.className = "party-room-menu__limit";
-  partyMenuLimit.textContent = "Лимит: 2 - 4 игрока";
+  partyMenuLimit.textContent = "Ð›Ð¸Ð¼Ð¸Ñ‚: 2 - 4 Ð¸Ð³Ñ€Ð¾ÐºÐ°";
 
   const partyMenuPlayersPanel = document.createElement("section");
   partyMenuPlayersPanel.className = "party-room-menu__players-panel";
@@ -399,7 +399,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
 
   const partyMenuStatus = document.createElement("p");
   partyMenuStatus.className = "party-room-menu__status";
-  partyMenuStatus.textContent = "Подожди друзей или стартуй, когда все будут готовы.";
+  partyMenuStatus.textContent = "ÐŸÐ¾Ð´Ð¾Ð¶Ð´Ð¸ Ð´Ñ€ÑƒÐ·ÐµÐ¹ Ð¸Ð»Ð¸ ÑÑ‚Ð°Ñ€Ñ‚ÑƒÐ¹, ÐºÐ¾Ð³Ð´Ð° Ð²ÑÐµ Ð±ÑƒÐ´ÑƒÑ‚ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹.";
 
   partyMenuScreen.append(
     partyMenuBar,
@@ -443,19 +443,19 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   partySaveBackButton.type = "button";
   partySaveBackButton.innerHTML = `
     <span class="party-chip__arrow" aria-hidden="true"></span>
-    <span>Назад</span>
+    <span>ÐÐ°Ð·Ð°Ð´</span>
   `;
 
   const partySaveBarTitle = document.createElement("strong");
   partySaveBarTitle.className = "save-room-menu__bar-title";
-  partySaveBarTitle.textContent = "Выберите сейв";
+  partySaveBarTitle.textContent = "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐµÐ¹Ð²";
 
   const partySaveCloseButton = document.createElement("button");
   partySaveCloseButton.id = "party-save-close-button";
   partySaveCloseButton.className = "party-icon-button";
   partySaveCloseButton.type = "button";
-  partySaveCloseButton.setAttribute("aria-label", "Закрыть");
-  partySaveCloseButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">×</span>';
+  partySaveCloseButton.setAttribute("aria-label", "Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ");
+  partySaveCloseButton.innerHTML = '<span class="party-icon-button__glyph" aria-hidden="true">Ã—</span>';
 
   partySaveBar.append(partySaveBackButton);
 
@@ -463,7 +463,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   partySaveSectionHead.className = "save-room-menu__section-head";
   partySaveSectionHead.innerHTML = `
     <span aria-hidden="true"></span>
-    <h2>Выберите сейв</h2>
+    <h2>Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐµÐ¹Ð²</h2>
     <span aria-hidden="true"></span>
   `;
 
@@ -478,7 +478,7 @@ if (refs.partyLobby && refs.partyBackButton && refs.partyInviteButton && refs.pa
   partySaveCancelButton.id = "party-save-cancel-button";
   partySaveCancelButton.className = "secondary-button";
   partySaveCancelButton.type = "button";
-  partySaveCancelButton.textContent = "Отмена";
+  partySaveCancelButton.textContent = "ÐžÑ‚Ð¼ÐµÐ½Ð°";
 
   partySaveMenu.append(
     partySaveBar,
@@ -515,11 +515,11 @@ if (refs.mobileScreenShell) {
 
   const inGameMenuTitle = document.createElement("strong");
   inGameMenuTitle.className = "mobile-in-game-menu__title";
-  inGameMenuTitle.textContent = "Меню";
+  inGameMenuTitle.textContent = "ÐœÐµÐ½ÑŽ";
 
   const inGameMenuSubtitle = document.createElement("span");
   inGameMenuSubtitle.className = "mobile-in-game-menu__subtitle";
-  inGameMenuSubtitle.textContent = "Выбери действие";
+  inGameMenuSubtitle.textContent = "Ð’Ñ‹Ð±ÐµÑ€Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ";
 
   inGameMenuHeader.append(inGameMenuEyebrow, inGameMenuTitle, inGameMenuSubtitle);
 
@@ -534,7 +534,7 @@ if (refs.mobileScreenShell) {
 
   const inGameMenuHint = document.createElement("p");
   inGameMenuHint.className = "mobile-in-game-menu__hint";
-  inGameMenuHint.textContent = "Крестовина - выбор  •  A - OK  •  B - назад";
+  inGameMenuHint.textContent = "ÐšÑ€ÐµÑÑ‚Ð¾Ð²Ð¸Ð½Ð° - Ð²Ñ‹Ð±Ð¾Ñ€  â€¢  A - OK  â€¢  B - Ð½Ð°Ð·Ð°Ð´";
 
   inGameMenuPanel.append(
     inGameMenuHeader,
@@ -560,7 +560,7 @@ if (refs.mobileScreenShell) {
 if (refs.gbaSpPowerButton) {
   refs.gbaSpPowerButton.setAttribute("role", "button");
   refs.gbaSpPowerButton.setAttribute("tabindex", "0");
-  refs.gbaSpPowerButton.setAttribute("aria-label", "Открыть игровое меню");
+  refs.gbaSpPowerButton.setAttribute("aria-label", "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¸Ð³Ñ€Ð¾Ð²Ð¾Ðµ Ð¼ÐµÐ½ÑŽ");
   refs.gbaSpPowerButton.setAttribute("aria-hidden", "false");
 }
 
@@ -631,7 +631,7 @@ function getInGameSavePermission(room = state.currentRoom) {
   if (!room?.id || room.status !== "running") {
     return {
       allowed: false,
-      reason: "Сначала запусти игру.",
+      reason: "Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð·Ð°Ð¿ÑƒÑÑ‚Ð¸ Ð¸Ð³Ñ€Ñƒ.",
     };
   }
 
@@ -644,7 +644,7 @@ function getInGameSavePermission(room = state.currentRoom) {
 
   return {
     allowed: false,
-    reason: "В пати сейвы может открывать только хост.",
+    reason: "Ð’ Ð¿Ð°Ñ‚Ð¸ ÑÐµÐ¹Ð²Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ…Ð¾ÑÑ‚.",
   };
 }
 
@@ -687,10 +687,10 @@ function getInGameSaveSlots(game = getInGameMenuGame()) {
       id: `slot-${slotId}`,
       slotId,
       filled,
-      title: filled ? record.title || game?.title || `Слот ${slotId}` : `Слот ${slotId}`,
+      title: filled ? record.title || game?.title || `Ð¡Ð»Ð¾Ñ‚ ${slotId}` : `Ð¡Ð»Ð¾Ñ‚ ${slotId}`,
       subtitle: filled
-        ? `Сохранено ${formatInGameSaveTimestamp(record.savedAt) || "только что"}`
-        : "Свободный слот",
+        ? `Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾ ${formatInGameSaveTimestamp(record.savedAt) || "Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ‡Ñ‚Ð¾"}`
+        : "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚",
       coverUrl: filled ? record.coverUrl || game?.coverUrl || "" : game?.coverUrl || "",
       savedAt: filled ? record.savedAt || "" : "",
       snapshot: filled ? record.snapshot : null,
@@ -704,19 +704,19 @@ function getInGameRootItems(room = state.currentRoom) {
   return [
     {
       id: "continue",
-      label: "Продолжить",
+      label: "ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ",
       disabled: false,
       reason: "",
     },
     {
       id: "save",
-      label: "Сохранить",
+      label: "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ",
       disabled: !permission.allowed,
       reason: permission.reason,
     },
     {
       id: "load",
-      label: "Загрузить",
+      label: "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ",
       disabled: !permission.allowed,
       reason: permission.reason,
     },
@@ -780,16 +780,16 @@ function renderInGameMenu() {
   refs.inGameMenu.dataset.view = state.inGameMenuView;
   refs.inGameMenuEyebrow.textContent =
     state.inGameMenuView === "save" ? "SAVE" : state.inGameMenuView === "load" ? "LOAD" : "PAUSE";
-  refs.inGameMenuTitle.textContent = game?.title || "Меню";
+  refs.inGameMenuTitle.textContent = game?.title || "ÐœÐµÐ½ÑŽ";
   refs.inGameMenuSubtitle.textContent =
     state.inGameMenuView === "save"
-      ? "Выбери слот для сохранения"
+      ? "Ð’Ñ‹Ð±ÐµÑ€Ð¸ ÑÐ»Ð¾Ñ‚ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ"
       : state.inGameMenuView === "load"
-        ? "Выбери сейв для загрузки"
-        : "Выбери действие";
+        ? "Ð’Ñ‹Ð±ÐµÑ€Ð¸ ÑÐµÐ¹Ð² Ð´Ð»Ñ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸"
+        : "Ð’Ñ‹Ð±ÐµÑ€Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ";
   refs.inGameMenuHint.textContent = showingSlots
-    ? "Крестовина - слот  •  A - выбрать  •  B - назад"
-    : "Крестовина - выбор  •  A - OK  •  B - назад";
+    ? "ÐšÑ€ÐµÑÑ‚Ð¾Ð²Ð¸Ð½Ð° - ÑÐ»Ð¾Ñ‚  â€¢  A - Ð²Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ  â€¢  B - Ð½Ð°Ð·Ð°Ð´"
+    : "ÐšÑ€ÐµÑÑ‚Ð¾Ð²Ð¸Ð½Ð° - Ð²Ñ‹Ð±Ð¾Ñ€  â€¢  A - OK  â€¢  B - Ð½Ð°Ð·Ð°Ð´";
 
   refs.inGameMenuActions.innerHTML = "";
   refs.inGameMenuSlots.innerHTML = "";
@@ -927,7 +927,7 @@ function persistInGameSave(slotId) {
   const game = getInGameMenuGame();
   const snapshot = emulator.serializeState();
   if (!game?.id || !snapshot) {
-    setInGameMenuStatus("Не удалось сохранить сейв.");
+    setInGameMenuStatus("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ð².");
     renderInGameMenu();
     return false;
   }
@@ -937,7 +937,7 @@ function persistInGameSave(slotId) {
     ...records,
     [`slot-${slotId}`]: {
       slotId,
-      title: game.title || `Слот ${slotId}`,
+      title: game.title || `Ð¡Ð»Ð¾Ñ‚ ${slotId}`,
       coverUrl: game.coverUrl || "",
       savedAt: new Date().toISOString(),
       snapshot,
@@ -945,12 +945,12 @@ function persistInGameSave(slotId) {
   };
 
   if (!tryWriteJsonStorage(getInGameSaveStorageKey(game.id), nextRecords)) {
-    setInGameMenuStatus("Память заполнена. Освободи место для сейвов.");
+    setInGameMenuStatus("ÐŸÐ°Ð¼ÑÑ‚ÑŒ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°. ÐžÑÐ²Ð¾Ð±Ð¾Ð´Ð¸ Ð¼ÐµÑÑ‚Ð¾ Ð´Ð»Ñ ÑÐµÐ¹Ð²Ð¾Ð².");
     renderInGameMenu();
     return false;
   }
 
-  setInGameMenuStatus(`Слот ${slotId} сохранен.`);
+  setInGameMenuStatus(`Ð¡Ð»Ð¾Ñ‚ ${slotId} ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½.`);
   renderInGameMenu();
   return true;
 }
@@ -974,13 +974,13 @@ function broadcastLoadedSave(snapshot) {
 function restoreInGameSave(slotId) {
   const slot = getInGameSaveSlots().find((entry) => entry.slotId === slotId);
   if (!slot?.snapshot) {
-    setInGameMenuStatus("Этот слот пока пустой.");
+    setInGameMenuStatus("Ð­Ñ‚Ð¾Ñ‚ ÑÐ»Ð¾Ñ‚ Ð¿Ð¾ÐºÐ° Ð¿ÑƒÑÑ‚Ð¾Ð¹.");
     renderInGameMenu();
     return false;
   }
 
   if (!emulator.restoreState(slot.snapshot)) {
-    setInGameMenuStatus("Не получилось загрузить сейв.");
+    setInGameMenuStatus("ÐÐµ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ð².");
     renderInGameMenu();
     return false;
   }
@@ -1022,7 +1022,7 @@ function activateInGameMenuSelection() {
   vibrateTap(14);
   if (state.inGameMenuView === "root") {
     if (current.disabled) {
-      setInGameMenuStatus(current.reason || "Сейчас недоступно.");
+      setInGameMenuStatus(current.reason || "Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾.");
       renderInGameMenu();
       return false;
     }
@@ -1161,9 +1161,8 @@ function setSelectedConsole(consoleId) {
   } else {
     localStorage.removeItem(SELECTED_CONSOLE_STORAGE_KEY);
   }
-  state.librarySearchQuery = "";
-  if (refs.miniLibrarySearch) {
-    refs.miniLibrarySearch.value = "";
+  if (!consoleId && refs.miniRomGrid) {
+    refs.miniRomGrid.innerHTML = "";
   }
   setSelectedGame("");
 }
@@ -1224,7 +1223,7 @@ function truncateLabel(value, maxLength = 16) {
     return text;
   }
 
-  return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
+  return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}â€¦`;
 }
 
 function getRecentGames() {
@@ -1323,15 +1322,7 @@ function getVisibleLibraryGames() {
     return [];
   }
 
-  const query = state.librarySearchQuery.trim().toLowerCase();
-  if (!query) {
-    return state.games;
-  }
-
-  return state.games.filter((game) => {
-    const haystack = `${game.title} ${game.fileName} ${game.mapper}`.toLowerCase();
-    return haystack.includes(query);
-  });
+  return state.games;
 }
 
 function renderTagList(container, tags, className = "library-hub__tag") {
@@ -1409,9 +1400,6 @@ function renderLibraryHub() {
   const featuredGame = getPrimaryLaunchGame();
   const spotlightGames = getSpotlightGames();
   const hasGames = state.games.length > 0;
-  const recentRoom = state.recentRoom;
-  const recentRoomGame = recentRoom?.gameId ? state.games.find((game) => game.id === recentRoom.gameId) : null;
-  const recentRoomTitle = recentRoomGame?.title || recentRoom?.gameTitle || "";
 
   if (refs.libraryHubTitle) {
     refs.libraryHubTitle.textContent = hasGames
@@ -1421,9 +1409,7 @@ function renderLibraryHub() {
 
   if (refs.libraryHubCopy) {
     refs.libraryHubCopy.textContent = hasGames
-      ? recentRoom
-        ? `Resume room ${recentRoom.roomId} or launch a new quick session from the picks below.`
-        : "Pick a featured game, open a room, and drop the invite straight into Telegram."
+      ? "Pick a featured game, open a room, and drop the invite straight into Telegram."
       : "Once the library is populated, the app will surface quick party picks and one-tap relaunches.";
   }
 
@@ -1442,11 +1428,8 @@ function renderLibraryHub() {
   refs.hubPlayButton.textContent = featuredGame ? `Quick Play ${truncateLabel(featuredGame.title, 12)}` : "Quick Play";
   refs.hubPartyButton.textContent = featuredGame ? `Party ${truncateLabel(featuredGame.title, 14)}` : "Quick Party";
 
-  const showRecentRoom = Boolean(recentRoom?.sharePath);
-  refs.hubRecentCard.classList.toggle("hidden", !showRecentRoom);
-  if (showRecentRoom) {
-    refs.hubRecentTitle.textContent = recentRoomTitle || `Room ${recentRoom.roomId}`;
-    refs.hubRecentCopy.textContent = `Room ${recentRoom.roomId} is still one tap away. Use it for a fast rematch or to keep the invite thread alive.`;
+  if (refs.hubRecentCard) {
+    refs.hubRecentCard.classList.add("hidden");
   }
 
   const showSpotlight = spotlightGames.length > 0;
@@ -1454,30 +1437,6 @@ function renderLibraryHub() {
   refs.spotlightGrid.innerHTML = "";
   for (const game of spotlightGames) {
     refs.spotlightGrid.appendChild(buildGameCard(game, { compact: true }));
-  }
-}
-
-function renderMiniLibraryHero(currentGame) {
-  const recentRoom = state.recentRoom;
-  const recentRoomGame = recentRoom?.gameId ? state.games.find((game) => game.id === recentRoom.gameId) : null;
-  const featuredGame = currentGame || getPrimaryLaunchGame(getVisibleLibraryGames()) || getPrimaryLaunchGame();
-
-  if (!state.selectedConsoleId) {
-    refs.miniLibraryHeroTitle.textContent = "Choose your console";
-    refs.miniLibraryHeroSubtitle.textContent = "Start with NES now. SNES, Game Boy, and Sega are queued next.";
-  } else {
-    refs.miniLibraryHeroTitle.textContent = featuredGame
-      ? `Start with ${featuredGame.title}`
-      : "Pick a game and invite a friend";
-    refs.miniLibraryHeroSubtitle.textContent = recentRoom
-      ? `Room ${recentRoom.roomId} is saved here, so you can jump back in without hunting for the invite.`
-      : "Pick a ROM, open a room, and keep the invite loop inside Telegram.";
-  }
-
-  const hasRecentRoom = Boolean(recentRoom?.sharePath);
-  refs.miniResumeCard.classList.toggle("hidden", !hasRecentRoom);
-  if (hasRecentRoom) {
-    refs.miniResumeMeta.textContent = `${recentRoomGame?.title || recentRoom.gameTitle || "Last room"} · ${recentRoom.roomId}`;
   }
 }
 
@@ -1500,7 +1459,7 @@ function renderConsoleSelection() {
     `;
     button.addEventListener("click", () => {
       if (!option.available) {
-        showToast(`${option.label} скоро добавим`);
+        showToast(`${option.label} ÑÐºÐ¾Ñ€Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð¸Ð¼`);
         return;
       }
 
@@ -1588,10 +1547,10 @@ function renderRomSelection() {
       </button>
       <div class="mini-library__rom-actions${selected ? "" : " hidden"}" aria-hidden="${String(!selected)}">
         <button class="mini-library__rom-action mini-library__rom-action--play" data-launch-mode="solo" type="button">
-          Играть
+          Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ
         </button>
         <button class="mini-library__rom-action mini-library__rom-action--party" data-launch-mode="party" type="button">
-          Пати
+          ÐŸÐ°Ñ‚Ð¸
         </button>
       </div>
     `;
@@ -1634,57 +1593,10 @@ function renderRomSelection() {
   if (!visibleGames.length) {
     const empty = document.createElement("div");
     empty.className = "mini-library__empty";
-    empty.textContent = state.librarySearchQuery ? "Ничего не найдено" : "ROMы пока пусты";
+    empty.textContent = "ROMы пока пусты";
     refs.miniRomGrid.appendChild(empty);
   }
 
-  refs.miniLibraryActions.classList.add("hidden");
-  refs.miniLibraryActions.setAttribute("aria-hidden", "true");
-  renderMiniLibraryHero(selectedGame);
-}
-
-function legacyRenderMiniLibrary() {
-  const active = shouldUsePixelMiniUi() && !state.currentRoomId;
-  refs.miniLibraryScreen.classList.toggle("hidden", !active);
-  refs.miniLibraryScreen.setAttribute("aria-hidden", String(!active));
-
-  if (!active) {
-    return;
-  }
-
-  refs.miniProfileInitials.textContent = getMiniProfileInitials();
-
-  const selectedConsole = getSelectedConsole();
-  const showConsoleSelection = !selectedConsole;
-
-  refs.miniConsoleView.classList.toggle("hidden", !showConsoleSelection);
-  refs.miniConsoleView.setAttribute("aria-hidden", String(!showConsoleSelection));
-  refs.miniRomView.classList.toggle("hidden", showConsoleSelection);
-  refs.miniRomView.setAttribute("aria-hidden", String(showConsoleSelection));
-  refs.miniConsoleBack.classList.toggle("hidden", showConsoleSelection);
-  refs.miniLibrarySearchWrap.classList.toggle("hidden", showConsoleSelection);
-
-  refs.miniLibraryList.innerHTML = "";
-  for (const entry of state.games) {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "mini-library__item";
-    item.dataset.selected = String(entry.id === game?.id);
-    item.innerHTML = `
-      <span class="mini-library__item-thumb">
-        <img src="${entry.coverUrl}" alt="${escapeHtml(entry.title)}" loading="lazy" />
-      </span>
-      <span class="mini-library__item-copy">
-        <strong>${escapeHtml(entry.title)}</strong>
-        <small>MAPPER ${entry.mapper} • ${entry.prgKb} KB</small>
-      </span>
-    `;
-    item.addEventListener("click", () => {
-      setSelectedGame(entry.id);
-      renderCatalog();
-    });
-    refs.miniLibraryList.appendChild(item);
-  }
 }
 
 function renderMiniLibrary() {
@@ -1696,23 +1608,25 @@ function renderMiniLibrary() {
     return;
   }
 
-  refs.miniProfileInitials.textContent = getMiniProfileInitials();
+  if (refs.miniProfileInitials) {
+    refs.miniProfileInitials.textContent = getMiniProfileInitials();
+  }
   const selectedConsole = getSelectedConsole();
   const showConsoleSelection = !selectedConsole;
   const canGoBack = !showConsoleSelection && CONSOLE_OPTIONS.length > 1;
 
   refs.miniLibraryScreen.dataset.stage = showConsoleSelection ? "console" : "rom";
-  refs.miniConsoleView.classList.toggle("hidden", !showConsoleSelection);
-  refs.miniConsoleView.setAttribute("aria-hidden", String(!showConsoleSelection));
-  refs.miniRomView.classList.toggle("hidden", showConsoleSelection);
-  refs.miniRomView.setAttribute("aria-hidden", String(showConsoleSelection));
-  refs.miniConsoleBack.classList.toggle("hidden", !canGoBack);
-  refs.miniLibrarySearchWrap.classList.toggle("hidden", showConsoleSelection);
+  refs.miniConsoleView?.classList.toggle("hidden", !showConsoleSelection);
+  refs.miniConsoleView?.setAttribute("aria-hidden", String(!showConsoleSelection));
+  refs.miniRomView?.classList.toggle("hidden", showConsoleSelection);
+  refs.miniRomView?.setAttribute("aria-hidden", String(showConsoleSelection));
+  refs.miniConsoleBack?.classList.toggle("hidden", !canGoBack);
+  refs.miniConsoleBack?.parentElement?.classList.toggle("hidden", showConsoleSelection);
 
   if (showConsoleSelection) {
-    refs.miniLibraryActions.classList.add("hidden");
-    refs.miniLibraryActions.setAttribute("aria-hidden", "true");
-    renderMiniLibraryHero(null);
+    if (refs.miniRomGrid) {
+      refs.miniRomGrid.innerHTML = "";
+    }
     renderConsoleSelection();
     return;
   }
@@ -1888,11 +1802,11 @@ function mergeCurrentRoomGame() {
 
 function renderFullscreenButtons(fullscreenActive) {
   if (refs.toggleFullscreen) {
-    refs.toggleFullscreen.textContent = fullscreenActive ? "Выйти из полноэкранного" : "Во весь экран";
+    refs.toggleFullscreen.textContent = fullscreenActive ? "Ð’Ñ‹Ð¹Ñ‚Ð¸ Ð¸Ð· Ð¿Ð¾Ð»Ð½Ð¾ÑÐºÑ€Ð°Ð½Ð½Ð¾Ð³Ð¾" : "Ð’Ð¾ Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½";
   }
 
   if (refs.screenFullscreenButton) {
-    refs.screenFullscreenButton.textContent = fullscreenActive ? "×" : "FS";
+    refs.screenFullscreenButton.textContent = fullscreenActive ? "Ã—" : "FS";
   }
 }
 
@@ -1937,7 +1851,7 @@ function legacyUpdateFullscreenUi() {
   const showFullscreenButtons = hasRoom;
   for (const button of refs.fullscreenButtons) {
     button.classList.toggle("hidden", !showFullscreenButtons);
-    button.setAttribute("aria-label", fullscreenActive ? "Выйти из полного экрана" : "Открыть на весь экран");
+    button.setAttribute("aria-label", fullscreenActive ? "Ð’Ñ‹Ð¹Ñ‚Ð¸ Ð¸Ð· Ð¿Ð¾Ð»Ð½Ð¾Ð³Ð¾ ÑÐºÑ€Ð°Ð½Ð°" : "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð½Ð° Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½");
   }
 
   renderFullscreenButtons(roomFullscreenActive);
@@ -2112,17 +2026,17 @@ async function shareCurrentRoomLink(room = state.currentRoom) {
     : `Join room ${room.id} in NES Switch Online.`;
 
   if (await state.telegram?.shareRoomLink?.(shareUrl, shareText)) {
-    showToast("Открыл приглашение в Telegram");
+    showToast("ÐžÑ‚ÐºÑ€Ñ‹Ð» Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ Ð² Telegram");
     return true;
   }
 
   const copied = await copyTextToClipboard(shareUrl);
   if (copied) {
-    showToast(state.telegram?.botUsername ? "TG-ссылка скопирована" : "Ссылка скопирована");
+    showToast(state.telegram?.botUsername ? "TG-ÑÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°" : "Ð¡ÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°");
     return true;
   }
 
-  window.prompt("Скопируй ссылку на комнату", shareUrl);
+  window.prompt("Ð¡ÐºÐ¾Ð¿Ð¸Ñ€ÑƒÐ¹ ÑÑÑ‹Ð»ÐºÑƒ Ð½Ð° ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ", shareUrl);
   return false;
 }
 
@@ -2196,11 +2110,11 @@ async function copyCurrentRoomLink() {
   const shareUrl = buildShareUrl(state.currentRoom);
   const copied = await copyTextToClipboard(shareUrl);
   if (copied) {
-    showToast(state.telegram?.botUsername ? "TG-ссылка скопирована" : "Ссылка скопирована");
+    showToast(state.telegram?.botUsername ? "TG-ÑÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°" : "Ð¡ÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°");
     return true;
   }
 
-  window.prompt("Скопируй ссылку на комнату", shareUrl);
+  window.prompt("Ð¡ÐºÐ¾Ð¿Ð¸Ñ€ÑƒÐ¹ ÑÑÑ‹Ð»ÐºÑƒ Ð½Ð° ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ", shareUrl);
   return false;
 }
 
@@ -2218,8 +2132,8 @@ function startCurrentRoom() {
 }
 
 function legacyRenderCatalog() {
-  refs.catalogCount.textContent = `${state.games.length} игр`;
-  refs.catalogStatus.textContent = state.games.length ? "Готово к игре" : "Библиотека пуста";
+  refs.catalogCount.textContent = `${state.games.length} Ð¸Ð³Ñ€`;
+  refs.catalogStatus.textContent = state.games.length ? "Ð“Ð¾Ñ‚Ð¾Ð²Ð¾ Ðº Ð¸Ð³Ñ€Ðµ" : "Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð¿ÑƒÑÑ‚Ð°";
 
   refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
   refs.gameGrid.innerHTML = "";
@@ -2236,12 +2150,12 @@ function legacyRenderCatalog() {
       <div class="game-card__meta">
         <h3 class="game-card__title">${escapeHtml(game.title)}</h3>
         <div class="game-card__tags">
-          <span>Маппер ${game.mapper}</span>
+          <span>ÐœÐ°Ð¿Ð¿ÐµÑ€ ${game.mapper}</span>
           <span>${game.prgKb} KB</span>
         </div>
       </div>
       <div class="game-card__actions">
-        <button class="primary-button" type="button">Играть</button>
+        <button class="primary-button" type="button">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ</button>
       </div>
     `;
 
@@ -2267,7 +2181,7 @@ function renderPlayers(room) {
   refs.playersList.innerHTML = "";
 
   if (!room?.players?.length) {
-    refs.playersList.innerHTML = `<p class="control-line">Комната пустая.</p>`;
+    refs.playersList.innerHTML = `<p class="control-line">ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð¿ÑƒÑÑ‚Ð°Ñ.</p>`;
     return;
   }
 
@@ -2277,11 +2191,11 @@ function renderPlayers(room) {
     card.className = "player-card";
     card.innerHTML = `
       <div>
-        <p class="player-card__name">${escapeHtml(player.name)}${player.isHost ? " • Хост" : ""}</p>
-        <p class="player-card__slot">${player.spectator ? "Наблюдатель" : `Игрок ${player.slot}`}</p>
+        <p class="player-card__name">${escapeHtml(player.name)}${player.isHost ? " â€¢ Ð¥Ð¾ÑÑ‚" : ""}</p>
+        <p class="player-card__slot">${player.spectator ? "ÐÐ°Ð±Ð»ÑŽÐ´Ð°Ñ‚ÐµÐ»ÑŒ" : `Ð˜Ð³Ñ€Ð¾Ðº ${player.slot}`}</p>
       </div>
       <div class="player-card__status ${statusClass}">
-        ${player.spectator ? "Смотрит" : player.ready ? "Готов" : "Ждёт"}
+        ${player.spectator ? "Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ñ‚" : player.ready ? "Ð“Ð¾Ñ‚Ð¾Ð²" : "Ð–Ð´Ñ‘Ñ‚"}
       </div>
     `;
     refs.playersList.appendChild(card);
@@ -2293,35 +2207,35 @@ function renderPlayers(room) {
 function legacyRenderRoom() {
   const room = state.currentRoom;
   const participant = state.participant;
-  refs.copyLink.textContent = state.telegram?.botUsername ? "Скопировать TG-ссылку" : "Копировать ссылку";
+  refs.copyLink.textContent = state.telegram?.botUsername ? "Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ TG-ÑÑÑ‹Ð»ÐºÑƒ" : "ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ";
 
   if (!room) {
-    refs.roomTitle.textContent = "Комната не найдена";
-    refs.roomSubtitle.textContent = "Создай новую комнату из библиотеки.";
+    refs.roomTitle.textContent = "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð°";
+    refs.roomSubtitle.textContent = "Ð¡Ð¾Ð·Ð´Ð°Ð¹ Ð½Ð¾Ð²ÑƒÑŽ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ Ð¸Ð· Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸.";
     refs.playersList.innerHTML = "";
     renderPartyLobby(null, null);
-    refs.mobileRoomBadge.textContent = "КОМНАТА";
+    refs.mobileRoomBadge.textContent = "ÐšÐžÐœÐÐÐ¢Ð";
     updateFullscreenUi();
     return;
   }
 
-  refs.roomTitle.textContent = room.game?.title || "Комната";
-  refs.roomSubtitle.textContent = `Комната ${room.id} • ${room.status === "running" ? "игра идёт" : "лобби"}`;
+  refs.roomTitle.textContent = room.game?.title || "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°";
+  refs.roomSubtitle.textContent = `ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ${room.id} â€¢ ${room.status === "running" ? "Ð¸Ð³Ñ€Ð° Ð¸Ð´Ñ‘Ñ‚" : "Ð»Ð¾Ð±Ð±Ð¸"}`;
   refs.roomCover.src = room.game?.coverUrl || "";
   refs.roomCover.alt = room.game?.title || "";
-  refs.readySummary.textContent = room.canStart ? "Можно стартовать" : room.status === "running" ? "Сессия в игре" : "Не готово";
+  refs.readySummary.textContent = room.canStart ? "ÐœÐ¾Ð¶Ð½Ð¾ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð°Ñ‚ÑŒ" : room.status === "running" ? "Ð¡ÐµÑÑÐ¸Ñ Ð² Ð¸Ð³Ñ€Ðµ" : "ÐÐµ Ð³Ð¾Ñ‚Ð¾Ð²Ð¾";
   refs.statusTitle.textContent =
     room.status === "running"
       ? room.session?.paused
-        ? "Сессия на паузе"
-        : "Сетевая сессия активна"
-      : "Комната ждёт игроков";
-  refs.mobileRoomBadge.textContent = `${room.id} • ${room.game?.title || "NES Room"}`;
+        ? "Ð¡ÐµÑÑÐ¸Ñ Ð½Ð° Ð¿Ð°ÑƒÐ·Ðµ"
+        : "Ð¡ÐµÑ‚ÐµÐ²Ð°Ñ ÑÐµÑÑÐ¸Ñ Ð°ÐºÑ‚Ð¸Ð²Ð½Ð°"
+      : "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð¶Ð´Ñ‘Ñ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²";
+  refs.mobileRoomBadge.textContent = `${room.id} â€¢ ${room.game?.title || "NES Room"}`;
 
   refs.roomSubtitle.textContent =
     room.status === "running"
-      ? `Комната ${room.id} • идет игра`
-      : `Комната ${room.id} • ждет игроков`;
+      ? `ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ${room.id} â€¢ Ð¸Ð´ÐµÑ‚ Ð¸Ð³Ñ€Ð°`
+      : `ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ${room.id} â€¢ Ð¶Ð´ÐµÑ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²`;
   refs.mobileRoomBadge.textContent = room.id;
 
   const me = room.players.find((player) => player.socketId === socket.id) ?? participant;
@@ -2331,7 +2245,7 @@ function legacyRenderRoom() {
   const amReady = Boolean(me?.ready);
 
   refs.toggleReady.disabled = !canReady;
-  refs.toggleReady.textContent = amReady ? "Снять готовность" : "Готов";
+  refs.toggleReady.textContent = amReady ? "Ð¡Ð½ÑÑ‚ÑŒ Ð³Ð¾Ñ‚Ð¾Ð²Ð½Ð¾ÑÑ‚ÑŒ" : "Ð“Ð¾Ñ‚Ð¾Ð²";
   refs.startSession.disabled = !(isHost && room.canStart && room.status === "lobby");
   refs.pauseSession.disabled = !(isHost && room.status === "running" && !room.session?.paused);
   refs.resumeSession.disabled = !(isHost && room.status === "running" && room.session?.paused);
@@ -2367,6 +2281,49 @@ function releaseAllTouchControls() {
     }
     button.classList.remove("touch-control--active");
   }
+}
+
+function shouldBlockGameplayBrowserGesture(target = null) {
+  if (
+    !state.isMobileDevice ||
+    !refs.roomView ||
+    !refs.mobileHandheld ||
+    refs.roomView.classList.contains("hidden") ||
+    refs.mobileHandheld.classList.contains("hidden") ||
+    !refs.roomView.classList.contains("room-view--mobile-fs")
+  ) {
+    return false;
+  }
+
+  if (!(target instanceof Node)) {
+    return true;
+  }
+
+  return (
+    refs.mobileHandheld.contains(target) ||
+    refs.mobileScreenShell?.contains(target) ||
+    refs.emulatorMount?.contains(target) ||
+    refs.roomView.contains(target)
+  );
+}
+
+function bindMobileGameplayGestureGuards() {
+  const blockGesture = (event) => {
+    if (!shouldBlockGameplayBrowserGesture(event.target) || !event.cancelable) {
+      return;
+    }
+
+    event.preventDefault();
+  };
+
+  document.addEventListener("gesturestart", blockGesture, { capture: true });
+  document.addEventListener("gesturechange", blockGesture, { capture: true });
+  document.addEventListener("gestureend", blockGesture, { capture: true });
+  document.addEventListener("touchmove", blockGesture, { capture: true, passive: false });
+  document.addEventListener("selectstart", blockGesture, { capture: true });
+  document.addEventListener("dragstart", blockGesture, { capture: true });
+  document.addEventListener("dblclick", blockGesture, { capture: true });
+  document.addEventListener("contextmenu", blockGesture, { capture: true });
 }
 
 function applyDpadMaskForPointer(pointerId, nextMask) {
@@ -2508,11 +2465,11 @@ async function legacySyncRoute() {
     if (socket.connected) {
       socket.emit("room:join", {
         roomId: route.roomId,
-        name: state.nickname || "Игрок",
+        name: state.nickname || "Ð˜Ð³Ñ€Ð¾Ðº",
       });
     }
   } catch (error) {
-    refs.roomTitle.textContent = "Комната не найдена";
+    refs.roomTitle.textContent = "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð°";
     refs.roomSubtitle.textContent = error.message;
     state.currentRoom = null;
     state.participant = null;
@@ -2574,48 +2531,11 @@ refs.hubResumeButton?.addEventListener("click", () => {
 
 refs.miniConsoleBack?.addEventListener("click", () => {
   setSelectedConsole("");
+  setSelectedGame("");
+  if (refs.miniRomGrid) {
+    refs.miniRomGrid.innerHTML = "";
+  }
   renderMiniLibrary();
-});
-
-refs.miniLibrarySearch?.addEventListener("input", () => {
-  state.librarySearchQuery = refs.miniLibrarySearch.value;
-  renderMiniLibrary();
-});
-
-refs.miniLibraryPlay?.addEventListener("click", async () => {
-  const game = getSelectedGame(getVisibleLibraryGames());
-  if (!game) {
-    return;
-  }
-
-  try {
-    refs.miniLibraryPlay.disabled = true;
-    await createRoomForGame(game.id, "solo");
-  } catch (error) {
-    showToast(error.message);
-  } finally {
-    refs.miniLibraryPlay.disabled = false;
-  }
-});
-
-refs.miniLibraryHost?.addEventListener("click", async () => {
-  const game = getSelectedGame(getVisibleLibraryGames());
-  if (!game) {
-    return;
-  }
-
-  try {
-    refs.miniLibraryHost.disabled = true;
-    await createRoomForGame(game.id, "party");
-  } catch (error) {
-    showToast(error.message);
-  } finally {
-    refs.miniLibraryHost.disabled = false;
-  }
-});
-
-refs.miniResumeButton?.addEventListener("click", () => {
-  resumeRecentRoom();
 });
 
 refs.backToLibrary.addEventListener("click", () => {
@@ -2629,7 +2549,7 @@ refs.copyLink.addEventListener("click", async () => {
 
   const shareUrl = buildShareUrl(state.currentRoom);
   await navigator.clipboard.writeText(shareUrl);
-  showToast(state.telegram?.botUsername ? "TG-ссылка скопирована" : "Ссылка скопирована");
+  showToast(state.telegram?.botUsername ? "TG-ÑÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°" : "Ð¡ÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°");
 });
 
 refs.toggleFullscreen.addEventListener("click", toggleFullscreenMode);
@@ -2701,7 +2621,7 @@ refs.nicknameInput.addEventListener("change", () => {
   refs.partyNicknameInput.value = state.nickname;
   localStorage.setItem("nes-switch-online:nickname", state.nickname);
   if (state.currentRoomId) {
-    socket.emit("room:rename", { name: state.nickname || "Игрок" });
+    socket.emit("room:rename", { name: state.nickname || "Ð˜Ð³Ñ€Ð¾Ðº" });
   }
 });
 
@@ -2715,7 +2635,7 @@ refs.partyNicknameInput.addEventListener("change", () => {
   refs.nicknameInput.value = state.nickname;
   localStorage.setItem("nes-switch-online:nickname", state.nickname);
   if (state.currentRoomId) {
-    socket.emit("room:rename", { name: state.nickname || "Игрок" });
+    socket.emit("room:rename", { name: state.nickname || "Ð˜Ð³Ñ€Ð¾Ðº" });
   }
 });
 
@@ -2762,7 +2682,7 @@ refs.partyPlayButton.addEventListener("click", () => {
 
 refs.partySaveButton?.addEventListener("click", () => {
   vibrateTap(18);
-  showToast("Сейвы скоро появятся");
+  showToast("Ð¡ÐµÐ¹Ð²Ñ‹ ÑÐºÐ¾Ñ€Ð¾ Ð¿Ð¾ÑÐ²ÑÑ‚ÑÑ");
 });
 
 refs.partySaveButton?.addEventListener("click", (event) => {
@@ -2814,7 +2734,7 @@ refs.resumeSession.addEventListener("click", () => {
 refs.stopSession.addEventListener("click", async () => {
   socket.emit("session:stop");
   releaseAllTouchControls();
-  await emulator.stop("Сессия остановлена");
+  await emulator.stop("Ð¡ÐµÑÑÐ¸Ñ Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð°");
 });
 
 window.addEventListener("popstate", () => {
@@ -2840,13 +2760,13 @@ socket.on("connect", () => {
   if (route.kind !== "library") {
     socket.emit("room:join", {
       roomId: route.roomId,
-      name: state.nickname || "Игрок",
+      name: state.nickname || "Ð˜Ð³Ñ€Ð¾Ðº",
     });
   }
 });
 
 socket.on("disconnect", () => {
-  showToast("Соединение с сервером потеряно");
+  showToast("Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ ÑÐµÑ€Ð²ÐµÑ€Ð¾Ð¼ Ð¿Ð¾Ñ‚ÐµÑ€ÑÐ½Ð¾");
 });
 
 socket.on("catalog:updated", (games) => {
@@ -2874,7 +2794,7 @@ socket.on("room:state", (room) => {
 });
 
 socket.on("room:error", ({ message }) => {
-  showToast(message || "Ошибка комнаты");
+  showToast(message || "ÐžÑˆÐ¸Ð±ÐºÐ° ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹");
 });
 
 socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requiredSlots }) => {
@@ -2884,7 +2804,7 @@ socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requ
 
   const player = state.currentRoom.players.find((entry) => entry.socketId === socket.id);
   if (player?.spectator) {
-    refs.screenOverlay.textContent = "Наблюдатель не участвует в текущей сессии";
+    refs.screenOverlay.textContent = "ÐÐ°Ð±Ð»ÑŽÐ´Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ ÑƒÑ‡Ð°ÑÑ‚Ð²ÑƒÐµÑ‚ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ ÑÐµÑÑÐ¸Ð¸";
     refs.screenOverlay.classList.remove("hidden");
     return;
   }
@@ -2899,7 +2819,7 @@ socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requ
       requiredSlots,
       romUrl: `/api/roms/${state.currentRoom.game.id}/file`,
     });
-    refs.statusTitle.textContent = "Синхронизация перед стартом";
+    refs.statusTitle.textContent = "Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¿ÐµÑ€ÐµÐ´ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð¼";
   } catch (error) {
     releaseAllTouchControls();
     await emulator.stop(error.message);
@@ -2948,13 +2868,13 @@ socket.on("session:ended", async ({ roomId, reason }) => {
   }
 
   const messages = {
-    "player-left": "Игрок вышел. Сессия остановлена.",
-    "host-ended": "Хост завершил сессию.",
+    "player-left": "Ð˜Ð³Ñ€Ð¾Ðº Ð²Ñ‹ÑˆÐµÐ». Ð¡ÐµÑÑÐ¸Ñ Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð°.",
+    "host-ended": "Ð¥Ð¾ÑÑ‚ Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ð» ÑÐµÑÑÐ¸ÑŽ.",
   };
 
   releaseAllTouchControls();
   closeInGameMenu();
-  await emulator.stop(messages[reason] || "Сессия завершена");
+  await emulator.stop(messages[reason] || "Ð¡ÐµÑÑÐ¸Ñ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð°");
 });
 
 function updateFullscreenUi() {
@@ -2993,7 +2913,7 @@ function updateFullscreenUi() {
   refs.exitMobileFullscreen.classList.toggle("hidden", !mobileOverlayActive);
   refs.mobileBackButton.classList.toggle("hidden", !mobileOverlayActive);
   refs.mobileMenuButton.classList.toggle("hidden", !mobileOverlayActive);
-  refs.mobileMenuButton.setAttribute("aria-label", canOpenInGameMenu() ? "Открыть меню" : "Поделиться");
+  refs.mobileMenuButton.setAttribute("aria-label", canOpenInGameMenu() ? "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¼ÐµÐ½ÑŽ" : "ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ");
   refs.partyLobby.classList.add("hidden");
   refs.partyLobby.setAttribute("aria-hidden", "true");
   refs.partyScreen?.setAttribute("aria-hidden", String(!partyLobbyActive));
@@ -3004,7 +2924,7 @@ function updateFullscreenUi() {
     button.classList.toggle("hidden", !showFullscreenButtons);
     button.setAttribute(
       "aria-label",
-      roomFullscreenActive ? "Выйти из полного экрана" : "Открыть на весь экран",
+      roomFullscreenActive ? "Ð’Ñ‹Ð¹Ñ‚Ð¸ Ð¸Ð· Ð¿Ð¾Ð»Ð½Ð¾Ð³Ð¾ ÑÐºÑ€Ð°Ð½Ð°" : "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð½Ð° Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½",
     );
   }
 
@@ -3021,8 +2941,8 @@ function updateFullscreenUi() {
 }
 
 function legacyRenderCatalogV2() {
-  refs.catalogCount.textContent = `${state.games.length} игр`;
-  refs.catalogStatus.textContent = state.games.length ? "Готово к игре" : "Библиотека пуста";
+  refs.catalogCount.textContent = `${state.games.length} Ð¸Ð³Ñ€`;
+  refs.catalogStatus.textContent = state.games.length ? "Ð“Ð¾Ñ‚Ð¾Ð²Ð¾ Ðº Ð¸Ð³Ñ€Ðµ" : "Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð¿ÑƒÑÑ‚Ð°";
   refs.emptyLibrary.classList.toggle("hidden", state.games.length > 0);
   refs.gameGrid.innerHTML = "";
 
@@ -3041,8 +2961,8 @@ function legacyRenderCatalogV2() {
         </div>
       </div>
       <div class="game-card__actions">
-        <button class="primary-button" type="button" data-launch-mode="solo">Играть</button>
-        <button class="secondary-button" type="button" data-launch-mode="party">Пати</button>
+        <button class="primary-button" type="button" data-launch-mode="solo">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ</button>
+        <button class="secondary-button" type="button" data-launch-mode="party">ÐŸÐ°Ñ‚Ð¸</button>
       </div>
     `;
 
@@ -3075,15 +2995,15 @@ function legacyRenderPartyLobby(room, me) {
   refs.partyNicknameInput.value = state.nickname;
 
   if (!room) {
-    refs.partyLobbyTitle.textContent = state.roomLoadError ? "Комната не найдена" : "Создаю пати";
+    refs.partyLobbyTitle.textContent = state.roomLoadError ? "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð°" : "Ð¡Ð¾Ð·Ð´Ð°ÑŽ Ð¿Ð°Ñ‚Ð¸";
     refs.partyLobbySubtitle.textContent = state.roomLoadError
-      ? "Вернись в библиотеку и создай новую комнату."
-      : "Готовлю комнату и ссылку для друга.";
+      ? "Ð’ÐµÑ€Ð½Ð¸ÑÑŒ Ð² Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÑƒ Ð¸ ÑÐ¾Ð·Ð´Ð°Ð¹ Ð½Ð¾Ð²ÑƒÑŽ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ."
+      : "Ð“Ð¾Ñ‚Ð¾Ð²Ð»ÑŽ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ Ð¸ ÑÑÑ‹Ð»ÐºÑƒ Ð´Ð»Ñ Ð´Ñ€ÑƒÐ³Ð°.";
     refs.partyRoomCode.textContent = "------";
-    refs.partyPlayerCount.textContent = "0 игроков";
+    refs.partyPlayerCount.textContent = "0 Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²";
     refs.partyStatusCopy.textContent = state.roomLoadError
       ? state.roomLoadError
-      : "Сейчас появится код комнаты и кнопки приглашения.";
+      : "Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¿Ð¾ÑÐ²Ð¸Ñ‚ÑÑ ÐºÐ¾Ð´ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹ Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ñ.";
     refs.partyPlayersList.innerHTML = "";
     refs.partyCopyIconButton.disabled = true;
     refs.partyMenuButton.disabled = true;
@@ -3091,8 +3011,8 @@ function legacyRenderPartyLobby(room, me) {
     refs.partyCopyButton.disabled = true;
     refs.partyReadyButton.disabled = true;
     refs.partyPlayButton.disabled = true;
-    refs.partyReadyButton.textContent = "Готов";
-    refs.partyPlayButton.textContent = "Играть";
+    refs.partyReadyButton.textContent = "Ð“Ð¾Ñ‚Ð¾Ð²";
+    refs.partyPlayButton.textContent = "Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ";
     return;
   }
 
@@ -3103,24 +3023,24 @@ function legacyRenderPartyLobby(room, me) {
   refs.partyLobbyTitle.textContent = room.game?.title || "Party Room";
   refs.partyLobbySubtitle.textContent =
     canPartyStart
-      ? "Оба игрока готовы. Можно запускать."
+      ? "ÐžÐ±Ð° Ð¸Ð³Ñ€Ð¾ÐºÐ° Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹. ÐœÐ¾Ð¶Ð½Ð¾ Ð·Ð°Ð¿ÑƒÑÐºÐ°Ñ‚ÑŒ."
       : players.length < 2
-        ? "Позови друга в комнату."
+        ? "ÐŸÐ¾Ð·Ð¾Ð²Ð¸ Ð´Ñ€ÑƒÐ³Ð° Ð² ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ."
       : isHost
-        ? "Когда второй игрок будет готов, нажми играть."
-        : "Нажми готово и жди запуска.";
+        ? "ÐšÐ¾Ð³Ð´Ð° Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð¸Ð³Ñ€Ð¾Ðº Ð±ÑƒÐ´ÐµÑ‚ Ð³Ð¾Ñ‚Ð¾Ð², Ð½Ð°Ð¶Ð¼Ð¸ Ð¸Ð³Ñ€Ð°Ñ‚ÑŒ."
+        : "ÐÐ°Ð¶Ð¼Ð¸ Ð³Ð¾Ñ‚Ð¾Ð²Ð¾ Ð¸ Ð¶Ð´Ð¸ Ð·Ð°Ð¿ÑƒÑÐºÐ°.";
   refs.partyRoomCode.textContent = room.id;
-  refs.partyPlayerCount.textContent = `${players.length} ${pluralizeRu(players.length, "игрок", "игрока", "игроков")}`;
+  refs.partyPlayerCount.textContent = `${players.length} ${pluralizeRu(players.length, "Ð¸Ð³Ñ€Ð¾Ðº", "Ð¸Ð³Ñ€Ð¾ÐºÐ°", "Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²")}`;
   refs.partyStatusCopy.textContent =
     canPartyStart
-      ? "Комната готова. Нажми «Играть», и игра откроется у всех."
+      ? "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð³Ð¾Ñ‚Ð¾Ð²Ð°. ÐÐ°Ð¶Ð¼Ð¸ Â«Ð˜Ð³Ñ€Ð°Ñ‚ÑŒÂ», Ð¸ Ð¸Ð³Ñ€Ð° Ð¾Ñ‚ÐºÑ€Ð¾ÐµÑ‚ÑÑ Ñƒ Ð²ÑÐµÑ…."
       : players.length < 2
-        ? "Нажми «Пригласить друга» и отправь ссылку в Telegram."
+        ? "ÐÐ°Ð¶Ð¼Ð¸ Â«ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð°Â» Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒ ÑÑÑ‹Ð»ÐºÑƒ Ð² Telegram."
         : !isHost
           ? me?.ready
-            ? "Ты готов. Жди, пока хост нажмёт играть."
-            : "Нажми «Готов», чтобы хост смог запустить игру."
-          : `Готовы ${readyPlayers} из ${players.length}.`;
+            ? "Ð¢Ñ‹ Ð³Ð¾Ñ‚Ð¾Ð². Ð–Ð´Ð¸, Ð¿Ð¾ÐºÐ° Ñ…Ð¾ÑÑ‚ Ð½Ð°Ð¶Ð¼Ñ‘Ñ‚ Ð¸Ð³Ñ€Ð°Ñ‚ÑŒ."
+            : "ÐÐ°Ð¶Ð¼Ð¸ Â«Ð“Ð¾Ñ‚Ð¾Ð²Â», Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ñ…Ð¾ÑÑ‚ ÑÐ¼Ð¾Ð³ Ð·Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ."
+          : `Ð“Ð¾Ñ‚Ð¾Ð²Ñ‹ ${readyPlayers} Ð¸Ð· ${players.length}.`;
 
   refs.partyPlayersList.innerHTML = "";
   for (const player of room.players) {
@@ -3129,10 +3049,10 @@ function legacyRenderPartyLobby(room, me) {
     item.innerHTML = `
       <div>
         <strong>${escapeHtml(player.name)}</strong>
-        <span>${player.isHost ? "Хост" : player.spectator ? "Наблюдатель" : `Игрок ${player.slot}`}</span>
+        <span>${player.isHost ? "Ð¥Ð¾ÑÑ‚" : player.spectator ? "ÐÐ°Ð±Ð»ÑŽÐ´Ð°Ñ‚ÐµÐ»ÑŒ" : `Ð˜Ð³Ñ€Ð¾Ðº ${player.slot}`}</span>
       </div>
       <b class="${player.ready ? "party-lobby__state party-lobby__state--ready" : "party-lobby__state"}">
-        ${player.spectator ? "Смотрит" : player.ready ? "Готов" : "Ждёт"}
+        ${player.spectator ? "Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ñ‚" : player.ready ? "Ð“Ð¾Ñ‚Ð¾Ð²" : "Ð–Ð´Ñ‘Ñ‚"}
       </b>
     `;
     refs.partyPlayersList.appendChild(item);
@@ -3141,12 +3061,12 @@ function legacyRenderPartyLobby(room, me) {
   refs.partyCopyIconButton.disabled = false;
   refs.partyMenuButton.disabled = false;
   refs.partyInviteButton.disabled = false;
-  refs.partyInviteButton.textContent = "Пригласить друга";
+  refs.partyInviteButton.textContent = "ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð°";
   refs.partyCopyButton.disabled = false;
-  refs.partyCopyButton.textContent = "Скопировать ссылку";
+  refs.partyCopyButton.textContent = "Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ";
   refs.partyReadyButton.disabled = room.status !== "lobby" || Boolean(me?.spectator);
-  refs.partyReadyButton.textContent = me?.ready ? "Снять готовность" : "Готов";
-  refs.partyPlayButton.textContent = isHost ? "Играть" : "Ждём хоста";
+  refs.partyReadyButton.textContent = me?.ready ? "Ð¡Ð½ÑÑ‚ÑŒ Ð³Ð¾Ñ‚Ð¾Ð²Ð½Ð¾ÑÑ‚ÑŒ" : "Ð“Ð¾Ñ‚Ð¾Ð²";
+  refs.partyPlayButton.textContent = isHost ? "Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ" : "Ð–Ð´Ñ‘Ð¼ Ñ…Ð¾ÑÑ‚Ð°";
   refs.partyPlayButton.disabled = !canPartyStart;
 }
 
@@ -3174,34 +3094,34 @@ function getPartySaveSlots(game = getPartyMenuGame()) {
     {
       id: "slot-1",
       filled: true,
-      title: game?.title || "Текущий сейв",
+      title: game?.title || "Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ ÑÐµÐ¹Ð²",
       coverUrl: game?.coverUrl || "",
       duration: formatSaveClock(totalMinutes),
-      ageLabel: `${hoursAgo} ${pluralizeRu(hoursAgo, "час", "часа", "часов")} назад`,
+      ageLabel: `${hoursAgo} ${pluralizeRu(hoursAgo, "Ñ‡Ð°Ñ", "Ñ‡Ð°ÑÐ°", "Ñ‡Ð°ÑÐ¾Ð²")} Ð½Ð°Ð·Ð°Ð´`,
     },
     {
       id: "slot-2",
       filled: false,
-      title: "Пусто",
-      subtitle: "Свободный слот для сохранения",
+      title: "ÐŸÑƒÑÑ‚Ð¾",
+      subtitle: "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ",
     },
     {
       id: "slot-3",
       filled: false,
-      title: "Пусто",
-      subtitle: "Свободный слот для сохранения",
+      title: "ÐŸÑƒÑÑ‚Ð¾",
+      subtitle: "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ",
     },
     {
       id: "slot-4",
       filled: false,
-      title: "Пусто",
-      subtitle: "Свободный слот для сохранения",
+      title: "ÐŸÑƒÑÑ‚Ð¾",
+      subtitle: "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ",
     },
     {
       id: "slot-5",
       filled: false,
-      title: "Пусто",
-      subtitle: "Свободный слот для сохранения",
+      title: "ÐŸÑƒÑÑ‚Ð¾",
+      subtitle: "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ",
     },
   ];
 }
@@ -3226,7 +3146,7 @@ function renderPartySaveSlots(slots) {
         </span>
         <span class="save-room-menu__slot-copy">
           <strong>${escapeHtml(slot.title)}</strong>
-          <span>Прохождение: ${escapeHtml(slot.progress)}</span>
+          <span>ÐŸÑ€Ð¾Ñ…Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ: ${escapeHtml(slot.progress)}</span>
           <span>${escapeHtml(slot.duration)}</span>
         </span>
         <span class="save-room-menu__slot-meta">
@@ -3246,7 +3166,7 @@ function renderPartySaveSlots(slots) {
 
     item.addEventListener("click", () => {
       vibrateTap(12);
-      showToast(slot.filled ? "Загрузка сейвов пока заглушка" : "Свободные слоты скоро заработают");
+      showToast(slot.filled ? "Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° ÑÐµÐ¹Ð²Ð¾Ð² Ð¿Ð¾ÐºÐ° Ð·Ð°Ð³Ð»ÑƒÑˆÐºÐ°" : "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ðµ ÑÐ»Ð¾Ñ‚Ñ‹ ÑÐºÐ¾Ñ€Ð¾ Ð·Ð°Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‚");
     });
 
     refs.partySaveSlots.appendChild(item);
@@ -3273,13 +3193,13 @@ function legacyRenderPartyMenu(room, me) {
     refs.partyMenuCoverImage.alt = partyMenuGame?.title || "";
   }
   if (refs.partyMenuTitle) {
-    refs.partyMenuTitle.textContent = partyMenuGame?.title || "Выбранная игра";
+    refs.partyMenuTitle.textContent = partyMenuGame?.title || "Ð’Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð°Ñ Ð¸Ð³Ñ€Ð°";
   }
   refs.partyReadyButton.dataset.ready = "false";
-  refs.partyInviteButton.textContent = "Пригласить";
-  refs.partyReadyButton.textContent = "Готов";
-  refs.partyPlayButton.textContent = "Играть";
-  refs.partySaveButton.textContent = "Запустить сейв";
+  refs.partyInviteButton.textContent = "ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ";
+  refs.partyReadyButton.textContent = "Ð“Ð¾Ñ‚Ð¾Ð²";
+  refs.partyPlayButton.textContent = "Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ";
+  refs.partySaveButton.textContent = "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ð²";
 
   if (!room) {
     refs.partyInviteButton.disabled = true;
@@ -3315,9 +3235,9 @@ function renderPartyMenuPlayers(players, me) {
 
     if (player) {
       const isSelf = Boolean(me && player.socketId === me.socketId);
-      const playerLabel = isSelf ? "Ты" : player.name;
-      const playerMeta = player.isHost ? "Хост" : `Игрок ${player.slot || index + 1}`;
-      const playerState = player.isHost ? "Хост" : player.ready ? "Готов" : "Ждёт";
+      const playerLabel = isSelf ? "Ð¢Ñ‹" : player.name;
+      const playerMeta = player.isHost ? "Ð¥Ð¾ÑÑ‚" : `Ð˜Ð³Ñ€Ð¾Ðº ${player.slot || index + 1}`;
+      const playerState = player.isHost ? "Ð¥Ð¾ÑÑ‚" : player.ready ? "Ð“Ð¾Ñ‚Ð¾Ð²" : "Ð–Ð´Ñ‘Ñ‚";
       const playerStateClass = player.ready || player.isHost
         ? "party-room-menu__player-pill party-room-menu__player-pill--active"
         : "party-room-menu__player-pill";
@@ -3336,8 +3256,8 @@ function renderPartyMenuPlayers(players, me) {
       item.innerHTML = `
         <div class="party-room-menu__player-avatar party-room-menu__player-avatar--empty">+</div>
         <div class="party-room-menu__player-copy">
-          <strong>Пригласите друга</strong>
-          <span>Свободный слот</span>
+          <strong>ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚Ðµ Ð´Ñ€ÑƒÐ³Ð°</strong>
+          <span>Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ñ‚</span>
         </div>
         <b class="party-room-menu__player-pill party-room-menu__player-pill--empty">+</b>
       `;
@@ -3361,7 +3281,7 @@ function renderPartyLobby(room, me) {
     getPrimaryLaunchGame(getVisibleLibraryGames()) ||
     getPrimaryLaunchGame();
 
-  const title = partyMenuGame?.title || "Новая комната";
+  const title = partyMenuGame?.title || "ÐÐ¾Ð²Ð°Ñ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ð°";
 
   refs.partyMenuScreen?.classList.remove("hidden");
   if (refs.partyMenuBarTitle) {
@@ -3381,20 +3301,20 @@ function renderPartyLobby(room, me) {
   refs.partyCopyIconButton.disabled = !room;
   refs.partyMenuButton.disabled = false;
   refs.partyReadyButton.dataset.ready = "false";
-  refs.partyInviteButton.textContent = "Пригласить";
-  refs.partyReadyButton.textContent = "Готов";
-  refs.partyPlayButton.textContent = "Начать";
-  refs.partySaveButton.textContent = "Загрузить сейв";
+  refs.partyInviteButton.textContent = "ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ";
+  refs.partyReadyButton.textContent = "Ð“Ð¾Ñ‚Ð¾Ð²";
+  refs.partyPlayButton.textContent = "ÐÐ°Ñ‡Ð°Ñ‚ÑŒ";
+  refs.partySaveButton.textContent = "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ð²";
 
   if (!room) {
     if (refs.partyMenuPlayersMeta) {
-      refs.partyMenuPlayersMeta.textContent = "0 игроков";
+      refs.partyMenuPlayersMeta.textContent = "0 Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²";
     }
     if (refs.partyMenuInviteMeta) {
-      refs.partyMenuInviteMeta.textContent = state.roomLoadError || "Готовлю комнату и ссылку.";
+      refs.partyMenuInviteMeta.textContent = state.roomLoadError || "Ð“Ð¾Ñ‚Ð¾Ð²Ð»ÑŽ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ Ð¸ ÑÑÑ‹Ð»ÐºÑƒ.";
     }
     if (refs.partyMenuStatus) {
-      refs.partyMenuStatus.textContent = state.roomLoadError || "Слоты игроков скоро появятся.";
+      refs.partyMenuStatus.textContent = state.roomLoadError || "Ð¡Ð»Ð¾Ñ‚Ñ‹ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð² ÑÐºÐ¾Ñ€Ð¾ Ð¿Ð¾ÑÐ²ÑÑ‚ÑÑ.";
     }
     renderPartyMenuPlayers([], null);
     refs.partyInviteButton.disabled = true;
@@ -3410,35 +3330,35 @@ function renderPartyLobby(room, me) {
   const canPartyStart = Boolean(isHost && room.canStart && room.status === "lobby" && players.length > 1);
 
   if (refs.partyMenuPlayersMeta) {
-    refs.partyMenuPlayersMeta.textContent = `${players.length} ${pluralizeRu(players.length, "игрок", "игрока", "игроков")}`;
+    refs.partyMenuPlayersMeta.textContent = `${players.length} ${pluralizeRu(players.length, "Ð¸Ð³Ñ€Ð¾Ðº", "Ð¸Ð³Ñ€Ð¾ÐºÐ°", "Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²")}`;
   }
   if (refs.partyMenuInviteMeta) {
     refs.partyMenuInviteMeta.textContent = players.length < 2
-      ? "Скопируй ссылку и позови друга в Telegram."
+      ? "Ð¡ÐºÐ¾Ð¿Ð¸Ñ€ÑƒÐ¹ ÑÑÑ‹Ð»ÐºÑƒ Ð¸ Ð¿Ð¾Ð·Ð¾Ð²Ð¸ Ð´Ñ€ÑƒÐ³Ð° Ð² Telegram."
       : isHost
-        ? `Готовы ${readyPlayers} из ${players.length}.`
+        ? `Ð“Ð¾Ñ‚Ð¾Ð²Ñ‹ ${readyPlayers} Ð¸Ð· ${players.length}.`
         : me?.ready
-          ? "Ты готов. Ждём сигнал от хоста."
-          : "Нажми «Готов», чтобы хост увидел тебя.";
+          ? "Ð¢Ñ‹ Ð³Ð¾Ñ‚Ð¾Ð². Ð–Ð´Ñ‘Ð¼ ÑÐ¸Ð³Ð½Ð°Ð» Ð¾Ñ‚ Ñ…Ð¾ÑÑ‚Ð°."
+          : "ÐÐ°Ð¶Ð¼Ð¸ Â«Ð“Ð¾Ñ‚Ð¾Ð²Â», Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ñ…Ð¾ÑÑ‚ ÑƒÐ²Ð¸Ð´ÐµÐ» Ñ‚ÐµÐ±Ñ.";
   }
   if (refs.partyMenuStatus) {
     refs.partyMenuStatus.textContent = canPartyStart
-      ? "Комната собрана. Можно начинать бой."
+      ? "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ÑÐ¾Ð±Ñ€Ð°Ð½Ð°. ÐœÐ¾Ð¶Ð½Ð¾ Ð½Ð°Ñ‡Ð¸Ð½Ð°Ñ‚ÑŒ Ð±Ð¾Ð¹."
       : players.length < 2
-        ? "Подожди друзей или отправь приглашение ещё раз."
+        ? "ÐŸÐ¾Ð´Ð¾Ð¶Ð´Ð¸ Ð´Ñ€ÑƒÐ·ÐµÐ¹ Ð¸Ð»Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒ Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ ÐµÑ‰Ñ‘ Ñ€Ð°Ð·."
         : !isHost
           ? me?.ready
-            ? "Ждём старт от хоста."
-            : "Отметься как готовый, и старт станет доступен."
-          : "Когда все отметятся как готовые, кнопка старта откроется.";
+            ? "Ð–Ð´Ñ‘Ð¼ ÑÑ‚Ð°Ñ€Ñ‚ Ð¾Ñ‚ Ñ…Ð¾ÑÑ‚Ð°."
+            : "ÐžÑ‚Ð¼ÐµÑ‚ÑŒÑÑ ÐºÐ°Ðº Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹Ð¹, Ð¸ ÑÑ‚Ð°Ñ€Ñ‚ ÑÑ‚Ð°Ð½ÐµÑ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½."
+          : "ÐšÐ¾Ð³Ð´Ð° Ð²ÑÐµ Ð¾Ñ‚Ð¼ÐµÑ‚ÑÑ‚ÑÑ ÐºÐ°Ðº Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹Ðµ, ÐºÐ½Ð¾Ð¿ÐºÐ° ÑÑ‚Ð°Ñ€Ñ‚Ð° Ð¾Ñ‚ÐºÑ€Ð¾ÐµÑ‚ÑÑ.";
   }
 
   renderPartyMenuPlayers(players, me);
   refs.partyInviteButton.disabled = false;
   refs.partyReadyButton.disabled = room.status !== "lobby" || Boolean(me?.spectator);
   refs.partyReadyButton.dataset.ready = String(Boolean(me?.ready));
-  refs.partyReadyButton.textContent = me?.ready ? "Готово" : "Готов";
-  refs.partyPlayButton.textContent = isHost ? "Начать" : "Ждём хоста";
+  refs.partyReadyButton.textContent = me?.ready ? "Ð“Ð¾Ñ‚Ð¾Ð²Ð¾" : "Ð“Ð¾Ñ‚Ð¾Ð²";
+  refs.partyPlayButton.textContent = isHost ? "ÐÐ°Ñ‡Ð°Ñ‚ÑŒ" : "Ð–Ð´Ñ‘Ð¼ Ñ…Ð¾ÑÑ‚Ð°";
   refs.partyPlayButton.disabled = !canPartyStart;
   refs.partySaveButton.disabled = false;
 }
@@ -3453,7 +3373,7 @@ function renderPartySaveScreen() {
 
   setView("save");
   if (refs.partySaveBarTitle) {
-    refs.partySaveBarTitle.textContent = "Выберите сейв";
+    refs.partySaveBarTitle.textContent = "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐµÐ¹Ð²";
   }
   renderPartySaveSlots(getPartySaveSlots(getPartyMenuGame(room)));
   updateFullscreenUi();
@@ -3488,11 +3408,7 @@ function renderActiveView() {
 
 function renderCatalog() {
   const catalogCountText = `${state.games.length} games`;
-  const catalogStatusText = state.recentRoom?.roomId
-    ? `Room ${state.recentRoom.roomId} ready to resume`
-    : state.games.length
-      ? "Ready to launch"
-      : "Library is empty";
+  const catalogStatusText = state.games.length ? "Ready to launch" : "Library is empty";
 
   if (refs.catalogCount) {
     refs.catalogCount.textContent = catalogCountText;
@@ -3525,7 +3441,7 @@ function renderRoom() {
   const soloLaunchActive = shouldShowSoloLaunch(room);
   const partyLobbyActive = shouldShowPartyLobby(room);
   const partyUiActive = shouldUsePartyUi();
-  refs.copyLink.textContent = state.telegram?.isMiniApp ? "Позвать друга" : "Копировать ссылку";
+  refs.copyLink.textContent = state.telegram?.isMiniApp ? "ÐŸÐ¾Ð·Ð²Ð°Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð°" : "ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ";
 
   if (partyLobbyActive) {
     return;
@@ -3535,18 +3451,18 @@ function renderRoom() {
 
   if (!room) {
     if (soloLaunchActive) {
-      refs.roomTitle.textContent = "Запускаю игру";
-      refs.roomSubtitle.textContent = "Готовлю экран и подключаю сессию.";
-      refs.screenOverlay.textContent = state.roomLoadError || "Запускаю игру...";
+      refs.roomTitle.textContent = "Ð—Ð°Ð¿ÑƒÑÐºÐ°ÑŽ Ð¸Ð³Ñ€Ñƒ";
+      refs.roomSubtitle.textContent = "Ð“Ð¾Ñ‚Ð¾Ð²Ð»ÑŽ ÑÐºÑ€Ð°Ð½ Ð¸ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÑŽ ÑÐµÑÑÐ¸ÑŽ.";
+      refs.screenOverlay.textContent = state.roomLoadError || "Ð—Ð°Ð¿ÑƒÑÐºÐ°ÑŽ Ð¸Ð³Ñ€Ñƒ...";
       refs.screenOverlay.classList.remove("hidden");
     } else {
-      refs.roomTitle.textContent = "Комната не найдена";
-      refs.roomSubtitle.textContent = "Создай новую комнату из библиотеки.";
-      refs.screenOverlay.textContent = "Жду запуск сессии";
+      refs.roomTitle.textContent = "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð°";
+      refs.roomSubtitle.textContent = "Ð¡Ð¾Ð·Ð´Ð°Ð¹ Ð½Ð¾Ð²ÑƒÑŽ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ Ð¸Ð· Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸.";
+      refs.screenOverlay.textContent = "Ð–Ð´Ñƒ Ð·Ð°Ð¿ÑƒÑÐº ÑÐµÑÑÐ¸Ð¸";
       refs.screenOverlay.classList.remove("hidden");
     }
     refs.playersList.innerHTML = "";
-    refs.mobileRoomBadge.textContent = soloLaunchActive ? "СТАРТ" : "КОМНАТА";
+    refs.mobileRoomBadge.textContent = soloLaunchActive ? "Ð¡Ð¢ÐÐ Ð¢" : "ÐšÐžÐœÐÐÐ¢Ð";
     updateFullscreenUi();
     return;
   }
@@ -3558,34 +3474,34 @@ function renderRoom() {
   const canReady = room.status === "lobby" && !isSpectator;
   const amReady = Boolean(me?.ready);
 
-  refs.roomTitle.textContent = room.game?.title || "Комната";
+  refs.roomTitle.textContent = room.game?.title || "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð°";
   refs.roomSubtitle.textContent =
     room.status === "running"
-      ? `Комната ${room.id} • игра идёт`
+      ? `ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ${room.id} â€¢ Ð¸Ð³Ñ€Ð° Ð¸Ð´Ñ‘Ñ‚`
       : playerNames
-        ? `В комнате: ${playerNames} • код ${room.id}`
-        : `Комната ${room.id} • ждёт игроков`;
+        ? `Ð’ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ðµ: ${playerNames} â€¢ ÐºÐ¾Ð´ ${room.id}`
+        : `ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° ${room.id} â€¢ Ð¶Ð´Ñ‘Ñ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²`;
   refs.roomCover.src = room.game?.coverUrl || "";
   refs.roomCover.alt = room.game?.title || "";
-  refs.readySummary.textContent = room.canStart ? "Можно стартовать" : room.status === "running" ? "Сессия в игре" : "Не готово";
+  refs.readySummary.textContent = room.canStart ? "ÐœÐ¾Ð¶Ð½Ð¾ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð°Ñ‚ÑŒ" : room.status === "running" ? "Ð¡ÐµÑÑÐ¸Ñ Ð² Ð¸Ð³Ñ€Ðµ" : "ÐÐµ Ð³Ð¾Ñ‚Ð¾Ð²Ð¾";
   refs.statusTitle.textContent =
     room.status === "running"
       ? room.session?.paused
-        ? "Сессия на паузе"
-        : "Сетевая сессия активна"
-      : "Комната ждёт игроков";
+        ? "Ð¡ÐµÑÑÐ¸Ñ Ð½Ð° Ð¿Ð°ÑƒÐ·Ðµ"
+        : "Ð¡ÐµÑ‚ÐµÐ²Ð°Ñ ÑÐµÑÑÐ¸Ñ Ð°ÐºÑ‚Ð¸Ð²Ð½Ð°"
+      : "ÐšÐ¾Ð¼Ð½Ð°Ñ‚Ð° Ð¶Ð´Ñ‘Ñ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²";
   refs.mobileRoomBadge.textContent = room.id;
   if (soloLaunchActive) {
-    refs.screenOverlay.textContent = "Подключаю сессию...";
+    refs.screenOverlay.textContent = "ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÑŽ ÑÐµÑÑÐ¸ÑŽ...";
     refs.screenOverlay.classList.remove("hidden");
   }
   if (partyUiActive && room.status !== "running") {
-    refs.screenOverlay.textContent = "Жду запуск сессии";
+    refs.screenOverlay.textContent = "Ð–Ð´Ñƒ Ð·Ð°Ð¿ÑƒÑÐº ÑÐµÑÑÐ¸Ð¸";
     refs.screenOverlay.classList.remove("hidden");
   }
 
   refs.toggleReady.disabled = !canReady;
-  refs.toggleReady.textContent = amReady ? "Снять готовность" : "Готов";
+  refs.toggleReady.textContent = amReady ? "Ð¡Ð½ÑÑ‚ÑŒ Ð³Ð¾Ñ‚Ð¾Ð²Ð½Ð¾ÑÑ‚ÑŒ" : "Ð“Ð¾Ñ‚Ð¾Ð²";
   refs.startSession.disabled = !(isHost && room.canStart && room.status === "lobby");
   refs.pauseSession.disabled = !(isHost && room.status === "running" && !room.session?.paused);
   refs.resumeSession.disabled = !(isHost && room.status === "running" && room.session?.paused);
@@ -3656,7 +3572,7 @@ async function syncRoute() {
     if (socket.connected) {
       socket.emit("room:join", {
         roomId: route.roomId,
-        name: state.nickname || "Игрок",
+        name: state.nickname || "Ð˜Ð³Ñ€Ð¾Ðº",
       });
     }
   } catch (error) {
@@ -3710,7 +3626,7 @@ socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requ
 
   const player = state.currentRoom.players.find((entry) => entry.socketId === socket.id);
   if (player?.spectator) {
-    refs.screenOverlay.textContent = "Наблюдатель не участвует в текущей сессии";
+    refs.screenOverlay.textContent = "ÐÐ°Ð±Ð»ÑŽÐ´Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ ÑƒÑ‡Ð°ÑÑ‚Ð²ÑƒÐµÑ‚ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ ÑÐµÑÑÐ¸Ð¸";
     refs.screenOverlay.classList.remove("hidden");
     return;
   }
@@ -3727,7 +3643,7 @@ socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requ
       requiredSlots,
       romUrl: `/api/roms/${state.currentRoom.game.id}/file`,
     });
-    refs.statusTitle.textContent = "Синхронизация перед стартом";
+    refs.statusTitle.textContent = "Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¿ÐµÑ€ÐµÐ´ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð¼";
     state.pendingRoomLaunch = null;
   } catch (error) {
     releaseAllTouchControls();
@@ -3738,11 +3654,11 @@ socket.on("session:starting", async ({ roomId, startedAt, inputDelayFrames, requ
 
 function syncFullscreenButtonLabels(fullscreenActive) {
   if (refs.toggleFullscreen) {
-    refs.toggleFullscreen.textContent = fullscreenActive ? "Свернуть экран" : "Во весь экран";
+    refs.toggleFullscreen.textContent = fullscreenActive ? "Ð¡Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÑÐºÑ€Ð°Ð½" : "Ð’Ð¾ Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½";
   }
 
   if (refs.screenFullscreenButton) {
-    refs.screenFullscreenButton.textContent = fullscreenActive ? "×" : "FS";
+    refs.screenFullscreenButton.textContent = fullscreenActive ? "Ã—" : "FS";
   }
 }
 
@@ -3786,6 +3702,7 @@ refs.inputDelay.value = String(state.inputDelayFrames);
 
 emulator.setInputInterceptor(handleInGameMenuInput);
 bindTouchControls();
+bindMobileGameplayGestureGuards();
 refreshDeviceMode();
 await ensureMiniAppFullscreen();
 
